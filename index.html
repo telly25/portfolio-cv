@@ -369,6 +369,34 @@
     body.dark .hero-glow { background: radial-gradient(ellipse, rgba(24,84,180,.13) 0%, transparent 68%); }
     body.dark #c-dot { background: var(--text); }
 
+    /* === TYPEWRITER === */
+    .hero-typewriter { font-family: var(--font-m); font-size: 1.3rem; color: var(--accent); letter-spacing: -.01em; margin-bottom: 1rem; min-height: 1.8rem; display: flex; align-items: center; opacity: 0; }
+    .tw-cursor { display: inline-block; width: 2px; height: 1em; background: var(--accent); margin-left: 2px; flex-shrink: 0; animation: blink .7s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-pitch { font-style: italic; font-size: clamp(.9rem,1.3vw,1rem); opacity: 0; color: var(--muted); margin-bottom: 2rem; font-weight: 400; line-height: 1.6; }
+
+    /* === QUI SUIS-JE === */
+    #qui-suis-je { border-top: 1px solid var(--border); }
+    .qsj-wrap { max-width: var(--mw); margin: 0 auto; padding: clamp(5rem,9vw,9rem) var(--pad); }
+    .qsj-accroche { border-left: 3px solid var(--accent); padding-left: 2rem; margin-bottom: 4rem; }
+    .qsj-accroche p { font-size: clamp(1.25rem,2.6vw,2rem); font-weight: 600; line-height: 1.35; letter-spacing: -.025em; color: var(--text); }
+    .qsj-body { max-width: 65ch; margin-bottom: 4.5rem; }
+    .qsj-body p { font-size: clamp(.9rem,1.4vw,1rem); color: var(--muted); line-height: 1.9; margin-bottom: 1.5rem; font-weight: 400; }
+    .qsj-pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+    @media (max-width:768px) { .qsj-pillars { grid-template-columns: 1fr; } }
+    .qsj-card { background: var(--bg); border: 1.5px solid var(--border2); border-radius: 10px; padding: 2.25rem 2rem; position: relative; overflow: hidden; transition: transform .3s ease, border-color .3s, box-shadow .3s; }
+    .qsj-card:hover { transform: translateY(-4px); border-color: rgba(24,84,180,.45); box-shadow: 0 0 0 1px rgba(24,84,180,.12), 0 12px 32px rgba(24,84,180,.1); }
+    .qsj-card svg { width: 36px; height: 36px; color: var(--accent); margin-bottom: 1.25rem; display: block; }
+    .qsj-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: .3rem; letter-spacing: -.02em; }
+    .qsj-subtitle { font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-hi); margin-bottom: .85rem; }
+    .qsj-card p { font-size: .875rem; color: var(--muted); line-height: 1.7; font-weight: 400; }
+
+    /* === SCROLL TO TOP === */
+    #scroll-top { position: fixed; bottom: 2rem; right: 2rem; width: 48px; height: 48px; border-radius: 50%; background: var(--accent); color: #fff; border: none; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; cursor: none; transition: opacity .3s ease, transform .3s ease, box-shadow .3s ease; box-shadow: 0 4px 16px rgba(24,84,180,.3); z-index: 2000; }
+    #scroll-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(24,84,180,.45); }
+    #scroll-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    #scroll-top svg { width: 18px; height: 18px; }
+
     /* === REDUCED MOTION === */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -391,6 +419,7 @@
       <div class="nav-right">
         <ul class="nav-links" role="list">
           <li><a href="#accueil" aria-current="page">Accueil</a></li>
+          <li><a href="#qui-suis-je">Qui suis-je</a></li>
           <li><a href="#expertise">Expertise</a></li>
           <li><a href="#projets">Projets</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -413,6 +442,7 @@
 
   <div id="mob-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
     <a href="#accueil" tabindex="-1">Accueil</a>
+    <a href="#qui-suis-je" tabindex="-1">Qui suis-je</a>
     <a href="#expertise" tabindex="-1">Expertise</a>
     <a href="#projets" tabindex="-1">Projets</a>
     <a href="#contact" tabindex="-1">Contact</a>
@@ -429,6 +459,8 @@
       <div class="hero-inner">
         <div class="hero-content">
           <p class="hero-tag">Thomas Laurent — Consultant AMOA</p>
+          <p class="hero-typewriter" aria-live="polite" aria-label="Consultant AMOA, Chef de Projet Digital, Analyste Fonctionnel"><span id="tw-text"></span><span class="tw-cursor" aria-hidden="true"></span></p>
+          <p class="hero-pitch">Je fais le lien entre vos besoins et leur réalisation.</p>
           <h1 class="hero-title" id="h-title">
             <span class="line">PILOTER.</span>
             <span class="line">LIVRER.</span>
@@ -436,8 +468,8 @@
           </h1>
           <p class="hero-sub">Consultant AMOA &nbsp;·&nbsp; Chef de Projet Web &nbsp;·&nbsp; Transformation Digitale</p>
           <div class="hero-bottom">
-            <a href="#contact" class="btn-cta" aria-label="Discutons de votre projet — aller au formulaire de contact">
-              Discutons de votre projet
+            <a href="#contact" class="btn-cta" aria-label="Parlons de votre besoin — aller au formulaire de contact">
+              Parlons de votre besoin
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <span class="scroll-hint" aria-hidden="true">Scroll</span>
@@ -451,6 +483,57 @@
             loop
             autoplay>
           </dotlottie-player>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUI SUIS-JE -->
+    <section id="qui-suis-je" aria-labelledby="qsj-title">
+      <div class="qsj-wrap">
+        <p class="sec-label">Profil</p>
+
+        <div class="qsj-accroche">
+          <p id="qsj-title">Consultant AMOA &amp; Chef de projet digital — je me positionne à l'interface entre les métiers, les équipes techniques et la direction.</p>
+        </div>
+
+        <div class="qsj-body">
+          <p>Expérimenté sur des projets d'envergure nationale — refonte de Culture.gouv.fr, modernisation des Archives nationales d'outre-mer, pilotage de la TMA de l'Intranet ministériel — je maîtrise aussi bien le cadrage fonctionnel que le pilotage opérationnel.</p>
+          <p>Ce qui me distingue&nbsp;: une proximité technique réelle. Je comprends une architecture Drupal, je lis une spec OpenAPI, je questionne un plan de taggage. Cette double culture me rend plus crédible face aux équipes de réalisation et plus efficace pour anticiper les risques.</p>
+          <p>Aujourd'hui, je cherche à m'impliquer sur des projets à fort enjeu fonctionnel, où la rigueur de l'analyse et la clarté de la documentation font vraiment la différence.</p>
+        </div>
+
+        <div class="qsj-pillars">
+          <article class="qsj-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <circle cx="18" cy="18" r="10" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M26 26l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 18h8M18 14v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>Analyse &amp; Cadrage</h3>
+            <p class="qsj-subtitle">Du besoin à la spécification</p>
+            <p>Recueil des besoins, user stories, règles de gestion, cahiers des charges — je structure ce qui est flou.</p>
+          </article>
+          <article class="qsj-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M20 10v5M20 25v5M10 20h5M25 20h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="20" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>Pilotage &amp; Coordination</h3>
+            <p class="qsj-subtitle">Du sprint au COPIL</p>
+            <p>Backlog, planning, reporting, animation des comités — je tiens le cap en environnement multi-projets.</p>
+          </article>
+          <article class="qsj-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <rect x="4" y="14" width="8" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="16" y="8" width="8" height="18" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="28" y="18" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 20h4M24 17h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>Proximité Technique</h3>
+            <p class="qsj-subtitle">Comprendre sans coder au quotidien</p>
+            <p>Architecture web, API, CMS, accessibilité — je parle le langage des développeurs pour mieux les piloter.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -741,6 +824,13 @@
 
   </main>
 
+  <!-- Scroll to top -->
+  <button id="scroll-top" aria-label="Retour en haut de page" role="button">
+    <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M9 14V4M3 9l6-6 6 6"/>
+    </svg>
+  </button>
+
   <!-- ─── FOOTER ─── -->
   <footer>
     <p class="ft-l">© 2025 Thomas Laurent — Tous droits réservés</p>
@@ -837,15 +927,42 @@
       });
     }
 
+    /* ── TYPEWRITER ── */
+    (function() {
+      const twEl  = document.getElementById('tw-text');
+      const words = ['Consultant AMOA', 'Chef de Projet Digital', 'Analyste Fonctionnel'];
+      let wi = 0, ci = 0, deleting = false;
+      function type() {
+        const word = words[wi];
+        if (!deleting) {
+          twEl.textContent = word.slice(0, ci + 1);
+          ci++;
+          if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+          setTimeout(type, 60);
+        } else {
+          twEl.textContent = word.slice(0, ci - 1);
+          ci--;
+          if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(type, 200); return; }
+          setTimeout(type, 35);
+        }
+      }
+      if (REDUCED) { twEl.textContent = words[0]; }
+      else { setTimeout(type, 1200); }
+    })();
+
     /* ── HERO ── */
     if (!REDUCED) {
       gsap.timeline({ defaults: { ease: 'power3.out' }, delay: .1 })
         .from('.hero-tag', { opacity: 0, y: 14, duration: .6 })
+        .to('.hero-typewriter', { opacity: 1, y: 0, duration: .5 }, '-=.2')
+        .to('.hero-pitch', { opacity: .75, duration: .5 }, '-=.1')
         .from('.hero-title .line', { opacity: 0, y: 22, duration: .75, stagger: .13 }, '-=.2')
         .from('.hero-sub', { opacity: 0, y: 12, duration: .55 }, '-=.3')
         .from('.hero-bottom', { opacity: 0, y: 12, duration: .55 }, '-=.3');
     } else {
       gsap.set(['.hero-tag','.hero-title','.hero-sub','.hero-bottom'], { opacity: 1 });
+      gsap.set('.hero-typewriter', { opacity: 1 });
+      gsap.set('.hero-pitch', { opacity: .75 });
     }
 
     /* ── NAV SCROLL ── */
@@ -904,6 +1021,24 @@
     }
     burger.addEventListener('click', toggleMenu);
     mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (mOpen) toggleMenu(); }));
+
+    /* ── QUI SUIS-JE ── */
+    if (!REDUCED) {
+      gsap.from('.qsj-accroche', { scrollTrigger: { trigger: '.qsj-accroche', start: 'top 82%' }, opacity: 0, y: 32, duration: .75, ease: 'power3.out' });
+      gsap.from('.qsj-body', { scrollTrigger: { trigger: '.qsj-body', start: 'top 82%' }, opacity: 0, duration: .7, delay: .15, ease: 'power2.out' });
+      gsap.from('.qsj-card', { scrollTrigger: { trigger: '.qsj-pillars', start: 'top 82%' }, opacity: 0, y: 36, duration: .6, stagger: .15, ease: 'power3.out' });
+    }
+
+    /* ── SCROLL TO TOP ── */
+    const scrollTopBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      const show = window.scrollY > 400;
+      scrollTopBtn.style.opacity = show ? '1' : '0';
+      scrollTopBtn.style.pointerEvents = show ? 'auto' : 'none';
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      document.getElementById('accueil').scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+    });
 
     /* ── EXPERTISE REVEAL ── */
     if (!REDUCED) {
