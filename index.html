@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!--
+    PORTFOLIO AMOA — THOMAS LAURENT
+    ─────────────────────────────────────────────────────────────────
+    CREATIVE DIRECTION CHOICE: Custom cursor avec lag magnétique
+    + Hero XXL typographie avec révélation dramatique au chargement.
+
+    Justification : Un consultant qui vend rigueur et attention au
+    détail doit le signaler dès la première interaction. Le curseur
+    personnalisé crée un sentiment de précision sur toute la page ;
+    le titre en stagger word-by-word frappe sans équivoque.
+
+    Palette : #080810 (noir profond) · #F0EEE8 (ivoire) · #0047FF
+    (bleu électrique) · #FF6B00 (ambre, sparingly)
+    Typo : Syne 800 (display) · DM Serif Display italic (accent)
+             Syne Mono (labels)
+    ─────────────────────────────────────────────────────────────────
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thomas Laurent — Consultant AMOA &amp; Chef de Projet Web</title>
+  <meta name="description" content="Consultant AMOA et Chef de Projet Web confirmé. Transformation digitale, pilotage de projets agiles, conduite du changement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+  <style>
+    /* === ROOT & RESET === */
+    :root {
+      --bg: #f8f7f4; --bg2: #efefeb; --bg3: #e8e7e2;
+      --text: #141414;
+      --muted: rgba(20,20,20,0.45); --muted2: rgba(20,20,20,0.28);
+      --accent: #1854b4; --accent-hi: #2e6fd4; --accent-glow: rgba(24,84,180,0.12);
+      --kpi: #1854b4;
+      --border: rgba(20,20,20,0.09); --border2: rgba(20,20,20,0.15);
+      --font-d: 'Space Grotesk', sans-serif; --font-s: 'Space Grotesk', sans-serif; --font-m: 'JetBrains Mono', monospace;
+      --nav-h: 72px; --mw: 1400px; --pad: clamp(1.5rem, 5vw, 6rem);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-d); overflow-x: hidden; cursor: none; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font-d); cursor: none; border: none; background: none; }
+    ::selection { background: var(--accent); color: #fff; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+    /* === CURSOR === */
+    #c-dot, #c-ring {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+      border-radius: 50%; transform: translate(-50%,-50%);
+    }
+    #c-dot { width: 5px; height: 5px; background: var(--accent); }
+    #c-ring { width: 34px; height: 34px; border: 1px solid rgba(24,84,180,.4); transition: width .3s, height .3s, border-color .3s; }
+    .cursor-grow #c-ring { width: 50px; height: 50px; border-color: var(--accent-hi); }
+
+    /* === NAV === */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+      z-index: 1000; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--pad); transition: background .4s, backdrop-filter .4s;
+    }
+    #nav.scrolled { background: rgba(248,247,244,.92); backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: var(--font-d); font-size: .9rem; font-weight: 700; letter-spacing: -.01em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links { display: flex; gap: 2.75rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--font-d); font-size: .85rem; font-weight: 500; letter-spacing: -.01em;
+      color: var(--muted); transition: color .3s; position: relative; padding-bottom: 4px;
+    }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width .3s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a[aria-current="page"]::after { width: 100%; }
+    #burger { display: none; flex-direction: column; gap: 5px; width: 28px; padding: 4px 0; }
+    #burger span { display: block; height: 1.5px; background: var(--text); transform-origin: center; }
+    #mob-menu {
+      display: none; position: fixed; inset: 0; background: rgba(248,247,244,.97); backdrop-filter: blur(24px); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+    }
+    #mob-menu.open { display: flex; }
+    #mob-menu a { font-size: clamp(2.2rem,8vw,4.5rem); font-weight: 800; color: var(--muted); transition: color .3s; }
+    #mob-menu a:hover { color: var(--accent); }
+    @media (max-width:768px) { .nav-links { display: none; } #burger { display: flex; } #theme-toggle { display: none; } }
+
+    /* === HERO === */
+    #accueil {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: var(--nav-h) var(--pad) clamp(4rem,8vw,8rem); position: relative; overflow: hidden;
+      max-width: 100vw;
+    }
+    .hero-inner {
+      width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,5vw,6rem);
+      align-items: center;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-lottie { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; }
+    .hero-lottie dotlottie-player { width: 100%; max-width: 480px; }
+    .hero-title { max-width: 100%; overflow: hidden; }
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(24,84,180,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,84,180,.06) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 70% 70% at 50% 60%, black 20%, transparent 100%);
+    }
+    @media (max-width: 900px) {
+      #accueil { justify-content: flex-start; padding-top: calc(var(--nav-h) + 3rem); }
+      .hero-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .hero-lottie { justify-content: center; }
+      .hero-lottie dotlottie-player { max-width: 260px; }
+    }
+    @media (max-width: 480px) {
+      .hero-lottie dotlottie-player { max-width: 200px; }
+    }
+    /* Linear-style atmospheric glow mesh */
+    .hero-mesh {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 55% 45% at 72% 20%, rgba(24,84,180,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(24,84,180,.05) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(248,247,244,0) 0%, var(--bg) 100%);
+    }
+    .hero-glow { position: absolute; width: 800px; height: 600px; background: radial-gradient(ellipse, rgba(24,84,180,.07) 0%, transparent 68%); top: -180px; right: -80px; pointer-events: none; }
+    .hero-tag { font-family: var(--font-m); font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-hi); margin-bottom: 2rem; opacity: 0; }
+    .hero-title { font-family: var(--font-d); font-weight: 700; font-size: clamp(2.8rem,6.5vw,7.5rem); line-height: .95; letter-spacing: -.04em; margin-bottom: 3rem; }
+    .hero-title .line { display: block; overflow: visible; line-height: 1.1; }
+    .hero-title .line:nth-child(2) { color: transparent; -webkit-text-stroke: 1px rgba(20,20,20,.2); }
+    .hero-title .line:nth-child(3) { color: var(--accent-hi); }
+    .hero-sub { font-family: var(--font-d); font-weight: 400; font-size: clamp(.88rem,1.4vw,1rem); letter-spacing: -.01em; color: var(--muted); margin-bottom: 3rem; opacity: 0; }
+    .hero-bottom { display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; opacity: 0; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: .75rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hi) 100%);
+      color: #fff;
+      font-family: var(--font-d); font-size: .85rem; font-weight: 600; letter-spacing: -.01em;
+      padding: .9rem 1.75rem; transition: transform .3s, box-shadow .3s;
+      border-radius: 6px;
+      box-shadow: 0 4px 20px rgba(24,84,180,.25);
+    }
+    .btn-cta:hover { background: var(--accent-hi); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(24,84,180,.35); }
+    .btn-cta svg { transition: transform .3s; }
+    .btn-cta:hover svg { transform: translateX(4px); }
+    .scroll-hint { font-family: var(--font-m); font-size: .68rem; letter-spacing: .12em; color: var(--muted2); text-transform: uppercase; display: flex; align-items: center; gap: .75rem; }
+    .scroll-hint::before { content: ''; display: block; width: 40px; height: 1px; background: var(--muted); }
+
+    /* === SECTION BASE === */
+    .wrap { max-width: var(--mw); margin: 0 auto; padding: clamp(5rem,9vw,9rem) var(--pad); }
+    .sec-sep { border-top: 1px solid var(--border); padding-top: 5rem; }
+    /* Subtle noise overlay — Linear's "texture" signature */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      opacity: .015;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 200px 200px;
+    }
+    main, footer { position: relative; z-index: 1; }
+    header { position: relative; z-index: 1001; }
+    .sec-label { font-family: var(--font-m); font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted2); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .sec-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--muted2); }
+    .sec-title { font-family: var(--font-d); font-weight: 700; font-size: clamp(2.5rem,5vw,4.5rem); line-height: 1; letter-spacing: -.035em; margin-bottom: 4.5rem; }
+    .sec-title em { font-style: normal; font-weight: 300; color: var(--muted); letter-spacing: -.02em; }
+
+    /* === EXPERTISE === */
+    .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px,1fr)); gap: 1.25rem; margin-bottom: 5.5rem; }
+    .exp-card {
+      background: var(--bg); padding: 2.75rem 2.25rem;
+      border: 1.5px solid var(--border2);
+      border-radius: 10px; overflow: hidden;
+      position: relative;
+      transition: background .4s, border-color .4s, box-shadow .4s;
+    }
+    .exp-card::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 90% 55% at 50% 0%, rgba(24,84,180,.07) 0%, transparent 70%);
+      opacity: 0; transition: opacity .4s;
+    }
+    .exp-card:hover { background: var(--bg2); border-color: rgba(24,84,180,.45); box-shadow: 0 0 0 1px rgba(24,84,180,.12), 0 8px 28px rgba(24,84,180,.08); }
+    .exp-card:hover::before { opacity: 1; }
+    .exp-card svg { width: 38px; height: 38px; margin-bottom: 1.5rem; color: var(--accent); }
+    .exp-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: .7rem; line-height: 1.3; letter-spacing: -.02em; }
+    .exp-card p { font-size: .875rem; color: var(--muted); line-height: 1.8; font-weight: 400; }
+    .exp-card ol { list-style: none; display: flex; flex-direction: column; gap: .5rem; padding: 0; counter-reset: exp-counter; }
+    .exp-card ol li { font-size: .875rem; color: var(--muted); line-height: 1.55; font-weight: 400; display: flex; align-items: baseline; gap: .65rem; counter-increment: exp-counter; }
+    .exp-card ol li::before { content: counter(exp-counter, decimal-leading-zero); font-family: var(--font-m); font-size: .62rem; color: var(--accent); flex-shrink: 0; opacity: .8; }
+
+    /* Skill bars */
+    .skills-hd { font-family: var(--font-m); font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted2); margin-bottom: 2rem; }
+    .skill-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.2rem; }
+    .skill-lbl { font-family: var(--font-m); font-size: .72rem; color: var(--muted); width: 150px; flex-shrink: 0; }
+    .skill-bg { flex: 1; height: 1px; background: var(--border); position: relative; }
+    .skill-fill { position: absolute; top: 0; left: 0; height: 100%; background: var(--accent); width: 0; }
+
+    /* Stats */
+    .stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 5rem; }
+    .stat { background: var(--bg); padding: 3rem 2rem; text-align: center; border: 1.5px solid var(--border2); border-radius: 10px; }
+    .stat-n { font-family: var(--font-d); font-weight: 800; font-size: clamp(3rem,6vw,5rem); color: var(--accent-hi); line-height: 1; margin-bottom: .5rem; }
+    .stat-l { font-family: var(--font-m); font-size: .68rem; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
+    @media (max-width:600px) { .stats { grid-template-columns: 1fr; } }
+
+    /* === PROJECTS === */
+    #projets { border-top: 1px solid var(--border); }
+    .filter-bar { display: flex; gap: .5rem; margin-bottom: 3.5rem; flex-wrap: wrap; }
+    .fbtn { font-family: var(--font-m); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; padding: .55rem 1.1rem; border: 1px solid var(--border); color: var(--muted); transition: all .3s; }
+    .fbtn { border-radius: 4px; }
+    .fbtn.active, .fbtn:hover { border-color: rgba(24,84,180,.6); color: var(--text); background: rgba(24,84,180,.08); }
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.25rem; }
+    .proj-card { background: var(--bg); padding: 2.75rem 2.25rem; position: relative; overflow: hidden; border: 1.5px solid var(--border2); border-radius: 10px; transition: background .45s, border-color .45s, box-shadow .45s; }
+    .proj-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(24,84,180,.09) 0%, transparent 70%); opacity: 0; transition: opacity .45s; }
+    .proj-card:hover::before { opacity: 1; }
+    .proj-card:hover { background: var(--bg2); border-color: rgba(24,84,180,.45); box-shadow: 0 0 0 1px rgba(24,84,180,.12), 0 8px 28px rgba(24,84,180,.08); }
+    .proj-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.75rem; }
+    .proj-num { font-family: var(--font-m); font-size: .66rem; color: var(--muted2); letter-spacing: .1em; }
+    .proj-sector { font-family: var(--font-m); font-size: .66rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--border); padding: .2rem .55rem; border-radius: 3px; }
+    .proj-card h3 { font-size: clamp(1.1rem,2vw,1.45rem); font-weight: 600; margin-bottom: .6rem; line-height: 1.2; letter-spacing: -.025em; }
+    .proj-role { font-family: var(--font-m); font-size: .7rem; letter-spacing: .06em; color: var(--muted2); margin-bottom: 1.15rem; text-transform: uppercase; }
+    .proj-desc { font-size: .875rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.6rem; font-weight: 400; }
+    .proj-kpi { font-weight: 800; font-size: 1.5rem; color: var(--kpi); margin-bottom: .2rem; letter-spacing: -.02em; }
+    .proj-kpi-l { font-family: var(--font-m); font-size: .7rem; color: var(--muted); letter-spacing: .06em; margin-bottom: 1.6rem; }
+    .proj-tags { display: flex; gap: .4rem; flex-wrap: wrap; }
+    .tag { font-family: var(--font-m); font-size: .66rem; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: .18rem .55rem; transition: border-color .3s, color .3s; }
+    .proj-card:hover .tag { border-color: rgba(0,71,255,.3); color: var(--text); }
+    .proj-card[data-hidden="true"] { display: none; }
+
+    /* === CONTACT === */
+    #contact { border-top: 1px solid var(--border); }
+    .contact-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 6rem; align-items: start; }
+    @media (max-width:900px) { .contact-layout { grid-template-columns: 1fr; gap: 4rem; } }
+    .c-info h3 { font-size: clamp(1.4rem,3vw,2.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -.03em; }
+    .c-info h3 em { font-style: normal; font-weight: 300; color: var(--muted); }
+    .c-info p { font-size: .875rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; }
+    .c-links { display: flex; flex-direction: column; gap: 1rem; }
+    .c-link { display: flex; align-items: center; gap: .75rem; font-family: var(--font-m); font-size: .74rem; color: var(--muted); transition: color .3s; letter-spacing: .02em; }
+    .c-link:hover { color: var(--accent); }
+    .c-link svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* Form */
+    .cform { display: flex; flex-direction: column; gap: 1.2rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    @media (max-width:600px) { .form-row { grid-template-columns: 1fr; } }
+    .fgrp { display: flex; flex-direction: column; gap: .45rem; }
+    .fgrp label { font-family: var(--font-m); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted2); }
+    .fgrp input, .fgrp textarea {
+      background: transparent; border: 1px solid var(--border); color: var(--text);
+      font-family: var(--font-d); font-size: .9rem; padding: .875rem 1rem;
+      transition: border-color .3s; outline: none; width: 100%; -webkit-appearance: none;
+    }
+    .fgrp input:focus, .fgrp textarea:focus { border-color: var(--accent); }
+    .fgrp textarea { resize: vertical; min-height: 115px; }
+    .err { font-family: var(--font-m); font-size: .68rem; color: #ff4d4d; display: none; }
+    .fgrp.bad input, .fgrp.bad textarea { border-color: #ff4d4d; }
+    .fgrp.bad .err { display: block; }
+
+    /* Captcha */
+    .captcha {
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .cap-q { font-family: var(--font-m); font-size: .85rem; color: var(--text); flex-shrink: 0; }
+    .cap-q span { color: var(--accent); font-size: 1.1rem; font-weight: 600; }
+    .cap-in {
+      width: 76px; background: transparent; border: 1px solid var(--border); color: var(--text);
+      font-family: var(--font-m); font-size: 1rem; padding: .45rem .75rem; outline: none; text-align: center;
+    }
+    .cap-in:focus { border-color: var(--accent); }
+    .cap-err { font-family: var(--font-m); font-size: .68rem; color: #ff4d4d; display: none; }
+
+    /* Submit */
+    .btn-sub {
+      display: inline-flex; align-items: center; gap: .75rem; color: var(--text);
+      font-family: var(--font-d); font-size: .85rem; font-weight: 600; letter-spacing: -.01em;
+      padding: .9rem 1.75rem; border: 1px solid var(--border2);
+      border-radius: 6px;
+      transition: border-color .3s, color .3s, box-shadow .3s; position: relative; overflow: hidden;
+      background: var(--bg3);
+    }
+    .btn-sub::before { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateX(-105%); transition: transform .4s cubic-bezier(.4,0,.2,1); }
+    .btn-sub:hover { border-color: var(--accent); color: #fff; box-shadow: 0 6px 28px rgba(24,84,180,.3); }
+    .btn-sub:hover::before { transform: translateX(0); }
+    .btn-sub span, .btn-sub svg { position: relative; z-index: 1; }
+    .btn-sub.loading { pointer-events: none; opacity: .65; }
+    .form-ok { display: none; font-family: var(--font-m); font-size: .82rem; color: #4dff91; letter-spacing: .07em; padding: .75rem 0; }
+    .form-ok.show { display: block; }
+
+    /* === FOOTER === */
+    footer { border-top: 1px solid var(--border); padding: 2.75rem var(--pad); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .ft-l { font-family: var(--font-m); font-size: .68rem; color: var(--muted2); letter-spacing: .04em; }
+    .ft-r { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .ft-r button, .ft-r a { font-family: var(--font-d); font-size: .78rem; font-weight: 500; color: var(--muted); letter-spacing: -.01em; transition: color .3s; }
+    .ft-r button:hover, .ft-r a:hover { color: var(--text); }
+
+    /* === COOKIE BANNER === */
+    #ck-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 5000; background: rgba(248,247,244,.96); backdrop-filter: blur(16px); border-top: 1px solid var(--border); padding: 2rem var(--pad); display: none; }
+    #ck-banner.vis { display: block; }
+    .ck-inner { max-width: 980px; display: flex; align-items: flex-start; gap: 3rem; flex-wrap: wrap; }
+    .ck-text { flex: 1; min-width: 240px; }
+    .ck-text p { font-size: .84rem; color: var(--muted); line-height: 1.7; margin-bottom: .4rem; }
+    .ck-text strong { color: var(--text); }
+    .ck-btns { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; flex-shrink: 0; }
+    .ck-btn { font-family: var(--font-d); font-size: .8rem; font-weight: 500; letter-spacing: -.01em; padding: .65rem 1.2rem; border: 1px solid var(--border); color: var(--muted); transition: all .3s; border-radius: 4px; }
+    .ck-btn:hover { border-color: var(--text); color: var(--text); }
+    .ck-btn.prim { background: var(--accent); border-color: var(--accent); color: #fff; border-radius: 4px; }
+    .ck-btn.prim:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+    #ck-panel { display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    #ck-panel.open { display: block; }
+    .ck-cat { display: flex; justify-content: space-between; align-items: center; padding: .9rem 0; border-bottom: 1px solid var(--border); }
+    .ck-cat-info h4 { font-size: .83rem; font-weight: 600; margin-bottom: .2rem; }
+    .ck-cat-info p { font-size: .76rem; color: var(--muted); margin: 0; }
+    .tgl-wrap { display: flex; align-items: center; gap: .7rem; }
+    .tgl-lbl { font-family: var(--font-m); font-size: .68rem; color: var(--muted); letter-spacing: .07em; }
+    .tgl { width: 40px; height: 22px; background: var(--border); border-radius: 11px; position: relative; transition: background .3s; }
+    .tgl.on { background: var(--accent); }
+    .tgl::after { content: ''; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; background: #fff; border-radius: 50%; transition: transform .3s; }
+    .tgl.on::after { transform: translateX(18px); }
+
+    /* === PRIVACY MODAL === */
+    #priv { display: none; position: fixed; inset: 0; z-index: 6000; background: rgba(0,0,0,.4); align-items: center; justify-content: center; padding: 2rem; }
+    #priv.open { display: flex; }
+    .priv-box { background: #fff; border: 1px solid var(--border); max-width: 620px; width: 100%; max-height: 80vh; overflow-y: auto; padding: 3rem; position: relative; }
+    .priv-box h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .priv-box p { font-size: .86rem; color: var(--muted); line-height: 1.8; margin-bottom: .9rem; }
+    .priv-close { position: absolute; top: 1.5rem; right: 1.5rem; font-family: var(--font-m); font-size: .72rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; transition: color .3s; }
+    .priv-close:hover { color: var(--text); }
+
+    /* === THEME TOGGLE === */
+    #theme-toggle {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 8px;
+      border: 1px solid var(--border2); color: var(--muted);
+      transition: color .3s, border-color .3s, background .3s;
+      flex-shrink: 0;
+    }
+    #theme-toggle:hover { color: var(--text); border-color: var(--accent); background: var(--accent-glow); }
+    #theme-toggle svg { width: 16px; height: 16px; }
+    .icon-moon { display: none; }
+    .icon-sun  { display: block; }
+    body.dark .icon-moon { display: block; }
+    body.dark .icon-sun  { display: none; }
+
+    /* === DARK THEME === */
+    body.dark {
+      --bg: #07070e; --bg2: #0d0d1c; --bg3: #111127;
+      --text: #F2F0EB;
+      --muted: rgba(242,240,235,0.4); --muted2: rgba(242,240,235,0.2);
+      --kpi: #7eaeff;
+      --border: rgba(242,240,235,0.07); --border2: rgba(242,240,235,0.12);
+    }
+    body.dark #nav.scrolled { background: rgba(7,7,14,.88); }
+    body.dark #mob-menu { background: rgba(7,7,14,.97); }
+    body.dark #ck-banner { background: rgba(7,7,14,.96); }
+    body.dark .priv-box { background: var(--bg2); }
+    body.dark .hero-title .line:nth-child(2) { -webkit-text-stroke: 1px rgba(242,240,235,.25); }
+    body.dark .hero-grid {
+      background-image:
+        linear-gradient(rgba(24,84,180,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24,84,180,.04) 1px, transparent 1px);
+    }
+    body.dark .hero-mesh {
+      background:
+        radial-gradient(ellipse 55% 45% at 72% 20%, rgba(24,84,180,.14) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 50% at 20% 80%, rgba(24,84,180,.08) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 50% 50%, rgba(7,7,14,0) 0%, var(--bg) 100%);
+    }
+    body.dark .hero-glow { background: radial-gradient(ellipse, rgba(24,84,180,.13) 0%, transparent 68%); }
+    body.dark #c-dot { background: var(--text); }
+
+    /* === REDUCED MOTION === */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .1ms !important; }
+      #c-dot, #c-ring { display: none; }
+      body, button, a { cursor: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div id="c-dot" aria-hidden="true"></div>
+  <div id="c-ring" aria-hidden="true"></div>
+
+  <!-- ─── NAV ─── -->
+  <header>
+    <nav id="nav" aria-label="Navigation principale">
+      <a href="#accueil" class="nav-logo">TL<span>.</span></a>
+      <div class="nav-right">
+        <ul class="nav-links" role="list">
+          <li><a href="#accueil" aria-current="page">Accueil</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" aria-label="Basculer le thème sombre / clair">
+          <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <circle cx="8" cy="8" r="3"/>
+            <path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.1 3.1l1.1 1.1M11.8 11.8l1.1 1.1M11.8 3.1l-1.1 1.1M3.1 11.8l1.1 1.1"/>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7z"/>
+          </svg>
+        </button>
+        <button id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mob-menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div id="mob-menu" aria-hidden="true" role="dialog" aria-label="Menu mobile">
+    <a href="#accueil" tabindex="-1">Accueil</a>
+    <a href="#expertise" tabindex="-1">Expertise</a>
+    <a href="#projets" tabindex="-1">Projets</a>
+    <a href="#contact" tabindex="-1">Contact</a>
+  </div>
+
+  <!-- ─── MAIN ─── -->
+  <main>
+
+    <!-- HERO -->
+    <section id="accueil" aria-labelledby="h-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-mesh" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <p class="hero-tag">Thomas Laurent — Consultant AMOA</p>
+          <h1 class="hero-title" id="h-title">
+            <span class="line">PILOTER.</span>
+            <span class="line">LIVRER.</span>
+            <span class="line">TRANSFORMER.</span>
+          </h1>
+          <p class="hero-sub">Consultant AMOA &nbsp;·&nbsp; Chef de Projet Web &nbsp;·&nbsp; Transformation Digitale</p>
+          <div class="hero-bottom">
+            <a href="#contact" class="btn-cta" aria-label="Discutons de votre projet — aller au formulaire de contact">
+              Discutons de votre projet
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <span class="scroll-hint" aria-hidden="true">Scroll</span>
+          </div>
+        </div>
+        <div class="hero-lottie" aria-hidden="true">
+          <dotlottie-player
+            src="https://lottie.host/49f7b588-b14b-41c2-ab65-01b9c8ba332d/ooQjGyfj0r.lottie"
+            background="transparent"
+            speed="1"
+            loop
+            autoplay>
+          </dotlottie-player>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERTISE -->
+    <section id="expertise" aria-labelledby="exp-title">
+      <div class="wrap sec-sep">
+        <p class="sec-label">Expertise</p>
+        <h2 class="sec-title" id="exp-title">Ce que je <em>maîtrise</em></h2>
+
+        <div class="exp-grid">
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <rect x="4" y="8" width="32" height="24" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 17h16M12 23h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>Maîtrise d'Ouvrage &amp; AMOA</h3>
+            <ol>
+              <li>Recueil des besoins métiers</li>
+              <li>Rédaction des cahiers des charges fonctionnels</li>
+              <li>Spécifications fonctionnelles détaillées</li>
+              <li>Validation des livrables avec les équipes métiers</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <circle cx="20" cy="20" r="14" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M20 10v10l6 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>Pilotage Projets Web &amp; Digitaux</h3>
+            <ol>
+              <li>Agile / Scrum et cycle en V</li>
+              <li>Gestion du planning, des budgets et des risques</li>
+              <li>Reporting exécutif</li>
+              <li>Animation des comités de pilotage</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <circle cx="10" cy="20" r="4" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="30" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="30" cy="30" r="4" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M14 20h8M26 13l-8 5M26 27l-8-5" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>Interface Équipes Techniques</h3>
+            <ol>
+              <li>Traduction des besoins en user stories exploitables</li>
+              <li>Collaboration avec les équipes dev et UX/UI</li>
+              <li>Coordination des intégrateurs</li>
+              <li>Suivi tout au long du cycle projet</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <path d="M8 32l8-14 6 8 4-5 6 11H8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+              <circle cx="28" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+            <h3>Conduite du Changement</h3>
+            <ol>
+              <li>Accompagnement dans les transitions digitales</li>
+              <li>Conception et animation de formations</li>
+              <li>Documentation utilisateur</li>
+              <li>Mesure de l'adoption</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <circle cx="20" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M20 17v6M12 32c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="20" cy="30" r="2" fill="currentColor"/>
+            </svg>
+            <h3>Product Management</h3>
+            <ol>
+              <li>Définition de la vision produit</li>
+              <li>Roadmap stratégique</li>
+              <li>Priorisation du backlog (RICE, MoSCoW)</li>
+              <li>Pilotage des OKRs et KPIs produit</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <rect x="4" y="6" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="15" y="18" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="26" y="6" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M9 14v4h11M20 14v4M31 14v4h-11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>Analyse Fonctionnelle</h3>
+            <ol>
+              <li>Modélisation des processus métiers (BPMN)</li>
+              <li>Rédaction de spécifications fonctionnelles</li>
+              <li>Gestion des exigences</li>
+              <li>Recette fonctionnelle et UAT</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <rect x="4" y="4" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="22" y="4" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="4" y="22" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M22 29h14M29 22v14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>Architecture SI &amp; Urbanisation</h3>
+            <ol>
+              <li>Cartographie des systèmes d'information</li>
+              <li>Analyse des flux de données</li>
+              <li>Cohérence du patrimoine applicatif</li>
+              <li>Accompagnement dans le choix des solutions</li>
+            </ol>
+          </article>
+          <article class="exp-card">
+            <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" role="img">
+              <rect x="4" y="8" width="32" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M4 14h32" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="9" cy="11" r="1.5" fill="currentColor"/>
+              <circle cx="14" cy="11" r="1.5" fill="currentColor"/>
+              <rect x="9" y="19" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M23 20h8M23 24h5M23 28h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <h3>UX &amp; Design Thinking</h3>
+            <ol>
+              <li>Ateliers de co-conception</li>
+              <li>User research et wireframing</li>
+              <li>Définition des parcours utilisateurs</li>
+              <li>Tests d'utilisabilité</li>
+            </ol>
+          </article>
+        </div>
+
+        <p class="skills-hd">Outils &amp; méthodes</p>
+        <div id="skill-bars" aria-label="Niveaux de maîtrise des outils">
+          <div class="skill-row"><span class="skill-lbl">Jira / Confluence</span><div class="skill-bg"><div class="skill-fill" data-fill="90"></div></div></div>
+          <div class="skill-row"><span class="skill-lbl">MS Project</span><div class="skill-bg"><div class="skill-fill" data-fill="85"></div></div></div>
+          <div class="skill-row"><span class="skill-lbl">Agile / Scrum</span><div class="skill-bg"><div class="skill-fill" data-fill="95"></div></div></div>
+          <div class="skill-row"><span class="skill-lbl">Figma / UX Design</span><div class="skill-bg"><div class="skill-fill" data-fill="75"></div></div></div>
+          <div class="skill-row"><span class="skill-lbl">SQL / Data</span><div class="skill-bg"><div class="skill-fill" data-fill="70"></div></div></div>
+          <div class="skill-row"><span class="skill-lbl">HTML / CSS</span><div class="skill-bg"><div class="skill-fill" data-fill="80"></div></div></div>
+        </div>
+
+        <div class="stats" aria-label="Chiffres clés">
+          <div class="stat">
+            <div class="stat-n" data-count="50" data-suf="+">0</div>
+            <p class="stat-l">Projets livrés</p>
+          </div>
+          <div class="stat">
+            <div class="stat-n" data-count="10" data-suf=" ans">0</div>
+            <p class="stat-l">D'expérience</p>
+          </div>
+          <div class="stat">
+            <div class="stat-n" data-count="98" data-suf="%">0</div>
+            <p class="stat-l">Satisfaction client</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETS -->
+    <section id="projets" aria-labelledby="proj-title">
+      <div class="wrap">
+        <p class="sec-label">Réalisations</p>
+        <h2 class="sec-title" id="proj-title">Projets <em>récents</em></h2>
+
+        <div class="filter-bar" role="group" aria-label="Filtrer les projets par catégorie">
+          <button class="fbtn active" data-filter="all">Tous</button>
+          <button class="fbtn" data-filter="Web">Web</button>
+          <button class="fbtn" data-filter="SI">SI</button>
+          <button class="fbtn" data-filter="Transfo">Transformation digitale</button>
+        </div>
+
+        <div class="proj-grid">
+          <article class="proj-card" data-cat="SI">
+            <div class="proj-top">
+              <span class="proj-num">01</span>
+              <span class="proj-sector">Banque &amp; Finance</span>
+            </div>
+            <h3>Refonte SI Ressources Humaines</h3>
+            <p class="proj-role">Chef de Projet / AMOA</p>
+            <p class="proj-desc">Migration de l'ERP RH vers une solution cloud pour 2 000 collaborateurs. Coordination de 4 équipes techniques, gestion des intégrations métiers et conduite du changement à l'échelle.</p>
+            <p class="proj-kpi">−40%</p>
+            <p class="proj-kpi-l">de délai de traitement des demandes RH</p>
+            <div class="proj-tags">
+              <span class="tag">SAP</span><span class="tag">Agile</span><span class="tag">Change Mgmt</span><span class="tag">SI</span>
+            </div>
+          </article>
+
+          <article class="proj-card" data-cat="Web">
+            <div class="proj-top">
+              <span class="proj-num">02</span>
+              <span class="proj-sector">E-commerce / Retail</span>
+            </div>
+            <h3>Portail Client Digital B2B</h3>
+            <p class="proj-role">AMOA Lead &amp; Product Owner</p>
+            <p class="proj-desc">Conception et déploiement d'un portail self-service pour 15 000 comptes actifs. Ateliers UX, rédaction des spécifications fonctionnelles, recette utilisateur et go-live en 6 mois.</p>
+            <p class="proj-kpi">+35%</p>
+            <p class="proj-kpi-l">de taux de conversion sur les commandes en ligne</p>
+            <div class="proj-tags">
+              <span class="tag">React</span><span class="tag">API REST</span><span class="tag">Scrum</span><span class="tag">Web</span>
+            </div>
+          </article>
+
+          <article class="proj-card" data-cat="Transfo">
+            <div class="proj-top">
+              <span class="proj-num">03</span>
+              <span class="proj-sector">Secteur Public</span>
+            </div>
+            <h3>Transformation Agile DSI</h3>
+            <p class="proj-role">Coach Agile / AMOA Transformation</p>
+            <p class="proj-desc">Accompagnement de la DSI dans sa transition vers l'agilité à l'échelle. Migration de 3 équipes vers Scrum, déploiement du cadre SAFe et formation de 80 collaborateurs.</p>
+            <p class="proj-kpi">−25%</p>
+            <p class="proj-kpi-l">de time-to-market sur les nouvelles fonctionnalités</p>
+            <div class="proj-tags">
+              <span class="tag">SAFe</span><span class="tag">Scrum</span><span class="tag">Formation</span><span class="tag">Transfo</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="ct-title">
+      <div class="wrap">
+        <p class="sec-label">Contact</p>
+        <h2 class="sec-title" id="ct-title">Travaillons <em>ensemble</em></h2>
+
+        <div class="contact-layout">
+          <div class="c-info">
+            <h3>Un projet ?<br><em>Parlons-en.</em></h3>
+            <p>Disponible pour des missions freelance ou des CDDs. Intervenant sur toute la France et en remote. Réponse garantie sous 24h.</p>
+            <div class="c-links">
+              <a href="mailto:contact@thomaslaurent.fr" class="c-link" aria-label="Envoyer un email à Thomas Laurent">
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="4" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1.25"/><path d="M2 5l7 5 7-5" stroke="currentColor" stroke-width="1.25"/></svg>
+                contact@thomaslaurent.fr
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="c-link" aria-label="Profil LinkedIn de Thomas Laurent (nouvel onglet)">
+                <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.25"/><path d="M6 8v5M6 6v.01M9 13V10a2 2 0 014 0v3" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"/></svg>
+                linkedin.com/in/thomaslaurent
+              </a>
+            </div>
+          </div>
+
+          <form class="cform" id="cform" novalidate aria-label="Formulaire de contact">
+            <div class="form-row">
+              <div class="fgrp">
+                <label for="f-nom">Nom <span aria-hidden="true">*</span></label>
+                <input type="text" id="f-nom" name="nom" autocomplete="name" aria-required="true" aria-describedby="e-nom" placeholder="Jean Dupont">
+                <span class="err" id="e-nom" role="alert" aria-live="polite">Ce champ est requis.</span>
+              </div>
+              <div class="fgrp">
+                <label for="f-email">Email <span aria-hidden="true">*</span></label>
+                <input type="email" id="f-email" name="email" autocomplete="email" aria-required="true" aria-describedby="e-email" placeholder="jean@entreprise.fr">
+                <span class="err" id="e-email" role="alert" aria-live="polite">Adresse email invalide.</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="fgrp">
+                <label for="f-tel">Téléphone</label>
+                <input type="tel" id="f-tel" name="tel" autocomplete="tel" placeholder="+33 6 00 00 00 00">
+              </div>
+              <div class="fgrp">
+                <label for="f-obj">Objet <span aria-hidden="true">*</span></label>
+                <input type="text" id="f-obj" name="obj" aria-required="true" aria-describedby="e-obj" placeholder="Mission AMOA, projet web…">
+                <span class="err" id="e-obj" role="alert" aria-live="polite">Ce champ est requis.</span>
+              </div>
+            </div>
+            <div class="fgrp">
+              <label for="f-msg">Message <span aria-hidden="true">*</span></label>
+              <textarea id="f-msg" name="msg" aria-required="true" aria-describedby="e-msg" placeholder="Décrivez votre projet, contexte, délais…"></textarea>
+              <span class="err" id="e-msg" role="alert" aria-live="polite">Ce champ est requis.</span>
+            </div>
+
+            <div class="captcha" role="group" aria-label="Vérification anti-spam">
+              <p class="cap-q">Combien font <span id="cap-a">7</span> + <span id="cap-b">4</span> ?</p>
+              <input type="number" id="cap-in" class="cap-in" aria-label="Réponse au calcul de vérification" aria-required="true" aria-describedby="cap-err" placeholder="?">
+              <span class="cap-err" id="cap-err" role="alert" aria-live="polite">Réponse incorrecte.</span>
+            </div>
+
+            <div aria-live="polite">
+              <p class="form-ok" id="form-ok">✓ Message envoyé. Je vous réponds dans les 24h.</p>
+            </div>
+
+            <button type="submit" class="btn-sub" id="sub-btn">
+              <span>Envoyer le message</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <p class="ft-l">© 2025 Thomas Laurent — Tous droits réservés</p>
+    <div class="ft-r">
+      <button id="btn-priv" aria-haspopup="dialog">Politique de confidentialité</button>
+      <button id="btn-ck">Gérer les cookies</button>
+    </div>
+  </footer>
+
+  <!-- Privacy Modal -->
+  <div id="priv" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+    <div class="priv-box">
+      <button class="priv-close" id="priv-close" aria-label="Fermer la politique de confidentialité">Fermer ✕</button>
+      <h2 id="priv-title">Politique de confidentialité</h2>
+      <p>Ce site portfolio ne collecte aucune donnée personnelle sans votre consentement explicite. Les informations soumises via le formulaire de contact sont utilisées exclusivement pour vous répondre et ne sont partagées avec aucun tiers.</p>
+      <p>En acceptant les cookies analytiques, vous autorisez la collecte de données de navigation anonymisées (pages visitées, durée de session) via des outils conformes au RGPD. Ces données ne permettent pas de vous identifier personnellement.</p>
+      <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour l'exercer, contactez : contact@thomaslaurent.fr</p>
+      <p>Ce site est hébergé en France. Aucun transfert de données hors Union Européenne n'est effectué.</p>
+    </div>
+  </div>
+
+  <!-- Cookie Banner -->
+  <div id="ck-banner" role="region" aria-label="Gestion des cookies">
+    <div class="ck-inner">
+      <div class="ck-text">
+        <p><strong>Ce site utilise des cookies.</strong></p>
+        <p>Des cookies fonctionnels (nécessaires) et analytiques (mesure d'audience) peuvent être déposés. Vos choix sont mémorisés.</p>
+      </div>
+      <div class="ck-btns">
+        <button class="ck-btn" id="ck-refuse">Tout refuser</button>
+        <button class="ck-btn" id="ck-custom">Personnaliser</button>
+        <button class="ck-btn prim" id="ck-accept">Tout accepter</button>
+      </div>
+    </div>
+    <div id="ck-panel">
+      <div class="ck-cat">
+        <div class="ck-cat-info"><h4>Cookies fonctionnels</h4><p>Nécessaires au bon fonctionnement du site. Ne peuvent pas être désactivés.</p></div>
+        <div class="tgl-wrap"><span class="tgl-lbl">Toujours actifs</span><div class="tgl on" aria-hidden="true"></div></div>
+      </div>
+      <div class="ck-cat">
+        <div class="ck-cat-info"><h4>Cookies analytiques</h4><p>Nous aident à comprendre votre navigation et améliorer le site.</p></div>
+        <div class="tgl-wrap">
+          <label for="tgl-an" class="tgl-lbl">Activer</label>
+          <button role="switch" id="tgl-an" class="tgl" aria-checked="false" aria-label="Activer les cookies analytiques"></button>
+        </div>
+      </div>
+      <div style="padding-top:1.25rem;">
+        <button class="ck-btn prim" id="ck-save">Sauvegarder mes choix</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SCRIPTS ─── -->
+  <script>
+    const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── NAV SMOOTH SCROLL ── */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth' });
+      });
+    });
+
+    /* ── THEME TOGGLE ── */
+    const themeBtn = document.getElementById('theme-toggle');
+    const DARK_KEY = 'tl_theme';
+    if (localStorage.getItem(DARK_KEY) === 'dark') document.body.classList.add('dark');
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.body.classList.toggle('dark');
+      localStorage.setItem(DARK_KEY, isDark ? 'dark' : 'light');
+    });
+
+    /* ── CURSOR ── */
+    if (!REDUCED) {
+      const dot = document.getElementById('c-dot');
+      const ring = document.getElementById('c-ring');
+      let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+      document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+      document.addEventListener('mouseleave', () => gsap.to([dot,ring],{opacity:0,duration:.4}));
+      document.addEventListener('mouseenter', () => gsap.to([dot,ring],{opacity:1,duration:.4}));
+      document.querySelectorAll('a,button,.fbtn,.exp-card,.proj-card').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
+      });
+      // lag factor: .09 = smooth lag like Linear
+      gsap.ticker.add(() => {
+        gsap.set(dot, { x: mx, y: my });
+        rx += (mx - rx) * .09; ry += (my - ry) * .09;
+        gsap.set(ring, { x: rx, y: ry });
+      });
+    }
+
+    /* ── HERO ── */
+    if (!REDUCED) {
+      gsap.timeline({ defaults: { ease: 'power3.out' }, delay: .1 })
+        .from('.hero-tag', { opacity: 0, y: 14, duration: .6 })
+        .from('.hero-title .line', { opacity: 0, y: 22, duration: .75, stagger: .13 }, '-=.2')
+        .from('.hero-sub', { opacity: 0, y: 12, duration: .55 }, '-=.3')
+        .from('.hero-bottom', { opacity: 0, y: 12, duration: .55 }, '-=.3');
+    } else {
+      gsap.set(['.hero-tag','.hero-title','.hero-sub','.hero-bottom'], { opacity: 1 });
+    }
+
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('nav');
+    ScrollTrigger.create({
+      start: 80,
+      onEnter: () => nav.classList.add('scrolled'),
+      onLeaveBack: () => nav.classList.remove('scrolled')
+    });
+
+    /* ── ACTIVE NAV ── */
+    const navLinks = document.querySelectorAll('.nav-links a');
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => {
+            a.removeAttribute('aria-current');
+            if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current','page');
+          });
+        }
+      });
+    }, { threshold: .35 }).observe && document.querySelectorAll('section[id]').forEach(s =>
+      new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) navLinks.forEach(a => {
+            a.removeAttribute('aria-current');
+            if (a.getAttribute('href') === '#' + e.target.id) a.setAttribute('aria-current','page');
+          });
+        });
+      }, { threshold: .35 }).observe(s)
+    );
+
+    /* ── BURGER ── */
+    const burger = document.getElementById('burger');
+    const mobMenu = document.getElementById('mob-menu');
+    const bLines = burger.querySelectorAll('span');
+    let mOpen = false;
+    function toggleMenu() {
+      mOpen = !mOpen;
+      burger.setAttribute('aria-expanded', mOpen);
+      mobMenu.setAttribute('aria-hidden', !mOpen);
+      mobMenu.querySelectorAll('a').forEach(a => a.setAttribute('tabindex', mOpen ? '0' : '-1'));
+      if (!REDUCED) {
+        if (mOpen) {
+          mobMenu.classList.add('open'); document.body.classList.add('menu-open');
+          gsap.from(mobMenu.querySelectorAll('a'), { y: 28, opacity: 0, duration: .5, stagger: .08, ease: 'power3.out' });
+          gsap.to(bLines[0], { rotation: 45, y: 6.5, duration: .3 });
+          gsap.to(bLines[1], { opacity: 0, duration: .2 });
+          gsap.to(bLines[2], { rotation: -45, y: -6.5, duration: .3 });
+        } else {
+          gsap.to(bLines[0], { rotation: 0, y: 0, duration: .3 });
+          gsap.to(bLines[1], { opacity: 1, duration: .2 });
+          gsap.to(bLines[2], { rotation: 0, y: 0, duration: .3, onComplete: () => { mobMenu.classList.remove('open'); document.body.classList.remove('menu-open'); }});
+        }
+      } else { mobMenu.classList.toggle('open', mOpen); document.body.classList.toggle('menu-open', mOpen); }
+    }
+    burger.addEventListener('click', toggleMenu);
+    mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { if (mOpen) toggleMenu(); }));
+
+    /* ── EXPERTISE REVEAL ── */
+    if (!REDUCED) {
+      gsap.from('.exp-card', { scrollTrigger: { trigger: '.exp-grid', start: 'top 82%' }, opacity: 0, y: 36, duration: .6, stagger: .11, ease: 'power3.out' });
+    }
+
+    /* ── SKILL BARS ── */
+    document.querySelectorAll('.skill-fill').forEach(bar => {
+      const pct = bar.dataset.fill + '%';
+      if (!REDUCED) {
+        gsap.to(bar, { width: pct, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: '#skill-bars', start: 'top 82%' } });
+      } else { bar.style.width = pct; }
+    });
+
+    /* ── STAT COUNTERS ── */
+    document.querySelectorAll('.stat-n').forEach(el => {
+      const target = parseInt(el.dataset.count, 10);
+      const suf = el.dataset.suf || '';
+      if (!REDUCED) {
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target, duration: 2, ease: 'power2.out',
+          scrollTrigger: { trigger: '.stats', start: 'top 82%' },
+          onUpdate() { el.textContent = Math.round(obj.val) + suf; }
+        });
+      } else { el.textContent = target + suf; }
+    });
+
+    /* ── PROJECTS REVEAL ── */
+    if (!REDUCED) {
+      gsap.from('.proj-card', { scrollTrigger: { trigger: '.proj-grid', start: 'top 82%' }, opacity: 0, y: 45, duration: .7, stagger: .14, ease: 'power3.out' });
+    }
+
+    /* ── PROJECT FILTER ── */
+    document.querySelectorAll('.fbtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.proj-card').forEach(card => {
+          const show = f === 'all' || card.dataset.cat === f;
+          card.setAttribute('data-hidden', !show);
+          if (!REDUCED && show) gsap.from(card, { opacity: 0, y: 18, duration: .4, ease: 'power2.out' });
+        });
+      });
+    });
+
+    /* ── CONTACT REVEAL ── */
+    if (!REDUCED) {
+      gsap.from('.c-info', { scrollTrigger: { trigger: '#contact', start: 'top 80%' }, opacity: 0, x: -28, duration: .75, ease: 'power3.out' });
+      gsap.from('.cform > *', { scrollTrigger: { trigger: '#contact', start: 'top 72%' }, opacity: 0, y: 18, duration: .5, stagger: .07, ease: 'power3.out' });
+    }
+
+    /* ── CAPTCHA ── */
+    let cA, cB;
+    function genCap() {
+      cA = Math.floor(Math.random()*9)+1; cB = Math.floor(Math.random()*9)+1;
+      document.getElementById('cap-a').textContent = cA;
+      document.getElementById('cap-b').textContent = cB;
+      document.getElementById('cap-in').value = '';
+    }
+    genCap();
+
+    /* ── FORM ── */
+    const cform = document.getElementById('cform');
+    const subBtn = document.getElementById('sub-btn');
+    function vf(id, ok) {
+      const g = document.getElementById(id).closest('.fgrp');
+      g.classList.toggle('bad', !ok); return ok;
+    }
+    cform.addEventListener('submit', e => {
+      e.preventDefault();
+      const nom  = document.getElementById('f-nom').value.trim();
+      const email= document.getElementById('f-email').value.trim();
+      const obj  = document.getElementById('f-obj').value.trim();
+      const msg  = document.getElementById('f-msg').value.trim();
+      const ans  = parseInt(document.getElementById('cap-in').value,10);
+      const capErr = document.getElementById('cap-err');
+      const v1 = vf('f-nom',  nom.length > 0);
+      const v2 = vf('f-email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
+      const v3 = vf('f-obj',  obj.length > 0);
+      const v4 = vf('f-msg',  msg.length > 0);
+      const capOk = ans === cA + cB;
+      capErr.style.display = capOk ? 'none' : 'block';
+      if (!v1||!v2||!v3||!v4||!capOk) return;
+      subBtn.classList.add('loading');
+      subBtn.querySelector('span').textContent = 'Envoi en cours…';
+      setTimeout(() => {
+        subBtn.classList.remove('loading');
+        subBtn.querySelector('span').textContent = 'Envoyer le message';
+        cform.reset(); genCap();
+        const ok = document.getElementById('form-ok');
+        ok.classList.add('show');
+        if (!REDUCED) gsap.from(ok, { opacity: 0, y: 8, duration: .4 });
+        setTimeout(() => ok.classList.remove('show'), 5000);
+      }, 1800);
+    });
+
+    /* ── COOKIES ── */
+    const CK_KEY = 'tl_consent';
+    const banner = document.getElementById('ck-banner');
+    if (!localStorage.getItem(CK_KEY)) setTimeout(() => banner.classList.add('vis'), 900);
+    document.getElementById('ck-accept').addEventListener('click', () => {
+      localStorage.setItem(CK_KEY, JSON.stringify({f:true,a:true})); banner.classList.remove('vis');
+    });
+    document.getElementById('ck-refuse').addEventListener('click', () => {
+      localStorage.setItem(CK_KEY, JSON.stringify({f:true,a:false})); banner.classList.remove('vis');
+    });
+    document.getElementById('ck-custom').addEventListener('click', () => {
+      document.getElementById('ck-panel').classList.toggle('open');
+    });
+    let aOn = false;
+    const tglAn = document.getElementById('tgl-an');
+    tglAn.addEventListener('click', () => {
+      aOn = !aOn; tglAn.classList.toggle('on',aOn); tglAn.setAttribute('aria-checked',aOn);
+    });
+    document.getElementById('ck-save').addEventListener('click', () => {
+      localStorage.setItem(CK_KEY, JSON.stringify({f:true,a:aOn})); banner.classList.remove('vis');
+    });
+    document.getElementById('btn-ck').addEventListener('click', () => {
+      localStorage.removeItem(CK_KEY); banner.classList.add('vis');
+    });
+
+    /* ── PRIVACY MODAL ── */
+    const priv = document.getElementById('priv');
+    document.getElementById('btn-priv').addEventListener('click', () => { priv.classList.add('open'); document.getElementById('priv-close').focus(); });
+    document.getElementById('priv-close').addEventListener('click', () => priv.classList.remove('open'));
+    priv.addEventListener('click', e => { if (e.target===priv) priv.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key==='Escape') priv.classList.remove('open'); });
+  </script>
+</body>
+</html>
