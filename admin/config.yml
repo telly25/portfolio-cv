@@ -1,0 +1,290 @@
+backend:
+  name: git-gateway
+  branch: dev
+
+media_folder: "assets"
+public_folder: "/assets"
+
+i18n:
+  structure: multiple_files
+  locales: [fr, en]
+  default_locale: fr
+
+collections:
+  - name: "translations"
+    label: "Contenu du site"
+    i18n: true
+    files:
+      - name: "content"
+        label: "Textes (FR / EN)"
+        file: "locales/fr.json"
+        i18n:
+          structure: multiple_files
+          locales: [fr, en]
+        fields:
+
+          # ── META ──────────────────────────────────────────────────────────
+          - { label: "Titre meta", name: "meta_title", widget: "string", i18n: true }
+          - { label: "Description meta", name: "meta_desc", widget: "text", i18n: true }
+
+          # ── NAVIGATION ────────────────────────────────────────────────────
+          - label: "Navigation"
+            name: "nav"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Accueil", name: "nav_home", widget: "string", i18n: true }
+              - { label: "Profil", name: "nav_profile", widget: "string", i18n: true }
+              - { label: "Expertise", name: "nav_expertise", widget: "string", i18n: true }
+              - { label: "Parcours", name: "nav_experience", widget: "string", i18n: true }
+              - { label: "Projets", name: "nav_projects", widget: "string", i18n: true }
+              - { label: "Contact", name: "nav_contact", widget: "string", i18n: true }
+              - { label: "Lien langue (menu mobile)", name: "nav_mob_lang", widget: "string", i18n: true }
+
+          # ── HERO ──────────────────────────────────────────────────────────
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Tag (ligne de présentation)", name: "hero_tag", widget: "string", i18n: true }
+              - { label: "Mots typewriter (séparés par virgule)", name: "hero_typewriter_words", widget: "list", i18n: true }
+              - { label: "Typewriter aria-label", name: "hero_typewriter_aria", widget: "string", i18n: true }
+              - { label: "Pitch (accroche sous typewriter)", name: "hero_pitch", widget: "text", i18n: true }
+              - { label: "Titre ligne 1", name: "hero_title1", widget: "string", i18n: true }
+              - { label: "Titre ligne 2", name: "hero_title2", widget: "string", i18n: true }
+              - { label: "Titre ligne 3", name: "hero_title3", widget: "string", i18n: true }
+              - { label: "Sous-titre (domaines)", name: "hero_sub", widget: "string", i18n: true }
+              - { label: "Pill 1 (disponibilité)", name: "hero_pill1", widget: "string", i18n: true }
+              - { label: "Pill 2 (type de contrat)", name: "hero_pill2", widget: "string", i18n: true }
+              - { label: "Pill 3 (localisation)", name: "hero_pill3", widget: "string", i18n: true }
+              - { label: "Bouton CV — texte", name: "hero_cta", widget: "string", i18n: true }
+              - { label: "Bouton CV — fichier (nom du PDF)", name: "hero_cta_href", widget: "string", i18n: true }
+              - { label: "Bouton CV — aria-label", name: "hero_cta_aria", widget: "string", i18n: true }
+              - { label: "Bouton contact — texte", name: "hero_ghost", widget: "string", i18n: true }
+              - { label: "Bouton contact — aria-label", name: "hero_ghost_aria", widget: "string", i18n: true }
+              - { label: "Note recruteur", name: "hero_recruiter", widget: "text", i18n: true }
+
+          # ── PROFIL ────────────────────────────────────────────────────────
+          - label: "Profil"
+            name: "profile"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Label section", name: "profile_label", widget: "string", i18n: true }
+              - { label: "Accroche (intro)", name: "profile_intro", widget: "text", i18n: true }
+              - { label: "Paragraphe 1", name: "profile_p1", widget: "text", i18n: true }
+              - { label: "Paragraphe 2", name: "profile_p2", widget: "text", i18n: true }
+              - { label: "Paragraphe 3", name: "profile_p3", widget: "text", i18n: true }
+              - { label: "Card 1 — Titre", name: "profile_card1_title", widget: "string", i18n: true }
+              - { label: "Card 1 — Sous-titre", name: "profile_card1_sub", widget: "string", i18n: true }
+              - { label: "Card 1 — Texte", name: "profile_card1_text", widget: "text", i18n: true }
+              - { label: "Card 2 — Titre", name: "profile_card2_title", widget: "string", i18n: true }
+              - { label: "Card 2 — Sous-titre", name: "profile_card2_sub", widget: "string", i18n: true }
+              - { label: "Card 2 — Texte", name: "profile_card2_text", widget: "text", i18n: true }
+              - { label: "Card 3 — Titre", name: "profile_card3_title", widget: "string", i18n: true }
+              - { label: "Card 3 — Sous-titre", name: "profile_card3_sub", widget: "string", i18n: true }
+              - { label: "Card 3 — Texte", name: "profile_card3_text", widget: "text", i18n: true }
+
+          # ── EXPERTISE ─────────────────────────────────────────────────────
+          - label: "Expertise"
+            name: "expertise"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Label section", name: "expertise_label", widget: "string", i18n: true }
+              - { label: "Titre section", name: "expertise_title", widget: "string", i18n: true }
+              - { label: "Card 1 — Titre", name: "exp_card1_title", widget: "string", i18n: true }
+              - { label: "Card 1 — Item 1", name: "exp_card1_li1", widget: "string", i18n: true }
+              - { label: "Card 1 — Item 2", name: "exp_card1_li2", widget: "string", i18n: true }
+              - { label: "Card 1 — Item 3", name: "exp_card1_li3", widget: "string", i18n: true }
+              - { label: "Card 1 — Item 4", name: "exp_card1_li4", widget: "string", i18n: true }
+              - { label: "Card 2 — Titre", name: "exp_card2_title", widget: "string", i18n: true }
+              - { label: "Card 2 — Item 1", name: "exp_card2_li1", widget: "string", i18n: true }
+              - { label: "Card 2 — Item 2", name: "exp_card2_li2", widget: "string", i18n: true }
+              - { label: "Card 2 — Item 3", name: "exp_card2_li3", widget: "string", i18n: true }
+              - { label: "Card 2 — Item 4", name: "exp_card2_li4", widget: "string", i18n: true }
+              - { label: "Card 3 — Titre", name: "exp_card3_title", widget: "string", i18n: true }
+              - { label: "Card 3 — Item 1", name: "exp_card3_li1", widget: "string", i18n: true }
+              - { label: "Card 3 — Item 2", name: "exp_card3_li2", widget: "string", i18n: true }
+              - { label: "Card 3 — Item 3", name: "exp_card3_li3", widget: "string", i18n: true }
+              - { label: "Card 3 — Item 4", name: "exp_card3_li4", widget: "string", i18n: true }
+              - { label: "Card 4 — Titre", name: "exp_card4_title", widget: "string", i18n: true }
+              - { label: "Card 4 — Item 1", name: "exp_card4_li1", widget: "string", i18n: true }
+              - { label: "Card 4 — Item 2", name: "exp_card4_li2", widget: "string", i18n: true }
+              - { label: "Card 4 — Item 3", name: "exp_card4_li3", widget: "string", i18n: true }
+              - { label: "Card 4 — Item 4", name: "exp_card4_li4", widget: "string", i18n: true }
+              - { label: "Card 5 — Titre", name: "exp_card5_title", widget: "string", i18n: true }
+              - { label: "Card 5 — Item 1", name: "exp_card5_li1", widget: "string", i18n: true }
+              - { label: "Card 5 — Item 2", name: "exp_card5_li2", widget: "string", i18n: true }
+              - { label: "Card 5 — Item 3", name: "exp_card5_li3", widget: "string", i18n: true }
+              - { label: "Card 5 — Item 4", name: "exp_card5_li4", widget: "string", i18n: true }
+              - { label: "Card 6 — Titre", name: "exp_card6_title", widget: "string", i18n: true }
+              - { label: "Card 6 — Item 1", name: "exp_card6_li1", widget: "string", i18n: true }
+              - { label: "Card 6 — Item 2", name: "exp_card6_li2", widget: "string", i18n: true }
+              - { label: "Card 6 — Item 3", name: "exp_card6_li3", widget: "string", i18n: true }
+              - { label: "Card 6 — Item 4", name: "exp_card6_li4", widget: "string", i18n: true }
+              - { label: "Card 7 — Titre", name: "exp_card7_title", widget: "string", i18n: true }
+              - { label: "Card 7 — Item 1", name: "exp_card7_li1", widget: "string", i18n: true }
+              - { label: "Card 7 — Item 2", name: "exp_card7_li2", widget: "string", i18n: true }
+              - { label: "Card 7 — Item 3", name: "exp_card7_li3", widget: "string", i18n: true }
+              - { label: "Card 7 — Item 4", name: "exp_card7_li4", widget: "string", i18n: true }
+              - { label: "Card 8 — Titre", name: "exp_card8_title", widget: "string", i18n: true }
+              - { label: "Card 8 — Item 1", name: "exp_card8_li1", widget: "string", i18n: true }
+              - { label: "Card 8 — Item 2", name: "exp_card8_li2", widget: "string", i18n: true }
+              - { label: "Card 8 — Item 3", name: "exp_card8_li3", widget: "string", i18n: true }
+              - { label: "Card 8 — Item 4", name: "exp_card8_li4", widget: "string", i18n: true }
+              - { label: "Titre outils & méthodes", name: "skills_title", widget: "string", i18n: true }
+              - { label: "Stat 1 — Label (projets)", name: "stat1_label", widget: "string", i18n: true }
+              - { label: "Stat 2 — Label (expérience)", name: "stat2_label", widget: "string", i18n: true }
+              - { label: "Stat 2 — Suffixe (ex: ans / yrs)", name: "stat2_suf", widget: "string", i18n: true }
+              - { label: "Stat 3 — Label (domaines)", name: "stat3_label", widget: "string", i18n: true }
+
+          # ── PARCOURS ──────────────────────────────────────────────────────
+          - label: "Parcours"
+            name: "experience"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Label section", name: "experience_label", widget: "string", i18n: true }
+              - { label: "Titre section", name: "experience_title", widget: "string", i18n: true }
+              - { label: "Aside — Titre", name: "career_aside_title", widget: "string", i18n: true }
+              - { label: "Aside — Texte", name: "career_aside_text", widget: "text", i18n: true }
+              - { label: "Poste 1 — Intitulé", name: "tl1_title", widget: "string", i18n: true }
+              - { label: "Poste 1 — Organisation", name: "tl1_org", widget: "string", i18n: true }
+              - { label: "Poste 1 — Mission 1", name: "tl1_li1", widget: "text", i18n: true }
+              - { label: "Poste 1 — Mission 2", name: "tl1_li2", widget: "text", i18n: true }
+              - { label: "Poste 1 — Mission 3", name: "tl1_li3", widget: "text", i18n: true }
+              - { label: "Poste 2 — Intitulé", name: "tl2_title", widget: "string", i18n: true }
+              - { label: "Poste 2 — Organisation", name: "tl2_org", widget: "string", i18n: true }
+              - { label: "Poste 2 — Mission 1", name: "tl2_li1", widget: "text", i18n: true }
+              - { label: "Poste 2 — Mission 2", name: "tl2_li2", widget: "text", i18n: true }
+              - { label: "Poste 2 — Mission 3", name: "tl2_li3", widget: "text", i18n: true }
+              - { label: "Poste 3 — Intitulé", name: "tl3_title", widget: "string", i18n: true }
+              - { label: "Poste 3 — Organisation", name: "tl3_org", widget: "string", i18n: true }
+              - { label: "Poste 3 — Mission 1", name: "tl3_li1", widget: "text", i18n: true }
+              - { label: "Poste 3 — Mission 2", name: "tl3_li2", widget: "text", i18n: true }
+              - { label: "Poste 3 — Mission 3", name: "tl3_li3", widget: "text", i18n: true }
+
+          # ── PROJETS ───────────────────────────────────────────────────────
+          - label: "Projets"
+            name: "projects"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Label section", name: "projects_label", widget: "string", i18n: true }
+              - { label: "Titre section", name: "projects_title", widget: "string", i18n: true }
+              - { label: "Filtre — Tous", name: "filter_all", widget: "string", i18n: true }
+              - { label: "Filtre — Transformation digitale", name: "filter_transfo", widget: "string", i18n: true }
+              - { label: "Projet 1 — Secteur", name: "proj1_sector", widget: "string", i18n: true }
+              - { label: "Projet 1 — Titre", name: "proj1_title", widget: "string", i18n: true }
+              - { label: "Projet 1 — Rôle", name: "proj1_role", widget: "string", i18n: true }
+              - { label: "Projet 1 — Description", name: "proj1_desc", widget: "text", i18n: true }
+              - { label: "Projet 1 — KPI label", name: "proj1_kpil", widget: "string", i18n: true }
+              - { label: "Projet 2 — Secteur", name: "proj2_sector", widget: "string", i18n: true }
+              - { label: "Projet 2 — Titre", name: "proj2_title", widget: "string", i18n: true }
+              - { label: "Projet 2 — Rôle", name: "proj2_role", widget: "string", i18n: true }
+              - { label: "Projet 2 — Description", name: "proj2_desc", widget: "text", i18n: true }
+              - { label: "Projet 2 — KPI label", name: "proj2_kpil", widget: "string", i18n: true }
+              - { label: "Projet 3 — Secteur", name: "proj3_sector", widget: "string", i18n: true }
+              - { label: "Projet 3 — Titre", name: "proj3_title", widget: "string", i18n: true }
+              - { label: "Projet 3 — Rôle", name: "proj3_role", widget: "string", i18n: true }
+              - { label: "Projet 3 — Description", name: "proj3_desc", widget: "text", i18n: true }
+              - { label: "Projet 3 — KPI label", name: "proj3_kpil", widget: "string", i18n: true }
+
+          # ── CONTACT & FORMULAIRE ──────────────────────────────────────────
+          - label: "Contact & Formulaire"
+            name: "contact"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Label section", name: "contact_label", widget: "string", i18n: true }
+              - { label: "Titre section", name: "contact_title", widget: "string", i18n: true }
+              - { label: "Bloc info — Titre", name: "contact_info_title", widget: "string", i18n: true }
+              - { label: "Bloc info — Texte", name: "contact_info_text", widget: "text", i18n: true }
+              - { label: "Champ Nom — Label", name: "form_label_name", widget: "string", i18n: true }
+              - { label: "Champ Nom — Placeholder", name: "form_ph_name", widget: "string", i18n: true }
+              - { label: "Champ Nom — Erreur", name: "form_err_name", widget: "string", i18n: true }
+              - { label: "Champ Email — Label", name: "form_label_email", widget: "string", i18n: true }
+              - { label: "Champ Email — Placeholder", name: "form_ph_email", widget: "string", i18n: true }
+              - { label: "Champ Email — Erreur", name: "form_err_email", widget: "string", i18n: true }
+              - { label: "Champ Téléphone — Label", name: "form_label_tel", widget: "string", i18n: true }
+              - { label: "Champ Objet — Label", name: "form_label_subject", widget: "string", i18n: true }
+              - { label: "Champ Objet — Placeholder", name: "form_ph_subject", widget: "string", i18n: true }
+              - { label: "Champ Objet — Erreur", name: "form_err_subject", widget: "string", i18n: true }
+              - { label: "Champ Message — Label", name: "form_label_message", widget: "string", i18n: true }
+              - { label: "Champ Message — Placeholder", name: "form_ph_message", widget: "text", i18n: true }
+              - { label: "Champ Message — Erreur", name: "form_err_message", widget: "string", i18n: true }
+              - { label: "Captcha — Question", name: "captcha_q", widget: "string", i18n: true }
+              - { label: "Captcha — Erreur", name: "captcha_err", widget: "string", i18n: true }
+              - { label: "Bouton envoyer", name: "form_submit", widget: "string", i18n: true }
+              - { label: "Bouton envoyer — état envoi", name: "form_sending", widget: "string", i18n: true }
+              - { label: "Message succès", name: "form_success", widget: "string", i18n: true }
+
+          # ── FOOTER ────────────────────────────────────────────────────────
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Copyright", name: "footer_copy", widget: "string", i18n: true }
+              - { label: "Bouton politique de confidentialité", name: "footer_privacy_btn", widget: "string", i18n: true }
+              - { label: "Bouton cookies", name: "footer_cookies_btn", widget: "string", i18n: true }
+
+          # ── POLITIQUE DE CONFIDENTIALITÉ ──────────────────────────────────
+          - label: "Politique de confidentialité"
+            name: "privacy"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Titre", name: "privacy_title", widget: "string", i18n: true }
+              - { label: "Bouton fermer", name: "privacy_close", widget: "string", i18n: true }
+              - { label: "Paragraphe 1", name: "privacy_p1", widget: "text", i18n: true }
+              - { label: "Paragraphe 2", name: "privacy_p2", widget: "text", i18n: true }
+              - { label: "Paragraphe 3", name: "privacy_p3", widget: "text", i18n: true }
+              - { label: "Paragraphe 4", name: "privacy_p4", widget: "text", i18n: true }
+
+          # ── COOKIES ───────────────────────────────────────────────────────
+          - label: "Bandeau cookies"
+            name: "cookies"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Titre bandeau", name: "cookie_title", widget: "string", i18n: true }
+              - { label: "Texte bandeau", name: "cookie_text", widget: "text", i18n: true }
+              - { label: "Bouton tout refuser", name: "cookie_refuse", widget: "string", i18n: true }
+              - { label: "Bouton personnaliser", name: "cookie_customize", widget: "string", i18n: true }
+              - { label: "Bouton tout accepter", name: "cookie_accept", widget: "string", i18n: true }
+              - { label: "Cookies fonctionnels — Titre", name: "cookie_functional_title", widget: "string", i18n: true }
+              - { label: "Cookies fonctionnels — Texte", name: "cookie_functional_text", widget: "text", i18n: true }
+              - { label: "Cookies fonctionnels — Badge", name: "cookie_always_on", widget: "string", i18n: true }
+              - { label: "Cookies analytiques — Titre", name: "cookie_analytics_title", widget: "string", i18n: true }
+              - { label: "Cookies analytiques — Texte", name: "cookie_analytics_text", widget: "text", i18n: true }
+              - { label: "Toggle activer", name: "cookie_enable", widget: "string", i18n: true }
+              - { label: "Bouton sauvegarder", name: "cookie_save", widget: "string", i18n: true }
+
+          # ── ACCESSIBILITÉ & TOUR ──────────────────────────────────────────
+          - label: "Accessibilité & Tour"
+            name: "a11y_tour"
+            widget: "object"
+            collapsed: true
+            i18n: true
+            fields:
+              - { label: "Bouton retour en haut — aria-label", name: "scroll_top_aria", widget: "string", i18n: true }
+              - { label: "Tour — Étape langue — Titre", name: "tour_lang_title", widget: "string", i18n: true }
+              - { label: "Tour — Étape langue — Texte", name: "tour_lang_text", widget: "text", i18n: true }
+              - { label: "Tour — Étape langue — Bouton suivant", name: "tour_lang_next", widget: "string", i18n: true }
+              - { label: "Tour — Étape thème — Titre", name: "tour_theme_title", widget: "string", i18n: true }
+              - { label: "Tour — Étape thème — Texte", name: "tour_theme_text", widget: "text", i18n: true }
+              - { label: "Tour — Étape thème — Bouton suivant", name: "tour_theme_next", widget: "string", i18n: true }
+              - { label: "Tour — Bouton passer", name: "tour_skip", widget: "string", i18n: true }

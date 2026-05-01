@@ -1,0 +1,93 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+
+    # A02 — Cryptographic Failures : forcer HTTPS pendant 1 an
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # A05 — Security Misconfiguration : empêcher le clickjacking
+    X-Frame-Options = "DENY"
+
+    # A05 — Empêcher le sniffing de type MIME
+    X-Content-Type-Options = "nosniff"
+
+    # A05 — Limiter les informations envoyées au referrer
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # A05 — Désactiver les fonctionnalités navigateur inutiles
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+
+    # A03 — XSS : Content Security Policy stricte
+    # - script-src : self + CDNs épinglés (GSAP, DotLottie, Netlify Identity)
+    # - style-src  : self + unsafe-inline (styles en attribut imposés par GSAP) + Google Fonts
+    # - connect-src: self + lottie.host (animation) + Netlify Identity API
+    # - frame-src  : Netlify Identity (popup OAuth)
+    # - worker-src : blob: (DotLottie utilise des workers blob)
+    # - object-src : none (bloque Flash et plugins)
+    # - base-uri   : self (bloque l'injection de balise <base>)
+    # - form-action: self (bloque l'exfiltration de formulaire)
+    Content-Security-Policy = """
+      default-src 'none';
+      script-src 'self'
+        https://cdnjs.cloudflare.com
+        https://unpkg.com
+        https://identity.netlify.com;
+      style-src 'self' 'unsafe-inline'
+        https://fonts.googleapis.com;
+      font-src 'self'
+        https://fonts.gstatic.com;
+      img-src 'self' data:;
+      connect-src 'self'
+        https://lottie.host
+        https://*.netlify.com
+        https://unpkg.com;
+      frame-src
+        https://identity.netlify.com;
+      worker-src 'self' blob:;
+      media-src 'self';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+    """
+
+# Cache long pour les assets statiques (JS, images, fonts)
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/locales/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# L'admin Decap CMS a besoin d'une CSP plus permissive (unpkg, cdn.jsdelivr)
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = """
+      default-src 'none';
+      script-src 'self'
+        https://unpkg.com
+        https://identity.netlify.com
+        'unsafe-inline';
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: blob:;
+      connect-src 'self'
+        https://*.netlify.com
+        https://api.netlify.com;
+      frame-src
+        https://identity.netlify.com;
+      worker-src 'self' blob:;
+      font-src 'self' data:;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+    """
