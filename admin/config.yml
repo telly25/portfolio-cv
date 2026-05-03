@@ -5,491 +5,729 @@ backend:
 media_folder: "assets"
 public_folder: "/assets"
 
-i18n:
-  structure: multiple_files
-  locales: [fr, en]
-  default_locale: fr
-
 collections:
-  - name: "translations"
+  - name: "site_content"
     label: "Contenu du site"
-    i18n: true
     files:
-      - name: "content"
-        label: "Textes (FR / EN)"
+
+      # ── VERSION FRANÇAISE ────────────────────────────────────────────────
+      - name: "fr"
+        label: "Version française"
         file: "locales/fr.json"
-        i18n:
-          structure: multiple_files
-          locales: [fr, en]
         fields:
 
-          # ── META ──────────────────────────────────────────────────────────
-          - { label: "Titre meta", name: "meta_title", widget: "string", i18n: true }
-          - { label: "Description meta", name: "meta_desc", widget: "text", i18n: true }
+          - { label: "Titre meta", name: "meta_title", widget: "string" }
+          - { label: "Description meta", name: "meta_desc", widget: "text" }
 
-          # ── NAVIGATION ────────────────────────────────────────────────────
           - label: "Navigation"
             name: "nav"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Accueil", name: "nav_home", widget: "string", i18n: true }
-              - { label: "Profil", name: "nav_profile", widget: "string", i18n: true }
-              - { label: "Expertise", name: "nav_expertise", widget: "string", i18n: true }
-              - { label: "Parcours", name: "nav_experience", widget: "string", i18n: true }
-              - { label: "Projets", name: "nav_projects", widget: "string", i18n: true }
-              - { label: "Contact", name: "nav_contact", widget: "string", i18n: true }
-              - { label: "Lien langue (menu mobile)", name: "nav_mob_lang", widget: "string", i18n: true }
+              - { label: "Accueil", name: "nav_home", widget: "string" }
+              - { label: "Profil", name: "nav_profile", widget: "string" }
+              - { label: "Expertise", name: "nav_expertise", widget: "string" }
+              - { label: "Parcours", name: "nav_experience", widget: "string" }
+              - { label: "Projets", name: "nav_projects", widget: "string" }
+              - { label: "Contact", name: "nav_contact", widget: "string" }
+              - { label: "Lien langue (menu mobile)", name: "nav_mob_lang", widget: "string" }
 
-          # ── HERO ──────────────────────────────────────────────────────────
           - label: "Hero"
             name: "hero"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Tag (ligne de présentation)", name: "hero_tag", widget: "string", i18n: true }
-              - { label: "Mots typewriter (séparés par virgule)", name: "hero_typewriter_words", widget: "list", i18n: true }
-              - { label: "Typewriter aria-label", name: "hero_typewriter_aria", widget: "string", i18n: true }
-              - { label: "Pitch (accroche sous le nom)", name: "hero_pitch", widget: "text", i18n: true }
-              - { label: "Label intro typewriter", name: "hero_target_label", widget: "string", i18n: true }
-              - { label: "Titre ligne 1", name: "hero_title1", widget: "string", i18n: true }
-              - { label: "Titre ligne 2", name: "hero_title2", widget: "string", i18n: true }
-              - { label: "Titre ligne 3", name: "hero_title3", widget: "string", i18n: true }
-              - { label: "Sous-titre (domaines)", name: "hero_sub", widget: "string", i18n: true }
-              - { label: "Pill 1 (disponibilité)", name: "hero_pill1", widget: "string", i18n: true }
-              - { label: "Pill 2 (type de contrat)", name: "hero_pill2", widget: "string", i18n: true }
-              - { label: "Pill 3 (localisation)", name: "hero_pill3", widget: "string", i18n: true }
-              - { label: "Bouton CV — texte", name: "hero_cta", widget: "string", i18n: true }
-              - { label: "Bouton CV — fichier (nom du PDF)", name: "hero_cta_href", widget: "string", i18n: true }
-              - { label: "Bouton CV — aria-label", name: "hero_cta_aria", widget: "string", i18n: true }
-              - { label: "Bouton contact — texte", name: "hero_ghost", widget: "string", i18n: true }
-              - { label: "Bouton contact — aria-label", name: "hero_ghost_aria", widget: "string", i18n: true }
+              - { label: "Tag (ligne de presentation)", name: "hero_tag", widget: "string" }
+              - { label: "Mots typewriter", name: "hero_typewriter_words", widget: "list" }
+              - { label: "Typewriter aria-label", name: "hero_typewriter_aria", widget: "string" }
+              - { label: "Pitch (accroche)", name: "hero_pitch", widget: "text" }
+              - { label: "Label intro typewriter", name: "hero_target_label", widget: "string" }
+              - { label: "Titre ligne 1", name: "hero_title1", widget: "string" }
+              - { label: "Titre ligne 2", name: "hero_title2", widget: "string" }
+              - { label: "Titre ligne 3", name: "hero_title3", widget: "string" }
+              - { label: "Pill 1 (disponibilite)", name: "hero_pill1", widget: "string" }
+              - { label: "Pill 2 (type de contrat)", name: "hero_pill2", widget: "string" }
+              - { label: "Pill 3 (localisation)", name: "hero_pill3", widget: "string" }
+              - { label: "Bouton CV - texte", name: "hero_cta", widget: "string" }
+              - { label: "Bouton CV - aria-label", name: "hero_cta_aria", widget: "string" }
+              - { label: "Bouton contact - texte", name: "hero_ghost", widget: "string" }
+              - { label: "Bouton contact - aria-label", name: "hero_ghost_aria", widget: "string" }
 
-          # ── PROFIL ────────────────────────────────────────────────────────
           - label: "Profil"
             name: "profile"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Label section", name: "profile_label", widget: "string", i18n: true }
-              - { label: "Accroche (intro)", name: "profile_intro", widget: "text", i18n: true }
-              - { label: "Expérience (3 ans...)", name: "profile_exp", widget: "text", i18n: true }
-              - { label: "Paragraphe 1", name: "profile_p1", widget: "text", i18n: true }
-              - { label: "Paragraphe 2", name: "profile_p2", widget: "text", i18n: true }
-              - { label: "Note de bas de profil (anglais projet…)", name: "profile_note", widget: "text", i18n: true }
-              - { label: "Mantra (phrase discrète)", name: "profile_mantra", widget: "text", i18n: true }
-              - { label: "Chip 1 — AMOA", name: "amoa_tag_1", widget: "string", i18n: true }
-              - { label: "Chip 2 — Cadrage", name: "amoa_tag_2", widget: "string", i18n: true }
-              - { label: "Chip 3 — Recette", name: "amoa_tag_3", widget: "string", i18n: true }
-              - { label: "Chip 4 — Coordination métier/SI", name: "amoa_tag_4", widget: "string", i18n: true }
-              - { label: "Chip 5 — CMS & contenus", name: "amoa_tag_5", widget: "string", i18n: true }
-              - { label: "Chip 6 — Anglais projet", name: "amoa_tag_6", widget: "string", i18n: true }
-              - { label: "Card 1 — Titre", name: "profile_card1_title", widget: "string", i18n: true }
-              - { label: "Card 1 — Sous-titre", name: "profile_card1_sub", widget: "string", i18n: true }
-              - { label: "Card 1 — Texte", name: "profile_card1_text", widget: "text", i18n: true }
-              - { label: "Card 2 — Titre", name: "profile_card2_title", widget: "string", i18n: true }
-              - { label: "Card 2 — Sous-titre", name: "profile_card2_sub", widget: "string", i18n: true }
-              - { label: "Card 2 — Texte", name: "profile_card2_text", widget: "text", i18n: true }
-              - { label: "Card 3 — Titre", name: "profile_card3_title", widget: "string", i18n: true }
-              - { label: "Card 3 — Sous-titre", name: "profile_card3_sub", widget: "string", i18n: true }
-              - { label: "Card 3 — Texte", name: "profile_card3_text", widget: "text", i18n: true }
+              - { label: "Label section", name: "profile_label", widget: "string" }
+              - { label: "Accroche (intro)", name: "profile_intro", widget: "text" }
+              - { label: "Experience (3 ans...)", name: "profile_exp", widget: "text" }
+              - { label: "Paragraphe 1", name: "profile_p1", widget: "text" }
+              - { label: "Paragraphe 2", name: "profile_p2", widget: "text" }
+              - { label: "Note de bas de profil", name: "profile_note", widget: "text" }
+              - { label: "Mantra", name: "profile_mantra", widget: "text" }
+              - { label: "Chip 1", name: "amoa_tag_1", widget: "string" }
+              - { label: "Chip 2", name: "amoa_tag_2", widget: "string" }
+              - { label: "Chip 3", name: "amoa_tag_3", widget: "string" }
+              - { label: "Chip 4", name: "amoa_tag_4", widget: "string" }
+              - { label: "Chip 5", name: "amoa_tag_5", widget: "string" }
+              - { label: "Chip 6", name: "amoa_tag_6", widget: "string" }
+              - { label: "Card 1 - Titre", name: "profile_card1_title", widget: "string" }
+              - { label: "Card 1 - Sous-titre", name: "profile_card1_sub", widget: "string" }
+              - { label: "Card 1 - Texte", name: "profile_card1_text", widget: "text" }
+              - { label: "Card 2 - Titre", name: "profile_card2_title", widget: "string" }
+              - { label: "Card 2 - Sous-titre", name: "profile_card2_sub", widget: "string" }
+              - { label: "Card 2 - Texte", name: "profile_card2_text", widget: "text" }
+              - { label: "Card 3 - Titre", name: "profile_card3_title", widget: "string" }
+              - { label: "Card 3 - Sous-titre", name: "profile_card3_sub", widget: "string" }
+              - { label: "Card 3 - Texte", name: "profile_card3_text", widget: "text" }
 
-          # ── EXPERTISE ─────────────────────────────────────────────────────
           - label: "Expertise"
             name: "expertise"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Label section", name: "expertise_label", widget: "string", i18n: true }
-              - { label: "Titre section", name: "expertise_title", widget: "string", i18n: true }
-              - { label: "Card 1 — Titre", name: "exp_card1_title", widget: "string", i18n: true }
-              - { label: "Card 1 — Item 1", name: "exp_card1_li1", widget: "string", i18n: true }
-              - { label: "Card 1 — Item 2", name: "exp_card1_li2", widget: "string", i18n: true }
-              - { label: "Card 1 — Item 3", name: "exp_card1_li3", widget: "string", i18n: true }
-              - { label: "Card 1 — Item 4", name: "exp_card1_li4", widget: "string", i18n: true }
-              - { label: "Card 2 — Titre", name: "exp_card2_title", widget: "string", i18n: true }
-              - { label: "Card 2 — Item 1", name: "exp_card2_li1", widget: "string", i18n: true }
-              - { label: "Card 2 — Item 2", name: "exp_card2_li2", widget: "string", i18n: true }
-              - { label: "Card 2 — Item 3", name: "exp_card2_li3", widget: "string", i18n: true }
-              - { label: "Card 2 — Item 4", name: "exp_card2_li4", widget: "string", i18n: true }
-              - { label: "Card 3 — Titre", name: "exp_card3_title", widget: "string", i18n: true }
-              - { label: "Card 3 — Item 1", name: "exp_card3_li1", widget: "string", i18n: true }
-              - { label: "Card 3 — Item 2", name: "exp_card3_li2", widget: "string", i18n: true }
-              - { label: "Card 3 — Item 3", name: "exp_card3_li3", widget: "string", i18n: true }
-              - { label: "Card 3 — Item 4", name: "exp_card3_li4", widget: "string", i18n: true }
-              - { label: "Card 4 — Titre", name: "exp_card4_title", widget: "string", i18n: true }
-              - { label: "Card 4 — Item 1", name: "exp_card4_li1", widget: "string", i18n: true }
-              - { label: "Card 4 — Item 2", name: "exp_card4_li2", widget: "string", i18n: true }
-              - { label: "Card 4 — Item 3", name: "exp_card4_li3", widget: "string", i18n: true }
-              - { label: "Card 4 — Item 4", name: "exp_card4_li4", widget: "string", i18n: true }
-              - { label: "Card 5 — Titre", name: "exp_card5_title", widget: "string", i18n: true }
-              - { label: "Card 5 — Item 1", name: "exp_card5_li1", widget: "string", i18n: true }
-              - { label: "Card 5 — Item 2", name: "exp_card5_li2", widget: "string", i18n: true }
-              - { label: "Card 5 — Item 3", name: "exp_card5_li3", widget: "string", i18n: true }
-              - { label: "Card 5 — Item 4", name: "exp_card5_li4", widget: "string", i18n: true }
-              - { label: "Card 6 — Titre", name: "exp_card6_title", widget: "string", i18n: true }
-              - { label: "Card 6 — Item 1", name: "exp_card6_li1", widget: "string", i18n: true }
-              - { label: "Card 6 — Item 2", name: "exp_card6_li2", widget: "string", i18n: true }
-              - { label: "Card 6 — Item 3", name: "exp_card6_li3", widget: "string", i18n: true }
-              - { label: "Card 6 — Item 4", name: "exp_card6_li4", widget: "string", i18n: true }
-              - { label: "Card 7 — Titre", name: "exp_card7_title", widget: "string", i18n: true }
-              - { label: "Card 7 — Item 1", name: "exp_card7_li1", widget: "string", i18n: true }
-              - { label: "Card 7 — Item 2", name: "exp_card7_li2", widget: "string", i18n: true }
-              - { label: "Card 7 — Item 3", name: "exp_card7_li3", widget: "string", i18n: true }
-              - { label: "Card 7 — Item 4", name: "exp_card7_li4", widget: "string", i18n: true }
-              - { label: "Card 8 — Titre", name: "exp_card8_title", widget: "string", i18n: true }
-              - { label: "Card 8 — Item 1", name: "exp_card8_li1", widget: "string", i18n: true }
-              - { label: "Card 8 — Item 2", name: "exp_card8_li2", widget: "string", i18n: true }
-              - { label: "Card 8 — Item 3", name: "exp_card8_li3", widget: "string", i18n: true }
-              - { label: "Card 8 — Item 4", name: "exp_card8_li4", widget: "string", i18n: true }
-              - { label: "Titre outils & méthodes", name: "skills_title", widget: "string", i18n: true }
-              - label: "Filtres catégories (logo wall)"
-                name: "tool_cats"
-                widget: "object"
-                collapsed: true
-                i18n: true
-                fields:
-                  - { label: "Tout", name: "tool_cat_all", widget: "string", i18n: true }
-                  - { label: "Gestion de projet", name: "tool_cat_gestion", widget: "string", i18n: true }
-                  - { label: "CMS", name: "tool_cat_cms", widget: "string", i18n: true }
-                  - { label: "Analytics", name: "tool_cat_analytics", widget: "string", i18n: true }
-                  - { label: "Automatisation", name: "tool_cat_auto", widget: "string", i18n: true }
-                  - { label: "Design & UX", name: "tool_cat_design", widget: "string", i18n: true }
-                  - { label: "SEO & Géo", name: "tool_cat_seo", widget: "string", i18n: true }
-                  - { label: "Tests & API", name: "tool_cat_tests", widget: "string", i18n: true }
-                  - { label: "Environnements techniques", name: "tool_cat_envtech", widget: "string", i18n: true }
-                  - { label: "ERP & Bureautique", name: "tool_cat_erp", widget: "string", i18n: true }
-              - label: "Noms des outils (logo wall)"
-                name: "tool_names"
-                widget: "object"
-                collapsed: true
-                i18n: true
-                fields:
-                  - { label: "Jira", name: "tool_name_jira", widget: "string", i18n: true }
-                  - { label: "Confluence", name: "tool_name_confluence", widget: "string", i18n: true }
-                  - { label: "Notion", name: "tool_name_notion", widget: "string", i18n: true }
-                  - { label: "GitLab", name: "tool_name_gitlab", widget: "string", i18n: true }
-                  - { label: "Wrike", name: "tool_name_wrike", widget: "string", i18n: true }
-                  - { label: "Mantis", name: "tool_name_mantis", widget: "string", i18n: true }
-                  - { label: "EasyRedmine", name: "tool_name_easyredmine", widget: "string", i18n: true }
-                  - { label: "Drupal", name: "tool_name_drupal", widget: "string", i18n: true }
-                  - { label: "WordPress", name: "tool_name_wordpress", widget: "string", i18n: true }
-                  - { label: "Ibexa", name: "tool_name_ibexa", widget: "string", i18n: true }
-                  - { label: "GA4", name: "tool_name_ga4", widget: "string", i18n: true }
-                  - { label: "Matomo", name: "tool_name_matomo", widget: "string", i18n: true }
-                  - { label: "Looker Studio", name: "tool_name_looker", widget: "string", i18n: true }
-                  - { label: "Eulerian", name: "tool_name_eulerian", widget: "string", i18n: true }
-                  - { label: "Piano Analytics", name: "tool_name_piano", widget: "string", i18n: true }
-                  - { label: "Make", name: "tool_name_make", widget: "string", i18n: true }
-                  - { label: "N8N", name: "tool_name_n8n", widget: "string", i18n: true }
-                  - { label: "Claude", name: "tool_name_claude", widget: "string", i18n: true }
-                  - { label: "Figma", name: "tool_name_figma", widget: "string", i18n: true }
-                  - { label: "Miro", name: "tool_name_miro", widget: "string", i18n: true }
-                  - { label: "Draw.io", name: "tool_name_drawio", widget: "string", i18n: true }
-                  - { label: "Affinity Suite", name: "tool_name_affinity", widget: "string", i18n: true }
-                  - { label: "Google Search Console", name: "tool_name_gsc", widget: "string", i18n: true }
-                  - { label: "Semrush", name: "tool_name_semrush", widget: "string", i18n: true }
-                  - { label: "Screaming Frog", name: "tool_name_screamingfrog", widget: "string", i18n: true }
-                  - { label: "Insomnia", name: "tool_name_insomnia", widget: "string", i18n: true }
-                  - { label: "SoapUI", name: "tool_name_soapui", widget: "string", i18n: true }
-                  - { label: "Xray", name: "tool_name_xray", widget: "string", i18n: true }
-                  - { label: "Next.js", name: "tool_name_nextjs", widget: "string", i18n: true }
-                  - { label: "Laravel", name: "tool_name_laravel", widget: "string", i18n: true }
-                  - { label: "Symfony", name: "tool_name_symfony", widget: "string", i18n: true }
-                  - { label: "ReactJS", name: "tool_name_react", widget: "string", i18n: true }
-                  - { label: "VueJS", name: "tool_name_vuejs", widget: "string", i18n: true }
-                  - { label: "SpringBoot", name: "tool_name_springboot", widget: "string", i18n: true }
-                  - { label: "Ruby on Rails", name: "tool_name_rails", widget: "string", i18n: true }
-                  - { label: "HTML", name: "tool_name_html", widget: "string", i18n: true }
-                  - { label: "CSS", name: "tool_name_css", widget: "string", i18n: true }
-                  - { label: "JavaScript", name: "tool_name_js", widget: "string", i18n: true }
-                  - { label: "SQL", name: "tool_name_sql", widget: "string", i18n: true }
-                  - { label: "Odoo", name: "tool_name_odoo", widget: "string", i18n: true }
-                  - { label: "Microsoft 365", name: "tool_name_ms365", widget: "string", i18n: true }
-              - { label: "Stat 1 — Label (projets)", name: "stat1_label", widget: "string", i18n: true }
-              - { label: "Stat 2 — Label (expérience)", name: "stat2_label", widget: "string", i18n: true }
-              - { label: "Stat 2 — Suffixe (ex: ans / yrs)", name: "stat2_suf", widget: "string", i18n: true }
-              - { label: "Stat 3 — Label (domaines)", name: "stat3_label", widget: "string", i18n: true }
+              - { label: "Label section", name: "expertise_label", widget: "string" }
+              - { label: "Titre section", name: "expertise_title", widget: "string" }
+              - { label: "Card 1 - Titre", name: "exp_card1_title", widget: "string" }
+              - { label: "Card 1 - Item 1", name: "exp_card1_li1", widget: "string" }
+              - { label: "Card 1 - Item 2", name: "exp_card1_li2", widget: "string" }
+              - { label: "Card 1 - Item 3", name: "exp_card1_li3", widget: "string" }
+              - { label: "Card 1 - Item 4", name: "exp_card1_li4", widget: "string" }
+              - { label: "Card 2 - Titre", name: "exp_card2_title", widget: "string" }
+              - { label: "Card 2 - Item 1", name: "exp_card2_li1", widget: "string" }
+              - { label: "Card 2 - Item 2", name: "exp_card2_li2", widget: "string" }
+              - { label: "Card 2 - Item 3", name: "exp_card2_li3", widget: "string" }
+              - { label: "Card 2 - Item 4", name: "exp_card2_li4", widget: "string" }
+              - { label: "Card 3 - Titre", name: "exp_card3_title", widget: "string" }
+              - { label: "Card 3 - Item 1", name: "exp_card3_li1", widget: "string" }
+              - { label: "Card 3 - Item 2", name: "exp_card3_li2", widget: "string" }
+              - { label: "Card 3 - Item 3", name: "exp_card3_li3", widget: "string" }
+              - { label: "Card 3 - Item 4", name: "exp_card3_li4", widget: "string" }
+              - { label: "Card 4 - Titre", name: "exp_card4_title", widget: "string" }
+              - { label: "Card 4 - Item 1", name: "exp_card4_li1", widget: "string" }
+              - { label: "Card 4 - Item 2", name: "exp_card4_li2", widget: "string" }
+              - { label: "Card 4 - Item 3", name: "exp_card4_li3", widget: "string" }
+              - { label: "Card 4 - Item 4", name: "exp_card4_li4", widget: "string" }
+              - { label: "Card 5 - Titre", name: "exp_card5_title", widget: "string" }
+              - { label: "Card 5 - Item 1", name: "exp_card5_li1", widget: "string" }
+              - { label: "Card 5 - Item 2", name: "exp_card5_li2", widget: "string" }
+              - { label: "Card 5 - Item 3", name: "exp_card5_li3", widget: "string" }
+              - { label: "Card 5 - Item 4", name: "exp_card5_li4", widget: "string" }
+              - { label: "Card 6 - Titre", name: "exp_card6_title", widget: "string" }
+              - { label: "Card 6 - Item 1", name: "exp_card6_li1", widget: "string" }
+              - { label: "Card 6 - Item 2", name: "exp_card6_li2", widget: "string" }
+              - { label: "Card 6 - Item 3", name: "exp_card6_li3", widget: "string" }
+              - { label: "Card 6 - Item 4", name: "exp_card6_li4", widget: "string" }
+              - { label: "Card 7 - Titre", name: "exp_card7_title", widget: "string" }
+              - { label: "Card 7 - Item 1", name: "exp_card7_li1", widget: "string" }
+              - { label: "Card 7 - Item 2", name: "exp_card7_li2", widget: "string" }
+              - { label: "Card 7 - Item 3", name: "exp_card7_li3", widget: "string" }
+              - { label: "Card 7 - Item 4", name: "exp_card7_li4", widget: "string" }
+              - { label: "Card 8 - Titre", name: "exp_card8_title", widget: "string" }
+              - { label: "Card 8 - Item 1", name: "exp_card8_li1", widget: "string" }
+              - { label: "Card 8 - Item 2", name: "exp_card8_li2", widget: "string" }
+              - { label: "Card 8 - Item 3", name: "exp_card8_li3", widget: "string" }
+              - { label: "Card 8 - Item 4", name: "exp_card8_li4", widget: "string" }
+              - { label: "Titre outils & methodes", name: "skills_title", widget: "string" }
+              - { label: "Stat 1 - Label", name: "stat1_label", widget: "string" }
+              - { label: "Stat 2 - Label", name: "stat2_label", widget: "string" }
+              - { label: "Stat 2 - Suffixe", name: "stat2_suf", widget: "string" }
+              - { label: "Stat 3 - Label", name: "stat3_label", widget: "string" }
 
-          # ── EXPÉRIENCE & FORMATION ────────────────────────────────────────
-          - label: "Expérience & Formation"
+          - label: "Experience & Formation"
             name: "experience"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Label section", name: "experience_label", widget: "string", i18n: true }
-              - { label: "Titre section", name: "experience_title", widget: "string", i18n: true }
-              - { label: "En-tête colonne Expérience", name: "cv_exp_head", widget: "string", i18n: true }
-              - { label: "En-tête colonne Formation", name: "cv_edu_head", widget: "string", i18n: true }
-              - { label: "Exp 1 — Intitulé", name: "cv_exp1_title", widget: "string", i18n: true }
-              - { label: "Exp 1 — Organisation", name: "cv_exp1_org", widget: "string", i18n: true }
-              - { label: "Exp 1 — Dates", name: "cv_exp1_date", widget: "string", i18n: true }
-              - { label: "Exp 1 — Lieu", name: "cv_exp1_loc", widget: "string", i18n: true }
-              - { label: "Exp 2 — Intitulé", name: "cv_exp2_title", widget: "string", i18n: true }
-              - { label: "Exp 2 — Organisation", name: "cv_exp2_org", widget: "string", i18n: true }
-              - { label: "Exp 2 — Dates", name: "cv_exp2_date", widget: "string", i18n: true }
-              - { label: "Exp 2 — Lieu", name: "cv_exp2_loc", widget: "string", i18n: true }
-              - { label: "Exp 3 — Intitulé", name: "cv_exp3_title", widget: "string", i18n: true }
-              - { label: "Exp 3 — Organisation", name: "cv_exp3_org", widget: "string", i18n: true }
-              - { label: "Exp 3 — Dates", name: "cv_exp3_date", widget: "string", i18n: true }
-              - { label: "Exp 3 — Lieu", name: "cv_exp3_loc", widget: "string", i18n: true }
-              - { label: "Exp 4 — Intitulé", name: "cv_exp4_title", widget: "string", i18n: true }
-              - { label: "Exp 4 — Organisation", name: "cv_exp4_org", widget: "string", i18n: true }
-              - { label: "Exp 4 — Dates", name: "cv_exp4_date", widget: "string", i18n: true }
-              - { label: "Exp 4 — Lieu", name: "cv_exp4_loc", widget: "string", i18n: true }
-              - { label: "Exp 5 — Intitulé", name: "cv_exp5_title", widget: "string", i18n: true }
-              - { label: "Exp 5 — Organisation", name: "cv_exp5_org", widget: "string", i18n: true }
-              - { label: "Exp 5 — Dates", name: "cv_exp5_date", widget: "string", i18n: true }
-              - { label: "Exp 5 — Lieu", name: "cv_exp5_loc", widget: "string", i18n: true }
-              - { label: "Exp 6 — Intitulé", name: "cv_exp6_title", widget: "string", i18n: true }
-              - { label: "Exp 6 — Organisation", name: "cv_exp6_org", widget: "string", i18n: true }
-              - { label: "Exp 6 — Dates", name: "cv_exp6_date", widget: "string", i18n: true }
-              - { label: "Exp 6 — Lieu", name: "cv_exp6_loc", widget: "string", i18n: true }
-              - { label: "Exp 7 — Intitulé", name: "cv_exp7_title", widget: "string", i18n: true }
-              - { label: "Exp 7 — Organisation", name: "cv_exp7_org", widget: "string", i18n: true }
-              - { label: "Exp 7 — Dates", name: "cv_exp7_date", widget: "string", i18n: true }
-              - { label: "Exp 7 — Lieu", name: "cv_exp7_loc", widget: "string", i18n: true }
-              - { label: "Exp 8 — Intitulé", name: "cv_exp8_title", widget: "string", i18n: true }
-              - { label: "Exp 8 — Organisation", name: "cv_exp8_org", widget: "string", i18n: true }
-              - { label: "Exp 8 — Dates", name: "cv_exp8_date", widget: "string", i18n: true }
-              - { label: "Exp 8 — Lieu", name: "cv_exp8_loc", widget: "string", i18n: true }
-              - { label: "Exp 9 — Intitulé", name: "cv_exp9_title", widget: "string", i18n: true }
-              - { label: "Exp 9 — Organisation", name: "cv_exp9_org", widget: "string", i18n: true }
-              - { label: "Exp 9 — Dates", name: "cv_exp9_date", widget: "string", i18n: true }
-              - { label: "Exp 9 — Lieu", name: "cv_exp9_loc", widget: "string", i18n: true }
-              - { label: "Formation 1 — Diplôme", name: "cv_edu1_title", widget: "string", i18n: true }
-              - { label: "Formation 1 — Établissement", name: "cv_edu1_org", widget: "string", i18n: true }
-              - { label: "Formation 1 — Dates", name: "cv_edu1_date", widget: "string", i18n: true }
-              - { label: "Formation 1 — Lieu", name: "cv_edu1_loc", widget: "string", i18n: true }
-              - { label: "Formation 2 — Diplôme", name: "cv_edu2_title", widget: "string", i18n: true }
-              - { label: "Formation 2 — Établissement", name: "cv_edu2_org", widget: "string", i18n: true }
-              - { label: "Formation 2 — Dates", name: "cv_edu2_date", widget: "string", i18n: true }
-              - { label: "Formation 2 — Lieu", name: "cv_edu2_loc", widget: "string", i18n: true }
-              - { label: "Formation 3 — Diplôme", name: "cv_edu3_title", widget: "string", i18n: true }
-              - { label: "Formation 3 — Établissement", name: "cv_edu3_org", widget: "string", i18n: true }
-              - { label: "Formation 3 — Dates", name: "cv_edu3_date", widget: "string", i18n: true }
-              - { label: "Formation 3 — Lieu", name: "cv_edu3_loc", widget: "string", i18n: true }
-              - { label: "Formation 4 — Diplôme", name: "cv_edu4_title", widget: "string", i18n: true }
-              - { label: "Formation 4 — Établissement", name: "cv_edu4_org", widget: "string", i18n: true }
-              - { label: "Formation 4 — Dates", name: "cv_edu4_date", widget: "string", i18n: true }
-              - { label: "Formation 4 — Lieu", name: "cv_edu4_loc", widget: "string", i18n: true }
-              - { label: "Label 'Autres expériences'", name: "xp_other_label", widget: "string", i18n: true }
-              - { label: "Autre 1 — Catégorie", name: "xp1_cat", widget: "string", i18n: true }
-              - { label: "Autre 1 — Badge", name: "xp1_badge", widget: "string", i18n: true }
-              - { label: "Autre 1 — Titre", name: "xp1_title", widget: "string", i18n: true }
-              - { label: "Autre 1 — Description", name: "xp1_desc", widget: "text", i18n: true }
-              - { label: "Autre 2 — Catégorie", name: "xp2_cat", widget: "string", i18n: true }
-              - { label: "Autre 2 — Badge", name: "xp2_badge", widget: "string", i18n: true }
-              - { label: "Autre 2 — Titre", name: "xp2_title", widget: "string", i18n: true }
-              - { label: "Autre 2 — Description", name: "xp2_desc", widget: "text", i18n: true }
-              - { label: "Autre 3 — Catégorie", name: "xp3_cat", widget: "string", i18n: true }
-              - { label: "Autre 3 — Badge", name: "xp3_badge", widget: "string", i18n: true }
-              - { label: "Autre 3 — Titre", name: "xp3_title", widget: "string", i18n: true }
-              - { label: "Autre 3 — Description", name: "xp3_desc", widget: "text", i18n: true }
-              - { label: "Autre 4 — Catégorie", name: "xp4_cat", widget: "string", i18n: true }
-              - { label: "Autre 4 — Badge", name: "xp4_badge", widget: "string", i18n: true }
-              - { label: "Autre 4 — Titre", name: "xp4_title", widget: "string", i18n: true }
-              - { label: "Autre 4 — Description", name: "xp4_desc", widget: "text", i18n: true }
+              - { label: "Label section", name: "experience_label", widget: "string" }
+              - { label: "Titre section", name: "experience_title", widget: "string" }
+              - { label: "En-tete colonne Experience", name: "cv_exp_head", widget: "string" }
+              - { label: "En-tete colonne Formation", name: "cv_edu_head", widget: "string" }
+              - { label: "Exp 1 - Intitule", name: "cv_exp1_title", widget: "string" }
+              - { label: "Exp 1 - Organisation", name: "cv_exp1_org", widget: "string" }
+              - { label: "Exp 1 - Dates", name: "cv_exp1_date", widget: "string" }
+              - { label: "Exp 1 - Lieu", name: "cv_exp1_loc", widget: "string" }
+              - { label: "Exp 2 - Intitule", name: "cv_exp2_title", widget: "string" }
+              - { label: "Exp 2 - Organisation", name: "cv_exp2_org", widget: "string" }
+              - { label: "Exp 2 - Dates", name: "cv_exp2_date", widget: "string" }
+              - { label: "Exp 2 - Lieu", name: "cv_exp2_loc", widget: "string" }
+              - { label: "Exp 4 - Intitule", name: "cv_exp4_title", widget: "string" }
+              - { label: "Exp 4 - Organisation", name: "cv_exp4_org", widget: "string" }
+              - { label: "Exp 4 - Dates", name: "cv_exp4_date", widget: "string" }
+              - { label: "Exp 4 - Lieu", name: "cv_exp4_loc", widget: "string" }
+              - { label: "Exp 6 - Intitule", name: "cv_exp6_title", widget: "string" }
+              - { label: "Exp 6 - Organisation", name: "cv_exp6_org", widget: "string" }
+              - { label: "Exp 6 - Dates", name: "cv_exp6_date", widget: "string" }
+              - { label: "Exp 6 - Lieu", name: "cv_exp6_loc", widget: "string" }
+              - { label: "Exp 7 - Intitule", name: "cv_exp7_title", widget: "string" }
+              - { label: "Exp 7 - Organisation", name: "cv_exp7_org", widget: "string" }
+              - { label: "Exp 7 - Dates", name: "cv_exp7_date", widget: "string" }
+              - { label: "Exp 7 - Lieu", name: "cv_exp7_loc", widget: "string" }
+              - { label: "Formation 1 - Diplome", name: "cv_edu1_title", widget: "string" }
+              - { label: "Formation 1 - Etablissement", name: "cv_edu1_org", widget: "string" }
+              - { label: "Formation 1 - Dates", name: "cv_edu1_date", widget: "string" }
+              - { label: "Formation 1 - Lieu", name: "cv_edu1_loc", widget: "string" }
+              - { label: "Formation 2 - Diplome", name: "cv_edu2_title", widget: "string" }
+              - { label: "Formation 2 - Etablissement", name: "cv_edu2_org", widget: "string" }
+              - { label: "Formation 2 - Dates", name: "cv_edu2_date", widget: "string" }
+              - { label: "Formation 2 - Lieu", name: "cv_edu2_loc", widget: "string" }
+              - { label: "Formation 3 - Diplome", name: "cv_edu3_title", widget: "string" }
+              - { label: "Formation 3 - Etablissement", name: "cv_edu3_org", widget: "string" }
+              - { label: "Formation 3 - Dates", name: "cv_edu3_date", widget: "string" }
+              - { label: "Formation 3 - Lieu", name: "cv_edu3_loc", widget: "string" }
+              - { label: "Formation 4 - Diplome", name: "cv_edu4_title", widget: "string" }
+              - { label: "Formation 4 - Etablissement", name: "cv_edu4_org", widget: "string" }
+              - { label: "Formation 4 - Dates", name: "cv_edu4_date", widget: "string" }
+              - { label: "Formation 4 - Lieu", name: "cv_edu4_loc", widget: "string" }
+              - { label: "Label 'Autres experiences'", name: "xp_other_label", widget: "string" }
+              - { label: "Autre 1 - Categorie", name: "xp1_cat", widget: "string" }
+              - { label: "Autre 1 - Badge", name: "xp1_badge", widget: "string" }
+              - { label: "Autre 1 - Titre", name: "xp1_title", widget: "string" }
+              - { label: "Autre 1 - Description", name: "xp1_desc", widget: "text" }
+              - { label: "Autre 2 - Categorie", name: "xp2_cat", widget: "string" }
+              - { label: "Autre 2 - Badge", name: "xp2_badge", widget: "string" }
+              - { label: "Autre 2 - Titre", name: "xp2_title", widget: "string" }
+              - { label: "Autre 2 - Description", name: "xp2_desc", widget: "text" }
+              - { label: "Autre 3 - Categorie", name: "xp3_cat", widget: "string" }
+              - { label: "Autre 3 - Badge", name: "xp3_badge", widget: "string" }
+              - { label: "Autre 3 - Titre", name: "xp3_title", widget: "string" }
+              - { label: "Autre 3 - Description", name: "xp3_desc", widget: "text" }
+              - { label: "Autre 4 - Categorie", name: "xp4_cat", widget: "string" }
+              - { label: "Autre 4 - Badge", name: "xp4_badge", widget: "string" }
+              - { label: "Autre 4 - Titre", name: "xp4_title", widget: "string" }
+              - { label: "Autre 4 - Description", name: "xp4_desc", widget: "text" }
 
-          # ── MISSIONS & RÉFÉRENCES ─────────────────────────────────────────
-          - label: "Missions & références"
+          - label: "Missions & references"
             name: "projects"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Label section", name: "projects_label", widget: "string", i18n: true }
-              - { label: "Titre section", name: "projects_title", widget: "string", i18n: true }
-              - { label: "Filtre — Tous", name: "filter_all", widget: "string", i18n: true }
-              - { label: "Filtre — IA & Auto.", name: "filter_ia", widget: "string", i18n: true }
-              - { label: "Filtre — Web", name: "filter_web", widget: "string", i18n: true }
-              - { label: "Filtre — Analytics", name: "filter_analytics", widget: "string", i18n: true }
-              - { label: "Filtre — SI", name: "filter_si", widget: "string", i18n: true }
-              - { label: "Filtre — Sécurité", name: "filter_securite", widget: "string", i18n: true }
-              - { label: "Filtre — Mobile", name: "filter_mobile", widget: "string", i18n: true }
-              - { label: "VeilleReg — Secteur", name: "proj_vr_sector", widget: "string", i18n: true }
-              - { label: "VeilleReg — Badge live", name: "proj_vr_live", widget: "string", i18n: true }
-              - { label: "VeilleReg — Titre", name: "proj_vr_title", widget: "string", i18n: true }
-              - { label: "VeilleReg — Rôle", name: "proj_vr_role", widget: "string", i18n: true }
-              - { label: "VeilleReg — Description", name: "proj_vr_desc", widget: "text", i18n: true }
-              - { label: "VeilleReg — KPI label", name: "proj_vr_kpil", widget: "string", i18n: true }
-              - { label: "VeilleReg — Lien texte", name: "proj_vr_link", widget: "string", i18n: true }
-              - { label: "Culture.gouv.fr — Secteur", name: "proj_c_sector", widget: "string", i18n: true }
-              - { label: "Culture.gouv.fr — Titre", name: "proj_c_title", widget: "string", i18n: true }
-              - { label: "Culture.gouv.fr — Rôle", name: "proj_c_role", widget: "string", i18n: true }
-              - { label: "Culture.gouv.fr — Description", name: "proj_c_desc", widget: "text", i18n: true }
-              - { label: "Culture.gouv.fr — KPI valeur", name: "proj_c_kpi", widget: "string", i18n: true }
-              - { label: "Culture.gouv.fr — KPI label", name: "proj_c_kpil", widget: "string", i18n: true }
-              - { label: "Migration analytics — Secteur", name: "proj_m_sector", widget: "string", i18n: true }
-              - { label: "Migration analytics — Titre", name: "proj_m_title", widget: "string", i18n: true }
-              - { label: "Migration analytics — Rôle", name: "proj_m_role", widget: "string", i18n: true }
-              - { label: "Migration analytics — Description", name: "proj_m_desc", widget: "text", i18n: true }
-              - { label: "Migration analytics — KPI valeur", name: "proj_m_kpi", widget: "string", i18n: true }
-              - { label: "Migration analytics — KPI label", name: "proj_m_kpil", widget: "string", i18n: true }
-              - { label: "ANOM — Secteur", name: "proj_a_sector", widget: "string", i18n: true }
-              - { label: "ANOM — Titre", name: "proj_a_title", widget: "string", i18n: true }
-              - { label: "ANOM — Rôle", name: "proj_a_role", widget: "string", i18n: true }
-              - { label: "ANOM — Description", name: "proj_a_desc", widget: "text", i18n: true }
-              - { label: "ANOM — KPI valeur", name: "proj_a_kpi", widget: "string", i18n: true }
-              - { label: "ANOM — KPI label", name: "proj_a_kpil", widget: "string", i18n: true }
-              - { label: "OFPRA — Secteur", name: "proj_o_sector", widget: "string", i18n: true }
-              - { label: "OFPRA — Titre", name: "proj_o_title", widget: "string", i18n: true }
-              - { label: "OFPRA — Rôle", name: "proj_o_role", widget: "string", i18n: true }
-              - { label: "OFPRA — Description", name: "proj_o_desc", widget: "text", i18n: true }
-              - { label: "OFPRA — KPI valeur", name: "proj_o_kpi", widget: "string", i18n: true }
-              - { label: "OFPRA — KPI label", name: "proj_o_kpil", widget: "string", i18n: true }
-              - { label: "Grand Mémorial — Secteur", name: "proj_g_sector", widget: "string", i18n: true }
-              - { label: "Grand Mémorial — Titre", name: "proj_g_title", widget: "string", i18n: true }
-              - { label: "Grand Mémorial — Rôle", name: "proj_g_role", widget: "string", i18n: true }
-              - { label: "Grand Mémorial — Description", name: "proj_g_desc", widget: "text", i18n: true }
-              - { label: "Grand Mémorial — KPI valeur", name: "proj_g_kpi", widget: "string", i18n: true }
-              - { label: "Grand Mémorial — KPI label", name: "proj_g_kpil", widget: "string", i18n: true }
-              - { label: "Référentiel infra — Secteur", name: "proj_r_sector", widget: "string", i18n: true }
-              - { label: "Référentiel infra — Titre", name: "proj_r_title", widget: "string", i18n: true }
-              - { label: "Référentiel infra — Rôle", name: "proj_r_role", widget: "string", i18n: true }
-              - { label: "Référentiel infra — Description", name: "proj_r_desc", widget: "text", i18n: true }
-              - { label: "Référentiel infra — KPI valeur", name: "proj_r_kpi", widget: "string", i18n: true }
-              - { label: "Référentiel infra — KPI label", name: "proj_r_kpil", widget: "string", i18n: true }
-              - { label: "Sémaphore — Secteur", name: "proj_sem_sector", widget: "string", i18n: true }
-              - { label: "Sémaphore — Titre", name: "proj_sem_title", widget: "string", i18n: true }
-              - { label: "Sémaphore — Rôle", name: "proj_sem_role", widget: "string", i18n: true }
-              - { label: "Sémaphore — Description", name: "proj_sem_desc", widget: "text", i18n: true }
-              - { label: "Sémaphore — KPI valeur", name: "proj_sem_kpi", widget: "string", i18n: true }
-              - { label: "Sémaphore — KPI label", name: "proj_sem_kpil", widget: "string", i18n: true }
-              - { label: "IRD — Secteur", name: "proj_ird_sector", widget: "string", i18n: true }
-              - { label: "IRD — Titre", name: "proj_ird_title", widget: "string", i18n: true }
-              - { label: "IRD — Rôle", name: "proj_ird_role", widget: "string", i18n: true }
-              - { label: "IRD — Description", name: "proj_ird_desc", widget: "text", i18n: true }
-              - { label: "IRD — KPI valeur", name: "proj_ird_kpi", widget: "string", i18n: true }
-              - { label: "IRD — KPI label", name: "proj_ird_kpil", widget: "string", i18n: true }
-              - { label: "Post-audit sécurité — Secteur", name: "proj_sec_sector", widget: "string", i18n: true }
-              - { label: "Post-audit sécurité — Titre", name: "proj_sec_title", widget: "string", i18n: true }
-              - { label: "Post-audit sécurité — Rôle", name: "proj_sec_role", widget: "string", i18n: true }
-              - { label: "Post-audit sécurité — Description", name: "proj_sec_desc", widget: "text", i18n: true }
-              - { label: "Post-audit sécurité — KPI valeur", name: "proj_sec_kpi", widget: "string", i18n: true }
-              - { label: "Post-audit sécurité — KPI label", name: "proj_sec_kpil", widget: "string", i18n: true }
-              - { label: "Groupe Atlantic — Secteur", name: "proj_atl_sector", widget: "string", i18n: true }
-              - { label: "Groupe Atlantic — Titre", name: "proj_atl_title", widget: "string", i18n: true }
-              - { label: "Groupe Atlantic — Rôle", name: "proj_atl_role", widget: "string", i18n: true }
-              - { label: "Groupe Atlantic — Description", name: "proj_atl_desc", widget: "text", i18n: true }
-              - { label: "Groupe Atlantic — KPI valeur", name: "proj_atl_kpi_val", widget: "string", i18n: true }
-              - { label: "Groupe Atlantic — KPI label", name: "proj_atl_kpil", widget: "string", i18n: true }
-              - { label: "Mobilier national — Secteur", name: "proj_mn_sector", widget: "string", i18n: true }
-              - { label: "Mobilier national — Titre", name: "proj_mn_title", widget: "string", i18n: true }
-              - { label: "Mobilier national — Rôle", name: "proj_mn_role", widget: "string", i18n: true }
-              - { label: "Mobilier national — Description", name: "proj_mn_desc", widget: "text", i18n: true }
-              - { label: "Mobilier national — KPI valeur", name: "proj_mn_kpi", widget: "string", i18n: true }
-              - { label: "Mobilier national — KPI label", name: "proj_mn_kpil", widget: "string", i18n: true }
-              - { label: "Chips secteurs — Label", name: "profile_sectors_label", widget: "string", i18n: true }
-              - { label: "Secteur 1", name: "sector_1", widget: "string", i18n: true }
-              - { label: "Secteur 2", name: "sector_2", widget: "string", i18n: true }
-              - { label: "Secteur 3", name: "sector_3", widget: "string", i18n: true }
-              - { label: "Secteur 4", name: "sector_4", widget: "string", i18n: true }
-              - { label: "Secteur 5", name: "sector_5", widget: "string", i18n: true }
-              - { label: "Secteur 6", name: "sector_6", widget: "string", i18n: true }
-              - { label: "Secteur 7", name: "sector_7", widget: "string", i18n: true }
-              - { label: "Secteur 8", name: "sector_8", widget: "string", i18n: true }
-              - { label: "Secteur 9", name: "sector_9", widget: "string", i18n: true }
-              - { label: "#CultureChezNous — Secteur", name: "proj_cc_sector", widget: "string", i18n: true }
-              - { label: "#CultureChezNous — Titre", name: "proj_cc_title", widget: "string", i18n: true }
-              - { label: "#CultureChezNous — Rôle", name: "proj_cc_role", widget: "string", i18n: true }
-              - { label: "#CultureChezNous — Description", name: "proj_cc_desc", widget: "text", i18n: true }
-              - { label: "#CultureChezNous — KPI valeur", name: "proj_cc_kpi", widget: "string", i18n: true }
-              - { label: "#CultureChezNous — KPI label", name: "proj_cc_kpil", widget: "string", i18n: true }
-              - { label: "Note sélection non exhaustive", name: "proj_note", widget: "string", i18n: true }
+              - { label: "Label section", name: "projects_label", widget: "string" }
+              - { label: "Titre section", name: "projects_title", widget: "string" }
+              - { label: "Filtre - Tous", name: "filter_all", widget: "string" }
+              - { label: "Filtre - IA & Auto.", name: "filter_ia", widget: "string" }
+              - { label: "Filtre - Web", name: "filter_web", widget: "string" }
+              - { label: "Filtre - Analytics", name: "filter_analytics", widget: "string" }
+              - { label: "Filtre - SI", name: "filter_si", widget: "string" }
+              - { label: "Filtre - Securite", name: "filter_securite", widget: "string" }
+              - { label: "Filtre - Mobile", name: "filter_mobile", widget: "string" }
+              - { label: "VeilleReg - Secteur", name: "proj_vr_sector", widget: "string" }
+              - { label: "VeilleReg - Badge live", name: "proj_vr_live", widget: "string" }
+              - { label: "VeilleReg - Titre", name: "proj_vr_title", widget: "string" }
+              - { label: "VeilleReg - Role", name: "proj_vr_role", widget: "string" }
+              - { label: "VeilleReg - Description", name: "proj_vr_desc", widget: "text" }
+              - { label: "VeilleReg - KPI label", name: "proj_vr_kpil", widget: "string" }
+              - { label: "VeilleReg - Lien texte", name: "proj_vr_link", widget: "string" }
+              - { label: "Culture.gouv.fr - Secteur", name: "proj_c_sector", widget: "string" }
+              - { label: "Culture.gouv.fr - Titre", name: "proj_c_title", widget: "string" }
+              - { label: "Culture.gouv.fr - Role", name: "proj_c_role", widget: "string" }
+              - { label: "Culture.gouv.fr - Description", name: "proj_c_desc", widget: "text" }
+              - { label: "Culture.gouv.fr - KPI label", name: "proj_c_kpil", widget: "string" }
+              - { label: "Migration analytics - Secteur", name: "proj_m_sector", widget: "string" }
+              - { label: "Migration analytics - Titre", name: "proj_m_title", widget: "string" }
+              - { label: "Migration analytics - Role", name: "proj_m_role", widget: "string" }
+              - { label: "Migration analytics - Description", name: "proj_m_desc", widget: "text" }
+              - { label: "Migration analytics - KPI label", name: "proj_m_kpil", widget: "string" }
+              - { label: "ANOM - Secteur", name: "proj_a_sector", widget: "string" }
+              - { label: "ANOM - Titre", name: "proj_a_title", widget: "string" }
+              - { label: "ANOM - Role", name: "proj_a_role", widget: "string" }
+              - { label: "ANOM - Description", name: "proj_a_desc", widget: "text" }
+              - { label: "ANOM - KPI label", name: "proj_a_kpil", widget: "string" }
+              - { label: "OFPRA - Secteur", name: "proj_o_sector", widget: "string" }
+              - { label: "OFPRA - Titre", name: "proj_o_title", widget: "string" }
+              - { label: "OFPRA - Role", name: "proj_o_role", widget: "string" }
+              - { label: "OFPRA - Description", name: "proj_o_desc", widget: "text" }
+              - { label: "OFPRA - KPI label", name: "proj_o_kpil", widget: "string" }
+              - { label: "Grand Memorial - Secteur", name: "proj_g_sector", widget: "string" }
+              - { label: "Grand Memorial - Titre", name: "proj_g_title", widget: "string" }
+              - { label: "Grand Memorial - Role", name: "proj_g_role", widget: "string" }
+              - { label: "Grand Memorial - Description", name: "proj_g_desc", widget: "text" }
+              - { label: "Grand Memorial - KPI label", name: "proj_g_kpil", widget: "string" }
+              - { label: "Referentiel infra - Secteur", name: "proj_r_sector", widget: "string" }
+              - { label: "Referentiel infra - Titre", name: "proj_r_title", widget: "string" }
+              - { label: "Referentiel infra - Role", name: "proj_r_role", widget: "string" }
+              - { label: "Referentiel infra - Description", name: "proj_r_desc", widget: "text" }
+              - { label: "Referentiel infra - KPI label", name: "proj_r_kpil", widget: "string" }
+              - { label: "Semaphore - Secteur", name: "proj_sem_sector", widget: "string" }
+              - { label: "Semaphore - Titre", name: "proj_sem_title", widget: "string" }
+              - { label: "Semaphore - Role", name: "proj_sem_role", widget: "string" }
+              - { label: "Semaphore - Description", name: "proj_sem_desc", widget: "text" }
+              - { label: "Semaphore - KPI label", name: "proj_sem_kpil", widget: "string" }
+              - { label: "IRD - Secteur", name: "proj_ird_sector", widget: "string" }
+              - { label: "IRD - Titre", name: "proj_ird_title", widget: "string" }
+              - { label: "IRD - Role", name: "proj_ird_role", widget: "string" }
+              - { label: "IRD - Description", name: "proj_ird_desc", widget: "text" }
+              - { label: "IRD - KPI label", name: "proj_ird_kpil", widget: "string" }
+              - { label: "Post-audit securite - Secteur", name: "proj_sec_sector", widget: "string" }
+              - { label: "Post-audit securite - Titre", name: "proj_sec_title", widget: "string" }
+              - { label: "Post-audit securite - Role", name: "proj_sec_role", widget: "string" }
+              - { label: "Post-audit securite - Description", name: "proj_sec_desc", widget: "text" }
+              - { label: "Post-audit securite - KPI label", name: "proj_sec_kpil", widget: "string" }
+              - { label: "Groupe Atlantic - Secteur", name: "proj_atl_sector", widget: "string" }
+              - { label: "Groupe Atlantic - Titre", name: "proj_atl_title", widget: "string" }
+              - { label: "Groupe Atlantic - Role", name: "proj_atl_role", widget: "string" }
+              - { label: "Groupe Atlantic - Description", name: "proj_atl_desc", widget: "text" }
+              - { label: "Groupe Atlantic - KPI label", name: "proj_atl_kpil", widget: "string" }
+              - { label: "Mobilier national - Secteur", name: "proj_mn_sector", widget: "string" }
+              - { label: "Mobilier national - Titre", name: "proj_mn_title", widget: "string" }
+              - { label: "Mobilier national - Role", name: "proj_mn_role", widget: "string" }
+              - { label: "Mobilier national - Description", name: "proj_mn_desc", widget: "text" }
+              - { label: "Mobilier national - KPI label", name: "proj_mn_kpil", widget: "string" }
+              - { label: "CultureChezNous - Secteur", name: "proj_cc_sector", widget: "string" }
+              - { label: "CultureChezNous - Titre", name: "proj_cc_title", widget: "string" }
+              - { label: "CultureChezNous - Role", name: "proj_cc_role", widget: "string" }
+              - { label: "CultureChezNous - Description", name: "proj_cc_desc", widget: "text" }
+              - { label: "CultureChezNous - KPI label", name: "proj_cc_kpil", widget: "string" }
+              - { label: "Chips secteurs - Label", name: "profile_sectors_label", widget: "string" }
+              - { label: "Secteur 1", name: "sector_1", widget: "string" }
+              - { label: "Secteur 2", name: "sector_2", widget: "string" }
+              - { label: "Secteur 3", name: "sector_3", widget: "string" }
+              - { label: "Secteur 4", name: "sector_4", widget: "string" }
+              - { label: "Secteur 5", name: "sector_5", widget: "string" }
+              - { label: "Secteur 6", name: "sector_6", widget: "string" }
+              - { label: "Secteur 7", name: "sector_7", widget: "string" }
+              - { label: "Secteur 8", name: "sector_8", widget: "string" }
+              - { label: "Secteur 9", name: "sector_9", widget: "string" }
+              - { label: "Note selection non exhaustive", name: "proj_note", widget: "string" }
 
-          # ── CONTACT & FORMULAIRE ──────────────────────────────────────────
           - label: "Contact & Formulaire"
             name: "contact"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Label section", name: "contact_label", widget: "string", i18n: true }
-              - { label: "Titre section", name: "contact_title", widget: "string", i18n: true }
-              - { label: "Bloc info — Titre", name: "contact_info_title", widget: "string", i18n: true }
-              - { label: "Bloc info — Texte", name: "contact_info_text", widget: "text", i18n: true }
-              - { label: "Champ Nom — Label", name: "form_label_name", widget: "string", i18n: true }
-              - { label: "Champ Nom — Placeholder", name: "form_ph_name", widget: "string", i18n: true }
-              - { label: "Champ Nom — Erreur", name: "form_err_name", widget: "string", i18n: true }
-              - { label: "Champ Email — Label", name: "form_label_email", widget: "string", i18n: true }
-              - { label: "Champ Email — Placeholder", name: "form_ph_email", widget: "string", i18n: true }
-              - { label: "Champ Email — Erreur", name: "form_err_email", widget: "string", i18n: true }
-              - { label: "Champ Téléphone — Label", name: "form_label_tel", widget: "string", i18n: true }
-              - { label: "Champ Objet — Label", name: "form_label_subject", widget: "string", i18n: true }
-              - { label: "Champ Objet — Placeholder", name: "form_ph_subject", widget: "string", i18n: true }
-              - { label: "Champ Objet — Erreur", name: "form_err_subject", widget: "string", i18n: true }
-              - { label: "Champ Message — Label", name: "form_label_message", widget: "string", i18n: true }
-              - { label: "Champ Message — Placeholder", name: "form_ph_message", widget: "text", i18n: true }
-              - { label: "Champ Message — Erreur", name: "form_err_message", widget: "string", i18n: true }
-              - { label: "Captcha — Question", name: "captcha_q", widget: "string", i18n: true }
-              - { label: "Captcha — Erreur", name: "captcha_err", widget: "string", i18n: true }
-              - { label: "Bouton envoyer", name: "form_submit", widget: "string", i18n: true }
-              - { label: "Bouton envoyer — état envoi", name: "form_sending", widget: "string", i18n: true }
-              - { label: "Message succès", name: "form_success", widget: "string", i18n: true }
+              - { label: "Label section", name: "contact_label", widget: "string" }
+              - { label: "Titre section", name: "contact_title", widget: "string" }
+              - { label: "Bloc info - Titre", name: "contact_info_title", widget: "string" }
+              - { label: "Bloc info - Texte", name: "contact_info_text", widget: "text" }
+              - { label: "Champ Nom - Label", name: "form_label_name", widget: "string" }
+              - { label: "Champ Nom - Placeholder", name: "form_ph_name", widget: "string" }
+              - { label: "Champ Nom - Erreur", name: "form_err_name", widget: "string" }
+              - { label: "Champ Email - Label", name: "form_label_email", widget: "string" }
+              - { label: "Champ Email - Placeholder", name: "form_ph_email", widget: "string" }
+              - { label: "Champ Email - Erreur", name: "form_err_email", widget: "string" }
+              - { label: "Champ Telephone - Label", name: "form_label_tel", widget: "string" }
+              - { label: "Champ Objet - Label", name: "form_label_subject", widget: "string" }
+              - { label: "Champ Objet - Placeholder", name: "form_ph_subject", widget: "string" }
+              - { label: "Champ Objet - Erreur", name: "form_err_subject", widget: "string" }
+              - { label: "Champ Message - Label", name: "form_label_message", widget: "string" }
+              - { label: "Champ Message - Placeholder", name: "form_ph_message", widget: "text" }
+              - { label: "Champ Message - Erreur", name: "form_err_message", widget: "string" }
+              - { label: "Captcha - Question", name: "captcha_q", widget: "string" }
+              - { label: "Captcha - Erreur", name: "captcha_err", widget: "string" }
+              - { label: "Bouton envoyer", name: "form_submit", widget: "string" }
+              - { label: "Bouton envoyer - etat envoi", name: "form_sending", widget: "string" }
+              - { label: "Message succes", name: "form_success", widget: "string" }
 
-          # ── FOOTER ────────────────────────────────────────────────────────
           - label: "Footer"
             name: "footer"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Copyright", name: "footer_copy", widget: "string", i18n: true }
-              - { label: "Bouton politique de confidentialité", name: "footer_privacy_btn", widget: "string", i18n: true }
-              - { label: "Bouton cookies", name: "footer_cookies_btn", widget: "string", i18n: true }
+              - { label: "Copyright", name: "footer_copy", widget: "string" }
+              - { label: "Bouton politique de confidentialite", name: "footer_privacy_btn", widget: "string" }
+              - { label: "Bouton cookies", name: "footer_cookies_btn", widget: "string" }
 
-          # ── POLITIQUE DE CONFIDENTIALITÉ ──────────────────────────────────
-          - label: "Politique de confidentialité"
+          - label: "Politique de confidentialite"
             name: "privacy"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Titre", name: "privacy_title", widget: "string", i18n: true }
-              - { label: "Bouton fermer", name: "privacy_close", widget: "string", i18n: true }
-              - { label: "Paragraphe 1", name: "privacy_p1", widget: "text", i18n: true }
-              - { label: "Paragraphe 2", name: "privacy_p2", widget: "text", i18n: true }
-              - { label: "Paragraphe 3", name: "privacy_p3", widget: "text", i18n: true }
-              - { label: "Paragraphe 4", name: "privacy_p4", widget: "text", i18n: true }
+              - { label: "Titre", name: "privacy_title", widget: "string" }
+              - { label: "Bouton fermer", name: "privacy_close", widget: "string" }
+              - { label: "Paragraphe 1", name: "privacy_p1", widget: "text" }
+              - { label: "Paragraphe 2", name: "privacy_p2", widget: "text" }
+              - { label: "Paragraphe 3", name: "privacy_p3", widget: "text" }
+              - { label: "Paragraphe 4", name: "privacy_p4", widget: "text" }
 
-          # ── COOKIES ───────────────────────────────────────────────────────
           - label: "Bandeau cookies"
             name: "cookies"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Titre bandeau", name: "cookie_title", widget: "string", i18n: true }
-              - { label: "Texte bandeau", name: "cookie_text", widget: "text", i18n: true }
-              - { label: "Bouton tout refuser", name: "cookie_refuse", widget: "string", i18n: true }
-              - { label: "Bouton personnaliser", name: "cookie_customize", widget: "string", i18n: true }
-              - { label: "Bouton tout accepter", name: "cookie_accept", widget: "string", i18n: true }
-              - { label: "Cookies fonctionnels — Titre", name: "cookie_functional_title", widget: "string", i18n: true }
-              - { label: "Cookies fonctionnels — Texte", name: "cookie_functional_text", widget: "text", i18n: true }
-              - { label: "Cookies fonctionnels — Badge", name: "cookie_always_on", widget: "string", i18n: true }
-              - { label: "Cookies analytiques — Titre", name: "cookie_analytics_title", widget: "string", i18n: true }
-              - { label: "Cookies analytiques — Texte", name: "cookie_analytics_text", widget: "text", i18n: true }
-              - { label: "Toggle activer", name: "cookie_enable", widget: "string", i18n: true }
-              - { label: "Bouton sauvegarder", name: "cookie_save", widget: "string", i18n: true }
+              - { label: "Titre bandeau", name: "cookie_title", widget: "string" }
+              - { label: "Texte bandeau", name: "cookie_text", widget: "text" }
+              - { label: "Bouton tout refuser", name: "cookie_refuse", widget: "string" }
+              - { label: "Bouton personnaliser", name: "cookie_customize", widget: "string" }
+              - { label: "Bouton tout accepter", name: "cookie_accept", widget: "string" }
+              - { label: "Cookies fonctionnels - Titre", name: "cookie_functional_title", widget: "string" }
+              - { label: "Cookies fonctionnels - Texte", name: "cookie_functional_text", widget: "text" }
+              - { label: "Cookies fonctionnels - Badge", name: "cookie_always_on", widget: "string" }
+              - { label: "Cookies analytiques - Titre", name: "cookie_analytics_title", widget: "string" }
+              - { label: "Cookies analytiques - Texte", name: "cookie_analytics_text", widget: "text" }
+              - { label: "Toggle activer", name: "cookie_enable", widget: "string" }
+              - { label: "Bouton sauvegarder", name: "cookie_save", widget: "string" }
 
-          # ── ACCESSIBILITÉ & TOUR ──────────────────────────────────────────
-          - label: "Accessibilité & Tour"
+          - label: "Accessibilite & Tour"
             name: "a11y_tour"
             widget: "object"
             collapsed: true
-            i18n: true
             fields:
-              - { label: "Bouton retour en haut — aria-label", name: "scroll_top_aria", widget: "string", i18n: true }
-              - { label: "Tour — Étape langue — Titre", name: "tour_lang_title", widget: "string", i18n: true }
-              - { label: "Tour — Étape langue — Texte", name: "tour_lang_text", widget: "text", i18n: true }
-              - { label: "Tour — Étape langue — Bouton suivant", name: "tour_lang_next", widget: "string", i18n: true }
-              - { label: "Tour — Étape thème — Titre", name: "tour_theme_title", widget: "string", i18n: true }
-              - { label: "Tour — Étape thème — Texte", name: "tour_theme_text", widget: "text", i18n: true }
-              - { label: "Tour — Étape thème — Bouton suivant", name: "tour_theme_next", widget: "string", i18n: true }
-              - { label: "Tour — Bouton passer", name: "tour_skip", widget: "string", i18n: true }
+              - { label: "Bouton retour en haut - aria-label", name: "scroll_top_aria", widget: "string" }
+              - { label: "Tour - Etape langue - Titre", name: "tour_lang_title", widget: "string" }
+              - { label: "Tour - Etape langue - Texte", name: "tour_lang_text", widget: "text" }
+              - { label: "Tour - Etape langue - Bouton suivant", name: "tour_lang_next", widget: "string" }
+              - { label: "Tour - Etape theme - Titre", name: "tour_theme_title", widget: "string" }
+              - { label: "Tour - Etape theme - Texte", name: "tour_theme_text", widget: "text" }
+              - { label: "Tour - Etape theme - Bouton suivant", name: "tour_theme_next", widget: "string" }
+              - { label: "Tour - Bouton passer", name: "tour_skip", widget: "string" }
+
+      # ── VERSION ANGLAISE ─────────────────────────────────────────────────
+      - name: "en"
+        label: "English version"
+        file: "locales/en.json"
+        fields:
+
+          - { label: "Meta title", name: "meta_title", widget: "string" }
+          - { label: "Meta description", name: "meta_desc", widget: "text" }
+
+          - label: "Navigation"
+            name: "nav"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Home", name: "nav_home", widget: "string" }
+              - { label: "Profile", name: "nav_profile", widget: "string" }
+              - { label: "Expertise", name: "nav_expertise", widget: "string" }
+              - { label: "Experience", name: "nav_experience", widget: "string" }
+              - { label: "Projects", name: "nav_projects", widget: "string" }
+              - { label: "Contact", name: "nav_contact", widget: "string" }
+              - { label: "Language link (mobile)", name: "nav_mob_lang", widget: "string" }
+
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Tag", name: "hero_tag", widget: "string" }
+              - { label: "Typewriter words", name: "hero_typewriter_words", widget: "list" }
+              - { label: "Typewriter aria-label", name: "hero_typewriter_aria", widget: "string" }
+              - { label: "Pitch", name: "hero_pitch", widget: "text" }
+              - { label: "Typewriter intro label", name: "hero_target_label", widget: "string" }
+              - { label: "Title line 1", name: "hero_title1", widget: "string" }
+              - { label: "Title line 2", name: "hero_title2", widget: "string" }
+              - { label: "Title line 3", name: "hero_title3", widget: "string" }
+              - { label: "Pill 1 (availability)", name: "hero_pill1", widget: "string" }
+              - { label: "Pill 2 (contract type)", name: "hero_pill2", widget: "string" }
+              - { label: "Pill 3 (location)", name: "hero_pill3", widget: "string" }
+              - { label: "CV button - text", name: "hero_cta", widget: "string" }
+              - { label: "CV button - aria-label", name: "hero_cta_aria", widget: "string" }
+              - { label: "Contact button - text", name: "hero_ghost", widget: "string" }
+              - { label: "Contact button - aria-label", name: "hero_ghost_aria", widget: "string" }
+
+          - label: "Profile"
+            name: "profile"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section label", name: "profile_label", widget: "string" }
+              - { label: "Intro", name: "profile_intro", widget: "text" }
+              - { label: "Experience (3 years...)", name: "profile_exp", widget: "text" }
+              - { label: "Paragraph 1", name: "profile_p1", widget: "text" }
+              - { label: "Paragraph 2", name: "profile_p2", widget: "text" }
+              - { label: "Profile note", name: "profile_note", widget: "text" }
+              - { label: "Mantra", name: "profile_mantra", widget: "text" }
+              - { label: "Chip 1", name: "amoa_tag_1", widget: "string" }
+              - { label: "Chip 2", name: "amoa_tag_2", widget: "string" }
+              - { label: "Chip 3", name: "amoa_tag_3", widget: "string" }
+              - { label: "Chip 4", name: "amoa_tag_4", widget: "string" }
+              - { label: "Chip 5", name: "amoa_tag_5", widget: "string" }
+              - { label: "Chip 6", name: "amoa_tag_6", widget: "string" }
+              - { label: "Card 1 - Title", name: "profile_card1_title", widget: "string" }
+              - { label: "Card 1 - Subtitle", name: "profile_card1_sub", widget: "string" }
+              - { label: "Card 1 - Text", name: "profile_card1_text", widget: "text" }
+              - { label: "Card 2 - Title", name: "profile_card2_title", widget: "string" }
+              - { label: "Card 2 - Subtitle", name: "profile_card2_sub", widget: "string" }
+              - { label: "Card 2 - Text", name: "profile_card2_text", widget: "text" }
+              - { label: "Card 3 - Title", name: "profile_card3_title", widget: "string" }
+              - { label: "Card 3 - Subtitle", name: "profile_card3_sub", widget: "string" }
+              - { label: "Card 3 - Text", name: "profile_card3_text", widget: "text" }
+
+          - label: "Expertise"
+            name: "expertise"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section label", name: "expertise_label", widget: "string" }
+              - { label: "Section title", name: "expertise_title", widget: "string" }
+              - { label: "Card 1 - Title", name: "exp_card1_title", widget: "string" }
+              - { label: "Card 1 - Item 1", name: "exp_card1_li1", widget: "string" }
+              - { label: "Card 1 - Item 2", name: "exp_card1_li2", widget: "string" }
+              - { label: "Card 1 - Item 3", name: "exp_card1_li3", widget: "string" }
+              - { label: "Card 1 - Item 4", name: "exp_card1_li4", widget: "string" }
+              - { label: "Card 2 - Title", name: "exp_card2_title", widget: "string" }
+              - { label: "Card 2 - Item 1", name: "exp_card2_li1", widget: "string" }
+              - { label: "Card 2 - Item 2", name: "exp_card2_li2", widget: "string" }
+              - { label: "Card 2 - Item 3", name: "exp_card2_li3", widget: "string" }
+              - { label: "Card 2 - Item 4", name: "exp_card2_li4", widget: "string" }
+              - { label: "Card 3 - Title", name: "exp_card3_title", widget: "string" }
+              - { label: "Card 3 - Item 1", name: "exp_card3_li1", widget: "string" }
+              - { label: "Card 3 - Item 2", name: "exp_card3_li2", widget: "string" }
+              - { label: "Card 3 - Item 3", name: "exp_card3_li3", widget: "string" }
+              - { label: "Card 3 - Item 4", name: "exp_card3_li4", widget: "string" }
+              - { label: "Card 4 - Title", name: "exp_card4_title", widget: "string" }
+              - { label: "Card 4 - Item 1", name: "exp_card4_li1", widget: "string" }
+              - { label: "Card 4 - Item 2", name: "exp_card4_li2", widget: "string" }
+              - { label: "Card 4 - Item 3", name: "exp_card4_li3", widget: "string" }
+              - { label: "Card 4 - Item 4", name: "exp_card4_li4", widget: "string" }
+              - { label: "Card 5 - Title", name: "exp_card5_title", widget: "string" }
+              - { label: "Card 5 - Item 1", name: "exp_card5_li1", widget: "string" }
+              - { label: "Card 5 - Item 2", name: "exp_card5_li2", widget: "string" }
+              - { label: "Card 5 - Item 3", name: "exp_card5_li3", widget: "string" }
+              - { label: "Card 5 - Item 4", name: "exp_card5_li4", widget: "string" }
+              - { label: "Card 6 - Title", name: "exp_card6_title", widget: "string" }
+              - { label: "Card 6 - Item 1", name: "exp_card6_li1", widget: "string" }
+              - { label: "Card 6 - Item 2", name: "exp_card6_li2", widget: "string" }
+              - { label: "Card 6 - Item 3", name: "exp_card6_li3", widget: "string" }
+              - { label: "Card 6 - Item 4", name: "exp_card6_li4", widget: "string" }
+              - { label: "Card 7 - Title", name: "exp_card7_title", widget: "string" }
+              - { label: "Card 7 - Item 1", name: "exp_card7_li1", widget: "string" }
+              - { label: "Card 7 - Item 2", name: "exp_card7_li2", widget: "string" }
+              - { label: "Card 7 - Item 3", name: "exp_card7_li3", widget: "string" }
+              - { label: "Card 7 - Item 4", name: "exp_card7_li4", widget: "string" }
+              - { label: "Card 8 - Title", name: "exp_card8_title", widget: "string" }
+              - { label: "Card 8 - Item 1", name: "exp_card8_li1", widget: "string" }
+              - { label: "Card 8 - Item 2", name: "exp_card8_li2", widget: "string" }
+              - { label: "Card 8 - Item 3", name: "exp_card8_li3", widget: "string" }
+              - { label: "Card 8 - Item 4", name: "exp_card8_li4", widget: "string" }
+              - { label: "Tools & methods title", name: "skills_title", widget: "string" }
+              - { label: "Stat 1 - Label", name: "stat1_label", widget: "string" }
+              - { label: "Stat 2 - Label", name: "stat2_label", widget: "string" }
+              - { label: "Stat 2 - Suffix", name: "stat2_suf", widget: "string" }
+              - { label: "Stat 3 - Label", name: "stat3_label", widget: "string" }
+
+          - label: "Experience & Education"
+            name: "experience"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section label", name: "experience_label", widget: "string" }
+              - { label: "Section title", name: "experience_title", widget: "string" }
+              - { label: "Experience column header", name: "cv_exp_head", widget: "string" }
+              - { label: "Education column header", name: "cv_edu_head", widget: "string" }
+              - { label: "Exp 1 - Title", name: "cv_exp1_title", widget: "string" }
+              - { label: "Exp 1 - Organisation", name: "cv_exp1_org", widget: "string" }
+              - { label: "Exp 1 - Dates", name: "cv_exp1_date", widget: "string" }
+              - { label: "Exp 1 - Location", name: "cv_exp1_loc", widget: "string" }
+              - { label: "Exp 2 - Title", name: "cv_exp2_title", widget: "string" }
+              - { label: "Exp 2 - Organisation", name: "cv_exp2_org", widget: "string" }
+              - { label: "Exp 2 - Dates", name: "cv_exp2_date", widget: "string" }
+              - { label: "Exp 2 - Location", name: "cv_exp2_loc", widget: "string" }
+              - { label: "Exp 4 - Title", name: "cv_exp4_title", widget: "string" }
+              - { label: "Exp 4 - Organisation", name: "cv_exp4_org", widget: "string" }
+              - { label: "Exp 4 - Dates", name: "cv_exp4_date", widget: "string" }
+              - { label: "Exp 4 - Location", name: "cv_exp4_loc", widget: "string" }
+              - { label: "Exp 6 - Title", name: "cv_exp6_title", widget: "string" }
+              - { label: "Exp 6 - Organisation", name: "cv_exp6_org", widget: "string" }
+              - { label: "Exp 6 - Dates", name: "cv_exp6_date", widget: "string" }
+              - { label: "Exp 6 - Location", name: "cv_exp6_loc", widget: "string" }
+              - { label: "Exp 7 - Title", name: "cv_exp7_title", widget: "string" }
+              - { label: "Exp 7 - Organisation", name: "cv_exp7_org", widget: "string" }
+              - { label: "Exp 7 - Dates", name: "cv_exp7_date", widget: "string" }
+              - { label: "Exp 7 - Location", name: "cv_exp7_loc", widget: "string" }
+              - { label: "Education 1 - Degree", name: "cv_edu1_title", widget: "string" }
+              - { label: "Education 1 - Institution", name: "cv_edu1_org", widget: "string" }
+              - { label: "Education 1 - Dates", name: "cv_edu1_date", widget: "string" }
+              - { label: "Education 1 - Location", name: "cv_edu1_loc", widget: "string" }
+              - { label: "Education 2 - Degree", name: "cv_edu2_title", widget: "string" }
+              - { label: "Education 2 - Institution", name: "cv_edu2_org", widget: "string" }
+              - { label: "Education 2 - Dates", name: "cv_edu2_date", widget: "string" }
+              - { label: "Education 2 - Location", name: "cv_edu2_loc", widget: "string" }
+              - { label: "Education 3 - Degree", name: "cv_edu3_title", widget: "string" }
+              - { label: "Education 3 - Institution", name: "cv_edu3_org", widget: "string" }
+              - { label: "Education 3 - Dates", name: "cv_edu3_date", widget: "string" }
+              - { label: "Education 3 - Location", name: "cv_edu3_loc", widget: "string" }
+              - { label: "Education 4 - Degree", name: "cv_edu4_title", widget: "string" }
+              - { label: "Education 4 - Institution", name: "cv_edu4_org", widget: "string" }
+              - { label: "Education 4 - Dates", name: "cv_edu4_date", widget: "string" }
+              - { label: "Education 4 - Location", name: "cv_edu4_loc", widget: "string" }
+              - { label: "Other experiences label", name: "xp_other_label", widget: "string" }
+              - { label: "Other 1 - Category", name: "xp1_cat", widget: "string" }
+              - { label: "Other 1 - Badge", name: "xp1_badge", widget: "string" }
+              - { label: "Other 1 - Title", name: "xp1_title", widget: "string" }
+              - { label: "Other 1 - Description", name: "xp1_desc", widget: "text" }
+              - { label: "Other 2 - Category", name: "xp2_cat", widget: "string" }
+              - { label: "Other 2 - Badge", name: "xp2_badge", widget: "string" }
+              - { label: "Other 2 - Title", name: "xp2_title", widget: "string" }
+              - { label: "Other 2 - Description", name: "xp2_desc", widget: "text" }
+              - { label: "Other 3 - Category", name: "xp3_cat", widget: "string" }
+              - { label: "Other 3 - Badge", name: "xp3_badge", widget: "string" }
+              - { label: "Other 3 - Title", name: "xp3_title", widget: "string" }
+              - { label: "Other 3 - Description", name: "xp3_desc", widget: "text" }
+              - { label: "Other 4 - Category", name: "xp4_cat", widget: "string" }
+              - { label: "Other 4 - Badge", name: "xp4_badge", widget: "string" }
+              - { label: "Other 4 - Title", name: "xp4_title", widget: "string" }
+              - { label: "Other 4 - Description", name: "xp4_desc", widget: "text" }
+
+          - label: "Projects & missions"
+            name: "projects"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section label", name: "projects_label", widget: "string" }
+              - { label: "Section title", name: "projects_title", widget: "string" }
+              - { label: "Filter - All", name: "filter_all", widget: "string" }
+              - { label: "Filter - AI & Auto.", name: "filter_ia", widget: "string" }
+              - { label: "Filter - Web", name: "filter_web", widget: "string" }
+              - { label: "Filter - Analytics", name: "filter_analytics", widget: "string" }
+              - { label: "Filter - IS", name: "filter_si", widget: "string" }
+              - { label: "Filter - Security", name: "filter_securite", widget: "string" }
+              - { label: "Filter - Mobile", name: "filter_mobile", widget: "string" }
+              - { label: "VeilleReg - Sector", name: "proj_vr_sector", widget: "string" }
+              - { label: "VeilleReg - Live badge", name: "proj_vr_live", widget: "string" }
+              - { label: "VeilleReg - Title", name: "proj_vr_title", widget: "string" }
+              - { label: "VeilleReg - Role", name: "proj_vr_role", widget: "string" }
+              - { label: "VeilleReg - Description", name: "proj_vr_desc", widget: "text" }
+              - { label: "VeilleReg - KPI label", name: "proj_vr_kpil", widget: "string" }
+              - { label: "VeilleReg - Link text", name: "proj_vr_link", widget: "string" }
+              - { label: "Culture.gouv.fr - Sector", name: "proj_c_sector", widget: "string" }
+              - { label: "Culture.gouv.fr - Title", name: "proj_c_title", widget: "string" }
+              - { label: "Culture.gouv.fr - Role", name: "proj_c_role", widget: "string" }
+              - { label: "Culture.gouv.fr - Description", name: "proj_c_desc", widget: "text" }
+              - { label: "Culture.gouv.fr - KPI label", name: "proj_c_kpil", widget: "string" }
+              - { label: "Analytics migration - Sector", name: "proj_m_sector", widget: "string" }
+              - { label: "Analytics migration - Title", name: "proj_m_title", widget: "string" }
+              - { label: "Analytics migration - Role", name: "proj_m_role", widget: "string" }
+              - { label: "Analytics migration - Description", name: "proj_m_desc", widget: "text" }
+              - { label: "Analytics migration - KPI label", name: "proj_m_kpil", widget: "string" }
+              - { label: "ANOM - Sector", name: "proj_a_sector", widget: "string" }
+              - { label: "ANOM - Title", name: "proj_a_title", widget: "string" }
+              - { label: "ANOM - Role", name: "proj_a_role", widget: "string" }
+              - { label: "ANOM - Description", name: "proj_a_desc", widget: "text" }
+              - { label: "ANOM - KPI label", name: "proj_a_kpil", widget: "string" }
+              - { label: "OFPRA - Sector", name: "proj_o_sector", widget: "string" }
+              - { label: "OFPRA - Title", name: "proj_o_title", widget: "string" }
+              - { label: "OFPRA - Role", name: "proj_o_role", widget: "string" }
+              - { label: "OFPRA - Description", name: "proj_o_desc", widget: "text" }
+              - { label: "OFPRA - KPI label", name: "proj_o_kpil", widget: "string" }
+              - { label: "Grand Memorial - Sector", name: "proj_g_sector", widget: "string" }
+              - { label: "Grand Memorial - Title", name: "proj_g_title", widget: "string" }
+              - { label: "Grand Memorial - Role", name: "proj_g_role", widget: "string" }
+              - { label: "Grand Memorial - Description", name: "proj_g_desc", widget: "text" }
+              - { label: "Grand Memorial - KPI label", name: "proj_g_kpil", widget: "string" }
+              - { label: "Infrastructure reference - Sector", name: "proj_r_sector", widget: "string" }
+              - { label: "Infrastructure reference - Title", name: "proj_r_title", widget: "string" }
+              - { label: "Infrastructure reference - Role", name: "proj_r_role", widget: "string" }
+              - { label: "Infrastructure reference - Description", name: "proj_r_desc", widget: "text" }
+              - { label: "Infrastructure reference - KPI label", name: "proj_r_kpil", widget: "string" }
+              - { label: "Semaphore - Sector", name: "proj_sem_sector", widget: "string" }
+              - { label: "Semaphore - Title", name: "proj_sem_title", widget: "string" }
+              - { label: "Semaphore - Role", name: "proj_sem_role", widget: "string" }
+              - { label: "Semaphore - Description", name: "proj_sem_desc", widget: "text" }
+              - { label: "Semaphore - KPI label", name: "proj_sem_kpil", widget: "string" }
+              - { label: "IRD - Sector", name: "proj_ird_sector", widget: "string" }
+              - { label: "IRD - Title", name: "proj_ird_title", widget: "string" }
+              - { label: "IRD - Role", name: "proj_ird_role", widget: "string" }
+              - { label: "IRD - Description", name: "proj_ird_desc", widget: "text" }
+              - { label: "IRD - KPI label", name: "proj_ird_kpil", widget: "string" }
+              - { label: "Post-audit security - Sector", name: "proj_sec_sector", widget: "string" }
+              - { label: "Post-audit security - Title", name: "proj_sec_title", widget: "string" }
+              - { label: "Post-audit security - Role", name: "proj_sec_role", widget: "string" }
+              - { label: "Post-audit security - Description", name: "proj_sec_desc", widget: "text" }
+              - { label: "Post-audit security - KPI label", name: "proj_sec_kpil", widget: "string" }
+              - { label: "Groupe Atlantic - Sector", name: "proj_atl_sector", widget: "string" }
+              - { label: "Groupe Atlantic - Title", name: "proj_atl_title", widget: "string" }
+              - { label: "Groupe Atlantic - Role", name: "proj_atl_role", widget: "string" }
+              - { label: "Groupe Atlantic - Description", name: "proj_atl_desc", widget: "text" }
+              - { label: "Groupe Atlantic - KPI label", name: "proj_atl_kpil", widget: "string" }
+              - { label: "Mobilier national - Sector", name: "proj_mn_sector", widget: "string" }
+              - { label: "Mobilier national - Title", name: "proj_mn_title", widget: "string" }
+              - { label: "Mobilier national - Role", name: "proj_mn_role", widget: "string" }
+              - { label: "Mobilier national - Description", name: "proj_mn_desc", widget: "text" }
+              - { label: "Mobilier national - KPI label", name: "proj_mn_kpil", widget: "string" }
+              - { label: "CultureChezNous - Sector", name: "proj_cc_sector", widget: "string" }
+              - { label: "CultureChezNous - Title", name: "proj_cc_title", widget: "string" }
+              - { label: "CultureChezNous - Role", name: "proj_cc_role", widget: "string" }
+              - { label: "CultureChezNous - Description", name: "proj_cc_desc", widget: "text" }
+              - { label: "CultureChezNous - KPI label", name: "proj_cc_kpil", widget: "string" }
+              - { label: "Sectors chips - Label", name: "profile_sectors_label", widget: "string" }
+              - { label: "Sector 1", name: "sector_1", widget: "string" }
+              - { label: "Sector 2", name: "sector_2", widget: "string" }
+              - { label: "Sector 3", name: "sector_3", widget: "string" }
+              - { label: "Sector 4", name: "sector_4", widget: "string" }
+              - { label: "Sector 5", name: "sector_5", widget: "string" }
+              - { label: "Sector 6", name: "sector_6", widget: "string" }
+              - { label: "Sector 7", name: "sector_7", widget: "string" }
+              - { label: "Sector 8", name: "sector_8", widget: "string" }
+              - { label: "Sector 9", name: "sector_9", widget: "string" }
+              - { label: "Non-exhaustive note", name: "proj_note", widget: "string" }
+
+          - label: "Contact & Form"
+            name: "contact"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Section label", name: "contact_label", widget: "string" }
+              - { label: "Section title", name: "contact_title", widget: "string" }
+              - { label: "Info block - Title", name: "contact_info_title", widget: "string" }
+              - { label: "Info block - Text", name: "contact_info_text", widget: "text" }
+              - { label: "Name field - Label", name: "form_label_name", widget: "string" }
+              - { label: "Name field - Placeholder", name: "form_ph_name", widget: "string" }
+              - { label: "Name field - Error", name: "form_err_name", widget: "string" }
+              - { label: "Email field - Label", name: "form_label_email", widget: "string" }
+              - { label: "Email field - Placeholder", name: "form_ph_email", widget: "string" }
+              - { label: "Email field - Error", name: "form_err_email", widget: "string" }
+              - { label: "Phone field - Label", name: "form_label_tel", widget: "string" }
+              - { label: "Subject field - Label", name: "form_label_subject", widget: "string" }
+              - { label: "Subject field - Placeholder", name: "form_ph_subject", widget: "string" }
+              - { label: "Subject field - Error", name: "form_err_subject", widget: "string" }
+              - { label: "Message field - Label", name: "form_label_message", widget: "string" }
+              - { label: "Message field - Placeholder", name: "form_ph_message", widget: "text" }
+              - { label: "Message field - Error", name: "form_err_message", widget: "string" }
+              - { label: "Captcha - Question", name: "captcha_q", widget: "string" }
+              - { label: "Captcha - Error", name: "captcha_err", widget: "string" }
+              - { label: "Submit button", name: "form_submit", widget: "string" }
+              - { label: "Submit button - sending state", name: "form_sending", widget: "string" }
+              - { label: "Success message", name: "form_success", widget: "string" }
+
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Copyright", name: "footer_copy", widget: "string" }
+              - { label: "Privacy policy button", name: "footer_privacy_btn", widget: "string" }
+              - { label: "Cookies button", name: "footer_cookies_btn", widget: "string" }
+
+          - label: "Privacy policy"
+            name: "privacy"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Title", name: "privacy_title", widget: "string" }
+              - { label: "Close button", name: "privacy_close", widget: "string" }
+              - { label: "Paragraph 1", name: "privacy_p1", widget: "text" }
+              - { label: "Paragraph 2", name: "privacy_p2", widget: "text" }
+              - { label: "Paragraph 3", name: "privacy_p3", widget: "text" }
+              - { label: "Paragraph 4", name: "privacy_p4", widget: "text" }
+
+          - label: "Cookie banner"
+            name: "cookies"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Banner title", name: "cookie_title", widget: "string" }
+              - { label: "Banner text", name: "cookie_text", widget: "text" }
+              - { label: "Reject all button", name: "cookie_refuse", widget: "string" }
+              - { label: "Customize button", name: "cookie_customize", widget: "string" }
+              - { label: "Accept all button", name: "cookie_accept", widget: "string" }
+              - { label: "Functional cookies - Title", name: "cookie_functional_title", widget: "string" }
+              - { label: "Functional cookies - Text", name: "cookie_functional_text", widget: "text" }
+              - { label: "Functional cookies - Badge", name: "cookie_always_on", widget: "string" }
+              - { label: "Analytics cookies - Title", name: "cookie_analytics_title", widget: "string" }
+              - { label: "Analytics cookies - Text", name: "cookie_analytics_text", widget: "text" }
+              - { label: "Enable toggle", name: "cookie_enable", widget: "string" }
+              - { label: "Save button", name: "cookie_save", widget: "string" }
+
+          - label: "Accessibility & Tour"
+            name: "a11y_tour"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Back to top - aria-label", name: "scroll_top_aria", widget: "string" }
+              - { label: "Tour - Language step - Title", name: "tour_lang_title", widget: "string" }
+              - { label: "Tour - Language step - Text", name: "tour_lang_text", widget: "text" }
+              - { label: "Tour - Language step - Next button", name: "tour_lang_next", widget: "string" }
+              - { label: "Tour - Theme step - Title", name: "tour_theme_title", widget: "string" }
+              - { label: "Tour - Theme step - Text", name: "tour_theme_text", widget: "text" }
+              - { label: "Tour - Theme step - Next button", name: "tour_theme_next", widget: "string" }
+              - { label: "Tour - Skip button", name: "tour_skip", widget: "string" }
