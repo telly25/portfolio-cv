@@ -1470,7 +1470,9 @@
             </div>
           </div>
 
-          <form class="cform" id="cform" novalidate aria-label="Formulaire de contact">
+          <form class="cform" id="cform" novalidate aria-label="Formulaire de contact" data-netlify="true" name="contact" data-netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact">
+            <p style="display:none"><label>Ne pas remplir <input name="bot-field"></label></p>
             <div class="form-row">
               <div class="fgrp">
                 <label for="f-nom" data-i18n="form_label_name">Nom <span aria-hidden="true">*</span></label>

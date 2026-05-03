@@ -283,15 +283,20 @@ cform.addEventListener('submit', e => {
   if (!v1||!v2||!v3||!v4||!capOk) return;
   subBtn.classList.add('loading');
   subBtn.querySelector('span').textContent = window._i18n_t ? window._i18n_t('form_sending') : 'Envoi en cours…';
-  setTimeout(() => {
-    subBtn.classList.remove('loading');
-    subBtn.querySelector('span').textContent = window._i18n_t ? window._i18n_t('form_submit') : 'Envoyer le message';
-    cform.reset(); genCap();
-    const ok = document.getElementById('form-ok');
-    ok.classList.add('show');
-    if (!REDUCED) gsap.from(ok, { opacity: 0, y: 8, duration: .4 });
-    setTimeout(() => ok.classList.remove('show'), 5000);
-  }, 1800);
+  fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(cform)).toString() })
+    .then(() => {
+      subBtn.classList.remove('loading');
+      subBtn.querySelector('span').textContent = window._i18n_t ? window._i18n_t('form_submit') : 'Envoyer le message';
+      cform.reset(); genCap();
+      const ok = document.getElementById('form-ok');
+      ok.classList.add('show');
+      if (!REDUCED) gsap.from(ok, { opacity: 0, y: 8, duration: .4 });
+      setTimeout(() => ok.classList.remove('show'), 5000);
+    })
+    .catch(() => {
+      subBtn.classList.remove('loading');
+      subBtn.querySelector('span').textContent = window._i18n_t ? window._i18n_t('form_submit') : 'Envoyer le message';
+    });
 });
 
 /* ── COOKIES ── */
