@@ -152,6 +152,8 @@ collections:
           - { label: "Icone — JavaScript", name: "tool_icon_js", widget: "string" }
           - { label: "Icone — Odoo", name: "tool_icon_odoo", widget: "string" }
           - { label: "Icone — Microsoft 365", name: "tool_icon_ms365", widget: "string" }
+          - { label: "Icone — Bootstrap", name: "tool_icon_bootstrap", widget: "string" }
+          - { label: "Icone — Tailwind CSS", name: "tool_icon_tailwind", widget: "string" }
 
           # Parcours & Formation
           - { label: "Parcours — Label section", name: "experience_label", widget: "string" }
@@ -498,6 +500,8 @@ collections:
           - { label: "Icon — JavaScript", name: "tool_icon_js", widget: "string" }
           - { label: "Icon — Odoo", name: "tool_icon_odoo", widget: "string" }
           - { label: "Icon — Microsoft 365", name: "tool_icon_ms365", widget: "string" }
+          - { label: "Icon — Bootstrap", name: "tool_icon_bootstrap", widget: "string" }
+          - { label: "Icon — Tailwind CSS", name: "tool_icon_tailwind", widget: "string" }
 
           # Experience & Education
           - { label: "Career — Section label", name: "experience_label", widget: "string" }

@@ -343,6 +343,8 @@
   "tool_name_odoo": "Odoo",
   "tool_name_ms365": "Microsoft 365",
   "tool_name_easyredmine": "EasyRedmine",
+  "tool_name_bootstrap": "Bootstrap",
+  "tool_name_tailwind": "Tailwind CSS",
   "tool_icon_jira": "https://cdn.simpleicons.org/jira",
   "tool_icon_confluence": "https://cdn.simpleicons.org/confluence",
   "tool_icon_notion": "https://cdn.simpleicons.org/notion",
@@ -373,5 +375,7 @@
   "tool_icon_js": "https://cdn.simpleicons.org/javascript",
   "tool_icon_odoo": "https://cdn.simpleicons.org/odoo",
   "tool_icon_ms365": "https://cdn.simpleicons.org/microsoftoffice",
+  "tool_icon_bootstrap": "https://cdn.simpleicons.org/bootstrap",
+  "tool_icon_tailwind": "https://cdn.simpleicons.org/tailwindcss",
   "profile_mantra": "I don't limit myself to what I know — innovation can make it obsolete at any time."
 }
