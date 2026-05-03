@@ -458,6 +458,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
     });
     const cvBtn = document.querySelector('.btn-cta[download]');
     if (cvBtn && tr.hero_cta_href) cvBtn.href = tr.hero_cta_href;
+    const logoImg = document.querySelector('.nav-logo img');
+    if (logoImg && tr.logo_src) logoImg.src = tr.logo_src;
     const stat2El = document.querySelector('[data-i18n-suf="stat2_suf"]');
     if (stat2El && tr.stat2_suf) stat2El.dataset.suf = tr.stat2_suf;
     if (tr.hero_typewriter_words) restartTypewriter(tr.hero_typewriter_words);
