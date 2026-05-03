@@ -451,6 +451,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const v = tr[el.dataset.i18nAria]; if (v !== undefined) el.setAttribute('aria-label', v);
     });
+    document.querySelectorAll('[data-i18n-src]').forEach(el => {
+      const v = tr[el.dataset.i18nSrc]; if (v !== undefined) el.src = v;
+    });
     document.querySelectorAll('.lang-btn, .lang-mob-btn').forEach(btn => {
       const active = btn.dataset.lang === lang;
       btn.classList.toggle('active', active);

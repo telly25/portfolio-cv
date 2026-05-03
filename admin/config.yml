@@ -19,8 +19,8 @@ collections:
           # Medias
           - { label: "Meta title", name: "meta_title", widget: "string" }
           - { label: "Meta description", name: "meta_desc", widget: "text" }
-          - { label: "Logo / Photo de profil (chemin, ex: assets/logo.png)", name: "logo_src", widget: "string" }
-          - { label: "CV PDF (chemin, ex: assets/CV_Felix_DJEMBI_CDP.pdf)", name: "hero_cta_href", widget: "string" }
+          - { label: "Logo / Photo de profil (chemin, ex: assets/uploads/logo.png)", name: "logo_src", widget: "string" }
+          - { label: "CV PDF (chemin, ex: assets/uploads/CV_Felix_DJEMBI_CDP.pdf)", name: "hero_cta_href", widget: "string" }
 
           # Navigation
           - { label: "Nav — Accueil", name: "nav_home", widget: "string" }
@@ -120,6 +120,38 @@ collections:
           - { label: "Expertise — Stat 2 label", name: "stat2_label", widget: "string" }
           - { label: "Expertise — Stat 2 suffixe", name: "stat2_suf", widget: "string" }
           - { label: "Expertise — Stat 3 label", name: "stat3_label", widget: "string" }
+
+          # Outils — Icones (URL cdn.simpleicons.org ou autre)
+          - { label: "Icone — Jira", name: "tool_icon_jira", widget: "string" }
+          - { label: "Icone — Confluence", name: "tool_icon_confluence", widget: "string" }
+          - { label: "Icone — Notion", name: "tool_icon_notion", widget: "string" }
+          - { label: "Icone — GitLab", name: "tool_icon_gitlab", widget: "string" }
+          - { label: "Icone — Drupal", name: "tool_icon_drupal", widget: "string" }
+          - { label: "Icone — WordPress", name: "tool_icon_wordpress", widget: "string" }
+          - { label: "Icone — GA4", name: "tool_icon_ga4", widget: "string" }
+          - { label: "Icone — Matomo", name: "tool_icon_matomo", widget: "string" }
+          - { label: "Icone — Looker Studio", name: "tool_icon_looker", widget: "string" }
+          - { label: "Icone — Make", name: "tool_icon_make", widget: "string" }
+          - { label: "Icone — N8N", name: "tool_icon_n8n", widget: "string" }
+          - { label: "Icone — Claude (Anthropic)", name: "tool_icon_claude", widget: "string" }
+          - { label: "Icone — Figma", name: "tool_icon_figma", widget: "string" }
+          - { label: "Icone — Miro", name: "tool_icon_miro", widget: "string" }
+          - { label: "Icone — Draw.io", name: "tool_icon_drawio", widget: "string" }
+          - { label: "Icone — Search Console", name: "tool_icon_gsc", widget: "string" }
+          - { label: "Icone — Semrush", name: "tool_icon_semrush", widget: "string" }
+          - { label: "Icone — Insomnia", name: "tool_icon_insomnia", widget: "string" }
+          - { label: "Icone — Next.js", name: "tool_icon_nextjs", widget: "string" }
+          - { label: "Icone — Laravel", name: "tool_icon_laravel", widget: "string" }
+          - { label: "Icone — Symfony", name: "tool_icon_symfony", widget: "string" }
+          - { label: "Icone — ReactJS", name: "tool_icon_react", widget: "string" }
+          - { label: "Icone — VueJS", name: "tool_icon_vuejs", widget: "string" }
+          - { label: "Icone — SpringBoot", name: "tool_icon_springboot", widget: "string" }
+          - { label: "Icone — Ruby on Rails", name: "tool_icon_rails", widget: "string" }
+          - { label: "Icone — HTML", name: "tool_icon_html", widget: "string" }
+          - { label: "Icone — CSS", name: "tool_icon_css", widget: "string" }
+          - { label: "Icone — JavaScript", name: "tool_icon_js", widget: "string" }
+          - { label: "Icone — Odoo", name: "tool_icon_odoo", widget: "string" }
+          - { label: "Icone — Microsoft 365", name: "tool_icon_ms365", widget: "string" }
 
           # Parcours & Formation
           - { label: "Parcours — Label section", name: "experience_label", widget: "string" }
@@ -333,8 +365,8 @@ collections:
           # Media
           - { label: "Meta title", name: "meta_title", widget: "string" }
           - { label: "Meta description", name: "meta_desc", widget: "text" }
-          - { label: "Logo / Profile photo", name: "logo_src", widget: "image" }
-          - { label: "CV PDF (file)", name: "hero_cta_href", widget: "file" }
+          - { label: "Logo / Profile photo (path, e.g. assets/uploads/logo.png)", name: "logo_src", widget: "string" }
+          - { label: "CV PDF (path, e.g. assets/uploads/CV_Felix_DJEMBI_CDP.pdf)", name: "hero_cta_href", widget: "string" }
 
           # Navigation
           - { label: "Nav — Home", name: "nav_home", widget: "string" }
@@ -434,6 +466,38 @@ collections:
           - { label: "Expertise — Stat 2 label", name: "stat2_label", widget: "string" }
           - { label: "Expertise — Stat 2 suffix", name: "stat2_suf", widget: "string" }
           - { label: "Expertise — Stat 3 label", name: "stat3_label", widget: "string" }
+
+          # Tool icons (URL cdn.simpleicons.org or other)
+          - { label: "Icon — Jira", name: "tool_icon_jira", widget: "string" }
+          - { label: "Icon — Confluence", name: "tool_icon_confluence", widget: "string" }
+          - { label: "Icon — Notion", name: "tool_icon_notion", widget: "string" }
+          - { label: "Icon — GitLab", name: "tool_icon_gitlab", widget: "string" }
+          - { label: "Icon — Drupal", name: "tool_icon_drupal", widget: "string" }
+          - { label: "Icon — WordPress", name: "tool_icon_wordpress", widget: "string" }
+          - { label: "Icon — GA4", name: "tool_icon_ga4", widget: "string" }
+          - { label: "Icon — Matomo", name: "tool_icon_matomo", widget: "string" }
+          - { label: "Icon — Looker Studio", name: "tool_icon_looker", widget: "string" }
+          - { label: "Icon — Make", name: "tool_icon_make", widget: "string" }
+          - { label: "Icon — N8N", name: "tool_icon_n8n", widget: "string" }
+          - { label: "Icon — Claude (Anthropic)", name: "tool_icon_claude", widget: "string" }
+          - { label: "Icon — Figma", name: "tool_icon_figma", widget: "string" }
+          - { label: "Icon — Miro", name: "tool_icon_miro", widget: "string" }
+          - { label: "Icon — Draw.io", name: "tool_icon_drawio", widget: "string" }
+          - { label: "Icon — Search Console", name: "tool_icon_gsc", widget: "string" }
+          - { label: "Icon — Semrush", name: "tool_icon_semrush", widget: "string" }
+          - { label: "Icon — Insomnia", name: "tool_icon_insomnia", widget: "string" }
+          - { label: "Icon — Next.js", name: "tool_icon_nextjs", widget: "string" }
+          - { label: "Icon — Laravel", name: "tool_icon_laravel", widget: "string" }
+          - { label: "Icon — Symfony", name: "tool_icon_symfony", widget: "string" }
+          - { label: "Icon — ReactJS", name: "tool_icon_react", widget: "string" }
+          - { label: "Icon — VueJS", name: "tool_icon_vuejs", widget: "string" }
+          - { label: "Icon — SpringBoot", name: "tool_icon_springboot", widget: "string" }
+          - { label: "Icon — Ruby on Rails", name: "tool_icon_rails", widget: "string" }
+          - { label: "Icon — HTML", name: "tool_icon_html", widget: "string" }
+          - { label: "Icon — CSS", name: "tool_icon_css", widget: "string" }
+          - { label: "Icon — JavaScript", name: "tool_icon_js", widget: "string" }
+          - { label: "Icon — Odoo", name: "tool_icon_odoo", widget: "string" }
+          - { label: "Icon — Microsoft 365", name: "tool_icon_ms365", widget: "string" }
 
           # Experience & Education
           - { label: "Career — Section label", name: "experience_label", widget: "string" }
