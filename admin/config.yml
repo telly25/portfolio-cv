@@ -2,8 +2,8 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "assets"
-public_folder: "assets"
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
 
 collections:
   - name: "site_content"
@@ -19,8 +19,8 @@ collections:
           # Medias
           - { label: "Meta title", name: "meta_title", widget: "string" }
           - { label: "Meta description", name: "meta_desc", widget: "text" }
-          - { label: "Logo / Photo de profil", name: "logo_src", widget: "image" }
-          - { label: "CV PDF (fichier)", name: "hero_cta_href", widget: "file" }
+          - { label: "Logo / Photo de profil (chemin, ex: assets/logo.png)", name: "logo_src", widget: "string" }
+          - { label: "CV PDF (chemin, ex: assets/CV_Felix_DJEMBI_CDP.pdf)", name: "hero_cta_href", widget: "string" }
 
           # Navigation
           - { label: "Nav — Accueil", name: "nav_home", widget: "string" }
