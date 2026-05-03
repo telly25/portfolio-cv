@@ -55,7 +55,7 @@ collections:
           - { label: "Profil — Paragraphe 1", name: "profile_p1", widget: "text" }
           - { label: "Profil — Paragraphe 2", name: "profile_p2", widget: "text" }
           - { label: "Profil — Note", name: "profile_note", widget: "text" }
-          - { label: "Profil — Mantra", name: "profile_mantra", widget: "text" }
+          - { label: "Profil — Mantra", name: "profile_mantra", widget: "string" }
           - { label: "Profil — Chip 1", name: "amoa_tag_1", widget: "string" }
           - { label: "Profil — Chip 2", name: "amoa_tag_2", widget: "string" }
           - { label: "Profil — Chip 3", name: "amoa_tag_3", widget: "string" }
@@ -403,7 +403,7 @@ collections:
           - { label: "Profile — Paragraph 1", name: "profile_p1", widget: "text" }
           - { label: "Profile — Paragraph 2", name: "profile_p2", widget: "text" }
           - { label: "Profile — Note", name: "profile_note", widget: "text" }
-          - { label: "Profile — Mantra", name: "profile_mantra", widget: "text" }
+          - { label: "Profile — Mantra", name: "profile_mantra", widget: "string" }
           - { label: "Profile — Chip 1", name: "amoa_tag_1", widget: "string" }
           - { label: "Profile — Chip 2", name: "amoa_tag_2", widget: "string" }
           - { label: "Profile — Chip 3", name: "amoa_tag_3", widget: "string" }
