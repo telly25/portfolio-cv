@@ -39,7 +39,8 @@
         https://fonts.googleapis.com;
       font-src 'self'
         https://fonts.gstatic.com;
-      img-src 'self' data:;
+      img-src 'self' data:
+        https://cdn.simpleicons.org;
       connect-src 'self'
         https://lottie.host
         https://*.netlify.com
