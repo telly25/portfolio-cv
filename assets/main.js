@@ -30,7 +30,7 @@ if (!REDUCED) {
   document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
   document.addEventListener('mouseleave', () => gsap.to([dot,ring],{opacity:0,duration:.4}));
   document.addEventListener('mouseenter', () => gsap.to([dot,ring],{opacity:1,duration:.4}));
-  document.querySelectorAll('a,button,.fbtn,.exp-card,.proj-card,.lang-switch,.tour-btn').forEach(el => {
+  document.querySelectorAll('a,button,.fbtn,.tfbtn,.exp-card,.proj-card,.lang-switch,.tour-btn').forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-grow'));
   });
@@ -64,22 +64,20 @@ function restartTypewriter(words) {
   if (REDUCED) { twEl.textContent = words[0]; }
   else { _twTimer = setTimeout(type, 400); }
 }
-restartTypewriter(['Chef de Projet Digital', 'Consultant AMOA', 'Product Owner']);
+restartTypewriter(['Chef de Projet Digital', 'Product Owner', 'Analyste Fonctionnel']);
 
 /* ── HERO ── */
 if (!REDUCED) {
   gsap.timeline({ defaults: { ease: 'power3.out' }, delay: .1 })
     .to('.hero-tag', { opacity: 1, y: 0, duration: .6 })
-    .to('.hero-typewriter', { opacity: 1, y: 0, duration: .5 }, '-=.2')
-    .to('.hero-pitch', { opacity: .75, duration: .5 }, '-=.1')
+    .to('.hero-pitch', { opacity: .75, duration: .5 }, '-=.2')
     .from('.hero-title .line', { opacity: 0, y: 22, duration: .75, stagger: .13 }, '-=.2')
-    .to('.hero-sub', { opacity: 1, y: 0, duration: .55 }, '-=.3')
+    .to('.hero-target', { opacity: 1, y: 0, duration: .5 }, '-=.3')
     .to('.hero-status', { opacity: 1, y: 0, duration: .45 }, '-=.25')
-    .to('.hero-bottom', { opacity: 1, y: 0, duration: .55 }, '-=.25')
-    .to('.recruiter-note', { opacity: 1, y: 0, duration: .45 }, '-=.25');
+    .to('.hero-bottom', { opacity: 1, y: 0, duration: .55 }, '-=.25');
 } else {
-  gsap.set(['.hero-tag','.hero-title','.hero-sub','.hero-status','.hero-bottom','.recruiter-note'], { opacity: 1 });
-  gsap.set('.hero-typewriter', { opacity: 1 });
+  gsap.set(['.hero-tag','.hero-title','.hero-status','.hero-bottom'], { opacity: 1 });
+  gsap.set('.hero-target', { opacity: 1 });
   gsap.set('.hero-pitch', { opacity: .75 });
 }
 
@@ -154,13 +152,56 @@ if (!REDUCED) {
   gsap.from('.exp-card', { scrollTrigger: { trigger: '.exp-grid', start: 'top 82%' }, opacity: 0, y: 36, duration: .6, stagger: .11, ease: 'power3.out' });
 }
 
-/* ── SKILL BARS ── */
-document.querySelectorAll('.skill-fill').forEach(bar => {
-  const pct = bar.dataset.fill + '%';
+/* ── TOOL LOGO WALL FILTER ── */
+(function () {
+  const btns  = document.querySelectorAll('.tfbtn');
+  const tiles = document.querySelectorAll('.tool-tile');
+
+  function filterWall(cat) {
+    btns.forEach(b => {
+      const active = b.dataset.cat === cat;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', String(active));
+    });
+    tiles.forEach(tile => {
+      const show = cat === 'all' || tile.dataset.cat === cat;
+      if (show) {
+        tile.style.display = 'flex';
+        if (!REDUCED) gsap.fromTo(tile, { opacity: 0, scale: .88 }, { opacity: 1, scale: 1, duration: .28, ease: 'power2.out' });
+        else gsap.set(tile, { opacity: 1, scale: 1 });
+      } else {
+        if (!REDUCED) {
+          gsap.to(tile, { opacity: 0, scale: .88, duration: .18, ease: 'power2.in',
+            onComplete() { tile.style.display = 'none'; }
+          });
+        } else { tile.style.display = 'none'; }
+      }
+    });
+  }
+
+  btns.forEach(btn => btn.addEventListener('click', () => filterWall(btn.dataset.cat)));
+
+  /* Fallback pour les logos Simple Icons non disponibles */
+  document.querySelectorAll('.si-icon').forEach(img => {
+    img.addEventListener('error', function () {
+      const name = this.closest('.tool-tile').querySelector('.tool-tile-name').textContent;
+      const initials = name.replace(/[^A-Za-z0-9]/g, '').slice(0, 2).toUpperCase();
+      const fb = document.createElement('div');
+      fb.className = 'tool-tile-fallback';
+      fb.setAttribute('aria-hidden', 'true');
+      fb.textContent = initials;
+      this.replaceWith(fb);
+    });
+  });
+
+  /* Animation d'entrée au scroll */
   if (!REDUCED) {
-    gsap.to(bar, { width: pct, duration: 1.2, ease: 'power2.out', scrollTrigger: { trigger: '#skill-bars', start: 'top 82%' } });
-  } else { bar.style.width = pct; }
-});
+    gsap.from('.tool-tile', {
+      scrollTrigger: { trigger: '#tool-wall', start: 'top 82%' },
+      opacity: 0, scale: .85, duration: .4, stagger: .03, ease: 'power2.out'
+    });
+  }
+})();
 
 /* ── STAT COUNTERS ── */
 document.querySelectorAll('.stat-n').forEach(el => {
@@ -178,8 +219,9 @@ document.querySelectorAll('.stat-n').forEach(el => {
 
 /* ── PARCOURS REVEAL ── */
 if (!REDUCED) {
-  gsap.from('.timeline-item', { scrollTrigger: { trigger: '#parcours', start: 'top 72%' }, opacity: 0, y: 28, duration: .6, stagger: .1, ease: 'power3.out' });
-  gsap.from('.career-aside', { scrollTrigger: { trigger: '#parcours', start: 'top 75%' }, opacity: 0, x: -24, duration: .7, ease: 'power3.out' });
+  gsap.from('.cv-col-head', { scrollTrigger: { trigger: '#parcours', start: 'top 78%' }, opacity: 0, y: 16, duration: .5, stagger: .15, ease: 'power3.out' });
+  gsap.from('.cv-item', { scrollTrigger: { trigger: '#parcours', start: 'top 72%' }, opacity: 0, y: 22, duration: .5, stagger: .06, ease: 'power3.out' });
+  gsap.from('.xp-card', { scrollTrigger: { trigger: '.xp-strip', start: 'top 82%' }, opacity: 0, y: 20, duration: .5, stagger: .1, ease: 'power3.out' });
 }
 
 /* ── PROJECTS REVEAL ── */
@@ -349,6 +391,9 @@ tourNext.addEventListener('click', () => {
 tourSkip.addEventListener('click', () => endTour(true));
 window.addEventListener('resize', () => { if (tourLayer.classList.contains('show')) placeTour(); });
 window.addEventListener('scroll', () => { if (tourLayer.classList.contains('show')) placeTour(); }, { passive: true });
+
+/* ── COPYRIGHT YEAR ── */
+document.getElementById('copy-year').textContent = new Date().getFullYear();
 
 /* ── PRIVACY MODAL ── */
 const priv = document.getElementById('priv');
