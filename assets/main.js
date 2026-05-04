@@ -460,9 +460,14 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
       if (btn.hasAttribute('aria-current')) btn.setAttribute('aria-current', String(active));
     });
     const cvBtn = document.querySelector('.btn-cta[download]');
-    if (cvBtn && tr.hero_cta_href) cvBtn.href = tr.hero_cta_href;
-    if (cvBtn && tr.cv_download_enabled !== undefined) {
-      cvBtn.style.display = tr.cv_download_enabled ? '' : 'none';
+    if (cvBtn) {
+      if (tr.hero_cta_href) cvBtn.href = tr.hero_cta_href;
+      if (tr.cv_download_enabled !== undefined) {
+        cvBtn.style.display = tr.cv_download_enabled ? '' : 'none';
+      }
+      const hasFile = /\.\w{2,5}$/.test((tr.hero_cta_href || '').trim());
+      cvBtn.onclick = hasFile ? null : e => e.preventDefault();
+      cvBtn.style.cursor = hasFile ? '' : 'not-allowed';
     }
     const logoImg = document.querySelector('.nav-logo img');
     if (logoImg && tr.logo_src) logoImg.src = tr.logo_src;
