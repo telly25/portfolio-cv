@@ -461,6 +461,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
     });
     const cvBtn = document.querySelector('.btn-cta[download]');
     if (cvBtn && tr.hero_cta_href) cvBtn.href = tr.hero_cta_href;
+    if (cvBtn && tr.cv_download_enabled !== undefined) {
+      cvBtn.style.display = tr.cv_download_enabled ? '' : 'none';
+    }
     const logoImg = document.querySelector('.nav-logo img');
     if (logoImg && tr.logo_src) logoImg.src = tr.logo_src;
     const stat2El = document.querySelector('[data-i18n-suf="stat2_suf"]');

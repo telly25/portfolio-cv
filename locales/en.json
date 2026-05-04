@@ -2,6 +2,7 @@
   "meta_title": "CV Félix DJEMBI",
   "logo_src": "assets/uploads/logo.png",
   "hero_cta_href": "assets/uploads/",
+  "cv_download_enabled": true,
   "meta_desc": "Digital Project Manager · AMOA Consultant · Business Analyst. 3 years of public-sector missions: functional scoping, web project management, IT coordination and change management.",
   "nav_home": "Home",
   "nav_profile": "Profile",

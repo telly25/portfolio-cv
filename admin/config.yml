@@ -21,6 +21,7 @@ collections:
           - { label: "Meta description", name: "meta_desc", widget: "text" }
           - { label: "Logo / Photo de profil (chemin, ex: assets/uploads/logo.png)", name: "logo_src", widget: "string" }
           - { label: "CV PDF (chemin, ex: assets/uploads/CV_Felix_DJEMBI_CDP.pdf)", name: "hero_cta_href", widget: "string" }
+          - { label: "Bouton CV — Activer le téléchargement", name: "cv_download_enabled", widget: "boolean", default: true }
 
           # Navigation
           - { label: "Nav — Accueil", name: "nav_home", widget: "string" }
@@ -369,6 +370,7 @@ collections:
           - { label: "Meta description", name: "meta_desc", widget: "text" }
           - { label: "Logo / Profile photo (path, e.g. assets/uploads/logo.png)", name: "logo_src", widget: "string" }
           - { label: "CV PDF (path, e.g. assets/uploads/CV_Felix_DJEMBI_CDP.pdf)", name: "hero_cta_href", widget: "string" }
+          - { label: "CV button — Enable download", name: "cv_download_enabled", widget: "boolean", default: true }
 
           # Navigation
           - { label: "Nav — Home", name: "nav_home", widget: "string" }

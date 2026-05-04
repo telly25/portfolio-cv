@@ -20,7 +20,8 @@ function isMirrorKey(key) {
   return (
     key.startsWith('tool_icon_') ||
     key === 'logo_src'           ||
-    key === 'hero_cta_href'
+    key === 'hero_cta_href'      ||
+    key === 'cv_download_enabled'
   );
 }
 
