@@ -471,7 +471,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
   async function loadLang(lang) {
     if (!cache[lang]) {
       try {
-        const res = await fetch('locales/' + lang + '.json');
+        const res = await fetch('locales/' + lang + '.json', { cache: 'no-store' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         cache[lang] = await res.json();
       } catch (e) { return; }
@@ -485,6 +485,5 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
     btn.addEventListener('click', () => loadLang(btn.dataset.lang));
   });
 
-  if (currentLang !== 'fr') { loadLang(currentLang); }
-  else { fetch('locales/fr.json').then(r => r.json()).then(d => { cache['fr'] = d; }); }
+  loadLang(currentLang);
 })();
