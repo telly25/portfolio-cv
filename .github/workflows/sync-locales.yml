@@ -1,0 +1,42 @@
+name: Sync FR → EN
+
+# Se déclenche uniquement quand locales/fr.json change sur main
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'locales/fr.json'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    # Empêche la boucle : ne tourne pas si c'est le bot qui a commité
+    if: github.actor != 'github-actions[bot]'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2          # nécessaire pour comparer HEAD~1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sync FR → EN
+        run: node scripts/sync-fr-to-en.js
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Commit en.json si modifié
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add locales/en.json
+          git diff --staged --quiet && echo "Rien à commiter." || \
+            git commit -m "auto: sync EN from FR [skip ci]" && git push
