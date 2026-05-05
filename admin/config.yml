@@ -63,6 +63,7 @@ collections:
           - { label: "Profil — Chip 4", name: "amoa_tag_4", widget: "string" }
           - { label: "Profil — Chip 5", name: "amoa_tag_5", widget: "string" }
           - { label: "Profil — Chip 6", name: "amoa_tag_6", widget: "string" }
+          - { label: "Profil — Chip 7", name: "amoa_tag_7", widget: "string" }
           - { label: "Profil — Card 1 titre", name: "profile_card1_title", widget: "string" }
           - { label: "Profil — Card 1 sous-titre", name: "profile_card1_sub", widget: "string" }
           - { label: "Profil — Card 1 texte", name: "profile_card1_text", widget: "text" }
@@ -412,6 +413,7 @@ collections:
           - { label: "Profile — Chip 4", name: "amoa_tag_4", widget: "string" }
           - { label: "Profile — Chip 5", name: "amoa_tag_5", widget: "string" }
           - { label: "Profile — Chip 6", name: "amoa_tag_6", widget: "string" }
+          - { label: "Profile — Chip 7", name: "amoa_tag_7", widget: "string" }
           - { label: "Profile — Card 1 title", name: "profile_card1_title", widget: "string" }
           - { label: "Profile — Card 1 subtitle", name: "profile_card1_sub", widget: "string" }
           - { label: "Profile — Card 1 text", name: "profile_card1_text", widget: "text" }

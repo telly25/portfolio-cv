@@ -1,4 +1,5 @@
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const APP_VERSION = '2026-05-05-1';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── NAV SMOOTH SCROLL ── */
@@ -64,7 +65,7 @@ function restartTypewriter(words) {
   if (REDUCED) { twEl.textContent = words[0]; }
   else { _twTimer = setTimeout(type, 400); }
 }
-restartTypewriter(['Chef de Projet Digital', 'Product Owner', 'Analyste Fonctionnel']);
+restartTypewriter(['Chef de Projet Web & SI', 'Coordinateur de Projets Digitaux', 'Analyste Fonctionnel']);
 
 /* ── HERO ── */
 if (!REDUCED) {
@@ -479,7 +480,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
   async function loadLang(lang) {
     if (!cache[lang]) {
       try {
-        const res = await fetch('locales/' + lang + '.json', { cache: 'no-store' });
+        const res = await fetch('locales/' + lang + '.json?v=' + APP_VERSION, { cache: 'reload' });
         if (!res.ok) throw new Error('HTTP ' + res.status);
         cache[lang] = await res.json();
       } catch (e) { return; }
