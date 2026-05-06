@@ -1,5 +1,5 @@
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '2026-05-05-1';
+const APP_VERSION = '2026-05-06-1';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── NAV SMOOTH SCROLL ── */
@@ -454,6 +454,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') priv.classLi
     });
     document.querySelectorAll('[data-i18n-src]').forEach(el => {
       const v = tr[el.dataset.i18nSrc]; if (v !== undefined) el.src = v;
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+      const v = tr[el.dataset.i18nAlt]; if (v !== undefined) el.alt = v;
+    });
+    document.querySelectorAll('[data-i18n-content]').forEach(el => {
+      const v = tr[el.dataset.i18nContent]; if (v !== undefined) el.setAttribute('content', v);
     });
     document.querySelectorAll('.lang-btn, .lang-mob-btn').forEach(btn => {
       const active = btn.dataset.lang === lang;
