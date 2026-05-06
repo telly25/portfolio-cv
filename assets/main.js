@@ -1,5 +1,5 @@
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '2026-05-06-1';
+const APP_VERSION = '2026-05-06-2';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── NAV SMOOTH SCROLL ── */
