@@ -1,5 +1,5 @@
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '2026-05-06-5';
+const APP_VERSION = '2026-05-06-6';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── NAV SMOOTH SCROLL ── */
@@ -134,7 +134,7 @@ mobMenu.querySelectorAll('a, button').forEach(a => a.addEventListener('click', (
 if (!REDUCED) {
   gsap.from('.qsj-accroche', { scrollTrigger: { trigger: '.qsj-accroche', start: 'top 82%' }, opacity: 0, y: 32, duration: .75, ease: 'power3.out' });
   gsap.from('.qsj-body', { scrollTrigger: { trigger: '.qsj-body', start: 'top 82%' }, opacity: 0, duration: .7, delay: .15, ease: 'power2.out' });
-  gsap.from('.qsj-card', { scrollTrigger: { trigger: '.qsj-pillars', start: 'top 82%' }, opacity: 0, y: 36, duration: .6, stagger: .15, ease: 'power3.out' });
+  gsap.from('.qsj-pillars', { scrollTrigger: { trigger: '.qsj-pillars', start: 'top 82%' }, opacity: 0, y: 36, duration: .6, ease: 'power3.out', clearProps: 'opacity,transform' });
 }
 
 /* ── SCROLL TO TOP ── */
