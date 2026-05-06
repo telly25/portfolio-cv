@@ -1,5 +1,5 @@
 const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const APP_VERSION = '2026-05-06-2';
+const APP_VERSION = '2026-05-06-3';
 gsap.registerPlugin(ScrollTrigger);
 
 /* ── NAV SMOOTH SCROLL ── */
@@ -65,7 +65,7 @@ function restartTypewriter(words) {
   if (REDUCED) { twEl.textContent = words[0]; }
   else { _twTimer = setTimeout(type, 400); }
 }
-restartTypewriter(['Chef de Projet Web & SI', 'Coordinateur de Projets Digitaux', 'Analyste Fonctionnel']);
+restartTypewriter(['Chef de Projet Web & SI', 'Chef de Projet AMOA / MOE', 'Analyste Fonctionnel']);
 
 /* ── HERO ── */
 if (!REDUCED) {
