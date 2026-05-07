@@ -133,6 +133,7 @@ collections:
           - { label: "Icone — GA4", name: "tool_icon_ga4", widget: "string" }
           - { label: "Icone — Matomo", name: "tool_icon_matomo", widget: "string" }
           - { label: "Icone — Looker Studio", name: "tool_icon_looker", widget: "string" }
+          - { label: "Icone — Tarteaucitron.io", name: "tool_icon_tarteaucitron", widget: "string" }
           - { label: "Icone — Make", name: "tool_icon_make", widget: "string" }
           - { label: "Icone — N8N", name: "tool_icon_n8n", widget: "string" }
           - { label: "Icone — Claude (Anthropic)", name: "tool_icon_claude", widget: "string" }
@@ -483,6 +484,7 @@ collections:
           - { label: "Icon — GA4", name: "tool_icon_ga4", widget: "string" }
           - { label: "Icon — Matomo", name: "tool_icon_matomo", widget: "string" }
           - { label: "Icon — Looker Studio", name: "tool_icon_looker", widget: "string" }
+          - { label: "Icon — Tarteaucitron.io", name: "tool_icon_tarteaucitron", widget: "string" }
           - { label: "Icon — Make", name: "tool_icon_make", widget: "string" }
           - { label: "Icon — N8N", name: "tool_icon_n8n", widget: "string" }
           - { label: "Icon — Claude (Anthropic)", name: "tool_icon_claude", widget: "string" }
