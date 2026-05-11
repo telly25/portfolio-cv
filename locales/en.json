@@ -520,7 +520,7 @@
   "tag_mistral_ai": "Mistral AI",
   "tag_chromadb": "ChromaDB",
   "proj_rw_sector": "AI · Regulatory Compliance",
-  "proj_rw_live": "Open source POC · Live",
+  "proj_rw_live": "Prototype · Personal project",
   "proj_rw_title": "RegWatch",
   "proj_rw_role": "Designer & Developer · Solo POC",
   "proj_rw_desc": "POC of a RAG-based compliance assistant querying GDPR, DORA, NIS2 and the AI Act in natural language. EUR-Lex ingestion via Playwright, Mistral Embed vectorisation, ChromaDB semantic search and streaming generation via Mistral API.",

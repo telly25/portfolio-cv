@@ -519,7 +519,7 @@
   "tag_mistral_ai": "Mistral AI",
   "tag_chromadb": "ChromaDB",
   "proj_rw_sector": "IA · Conformité réglementaire",
-  "proj_rw_live": "POC open source · En ligne",
+  "proj_rw_live": "Prototype · Projet perso",
   "proj_rw_title": "RegWatch",
   "proj_rw_role": "Concepteur & Développeur · POC solo",
   "proj_rw_desc": "POC d'assistant RAG de conformité réglementaire européenne interrogeant RGPD, DORA, NIS2 et l'AI Act en langage naturel. Ingestion EUR-Lex via Playwright, vectorisation Mistral Embed, recherche sémantique ChromaDB et génération streaming via Mistral API.",
