@@ -153,7 +153,7 @@
   "profile_card2_sub": "Du sprint au COPIL",
   "tool_cat_dataviz": "Datavisualisation",
   "tool_name_powerbi": "Power BI",
-  "tool_icon_powerbi": "https://cdn.simpleicons.org/powerbi",
+  "tool_icon_powerbi": "assets/powerbi.svg",
   "tool_cat_seo": "SEO & Géo",
   "tool_cat_search": "Moteur de recherche",
   "tool_name_ga4": "GA4",
